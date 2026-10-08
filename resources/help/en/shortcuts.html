@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessible Video Transcriber - Detailed Keyboard Shortcut List</title>
+<style>
+  body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.65; max-width: 54rem;
+         margin: 0 auto; padding: 1.5rem 1.1rem 5rem; color: #1b1b1b; background: #ffffff; }
+  h1 { font-size: 1.95rem; line-height: 1.25; border-bottom: 4px solid #0b57d0; padding-bottom: .45rem; }
+  h2 { font-size: 1.45rem; margin-top: 2.6rem; border-bottom: 1px solid #cdd2da; padding-bottom: .25rem; }
+  h3 { font-size: 1.16rem; margin-top: 1.7rem; }
+  p, li { font-size: 1.02rem; }
+  a { color: #0b57d0; }
+  a:focus-visible { outline: 4px solid #b30000; outline-offset: 3px; }
+  nav { background: #f1f4f9; border: 1px solid #c9ccd4; border-radius: 10px; padding: .9rem 1.3rem; margin: 1.6rem 0; }
+  nav ul { list-style: none; margin: .4rem 0 0; padding: 0; }
+  nav li { margin: .3rem 0; }
+  kbd { font-family: Consolas, "Courier New", monospace; font-size: .98em; background: #eef1f5;
+        border: 1px solid #b9bfc9; border-bottom-width: 3px; border-radius: 5px; padding: .08rem .42rem;
+        direction: ltr; unicode-bidi: isolate; }
+  table { border-collapse: collapse; width: 100%; margin: .9rem 0 1.5rem; }
+  th, td { border: 1px solid #c9ccd4; padding: .6rem .8rem; text-align: left; vertical-align: top; }
+  th { background: #eef1f5; font-size: 1rem; }
+  td.keys { white-space: nowrap; font-weight: 600; }
+  .note { background: #fff8e1; border-left: 6px solid #b38600; padding: .65rem 1rem; margin: 1rem 0; }
+  footer { margin-top: 3.5rem; border-top: 1px solid #cdd2da; padding-top: 1rem; font-size: .95rem; }
+  @media (prefers-color-scheme: dark) {
+    body { background: #14161a; color: #e9ecf1; }
+    h2 { border-color: #3a4048; }
+    a { color: #8ab4f8; }
+    nav { background: #1c2027; border-color: #3a4048; }
+    kbd, th { background: #23272e; color: #e9ecf1; border-color: #4a515a; }
+    th { background: #23272e; }
+    th, td { border-color: #4a515a; }
+    .note { background: #2a2517; border-color: #d4a72c; }
+    footer { border-color: #3a4048; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="top">Accessible Video Transcriber &mdash; Keyboard Shortcuts</h1>
+  <p>Version 1.2, by Iman Rammal. Every shortcut the program has, in one
+  list, grouped by menu, with a line explaining what each one does. The same
+  list also lives in the combined user guide: press <kbd>Ctrl+/</kbd> to
+  open the guide straight at the Keyboard Shortcuts section.</p>
+</header>
+
+<nav aria-label="Contents of this page">
+  <h2>Contents of this page</h2>
+  <ul>
+    <li><a href="#how">How to use this list</a></li>
+    <li><a href="#file">File</a></li>
+    <li><a href="#edit">Edit</a></li>
+    <li><a href="#settings">Settings</a></li>
+    <li><a href="#accessibility">Accessibility</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#models">Models</a></li>
+    <li><a href="#help">Help</a></li>
+    <li><a href="#main">Main screen</a></li>
+    <li><a href="#tips">General keyboard tips</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<section id="how">
+<h2>How to use this list</h2>
+<ul>
+  <li>Hold the keys together, for example hold <kbd>Ctrl</kbd> and press
+  <kbd>O</kbd> once, then let go.</li>
+  <li>Every shortcut here has a menu twin: open the menu named in the group
+  heading and choose the item with the arrow keys. The menu prints the
+  shortcut next to the item, so you can always discover it again.</li>
+  <li>Menu letters are underlined on screen. Hold <kbd>Alt</kbd> and press
+  the underlined letter to open a menu or press a menu item directly.</li>
+  <li><kbd>Tab</kbd> and <kbd>Shift</kbd> with <kbd>Tab</kbd> move forward
+  and backward through the controls of the main window in reading order, and
+  the focus rectangle always shows where you are.</li>
+</ul>
+</section>
+
+<section id="file">
+<h2>File</h2>
+<table>
+  <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
+  <tr><td class="keys"><kbd>Ctrl+O</kbd></td><td>Open Video&hellip;</td>
+      <td>Opens the file dialog to choose a video (or an audio file) to work on.
+      You can also drag a file onto the window instead.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+I</kbd></td><td>Import .srt&hellip;</td>
+      <td>Reads an existing subtitle file into the transcript editor, so you
+      can edit or translate captions you already have.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+S</kbd></td><td>Export .srt&hellip;</td>
+      <td>Writes the captions to a subtitle file with full start and end
+      times, ready for players and upload sites.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+E</kbd></td><td>Export subtitles and video</td>
+      <td>The complete hand-off: announces the start, writes the captions to
+      a subtitle or plain text file, then offers to burn the same captions
+      into a copy of the video, and announces the result.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+R</kbd></td><td>Render Subtitled Video&hellip;</td>
+      <td>Burns the caption lines into the picture (white text, black
+      outline) in the background and saves a new MP4 file.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+W</kbd></td><td>Open Output Folder</td>
+      <td>Opens the folder that holds the last file you exported or
+      rendered.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Q</kbd></td><td>Exit</td>
+      <td>Asks you to confirm, then closes the program and shows the
+      goodbye message.</td></tr>
+</table>
+</section>
+
+<section id="edit">
+<h2>Edit</h2>
+<table>
+  <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+N</kbd></td><td>Add Row</td>
+      <td>Adds an empty caption line at the end of the transcript. The
+      program announces the number of the new row.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+D</kbd></td><td>Delete Selected Row</td>
+      <td>Deletes the selected caption line or lines after telling you how
+      many, or telling you that nothing was selected.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+C</kbd></td><td>Copy Results</td>
+      <td>Copies every caption to the Windows clipboard, with the times when
+      <em>Show timestamps</em> is on, and announces the count.</td></tr>
+</table>
+</section>
+
+<section id="settings">
+<h2>Settings</h2>
+<table>
+  <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
+  <tr><td class="keys"><kbd>Ctrl+,</kbd></td><td>Speech &amp; Translation Settings&hellip;</td>
+      <td>Opens the preferences: default speech engine, recognition model,
+      translation service and the API keys with Show, Test and Get API key
+      buttons.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+1</kbd></td><td>Interface in English</td>
+      <td>Switches the whole interface to English; a check mark shows the
+      current language.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+2</kbd></td><td dir="ltr">الواجهة بالعربية</td>
+      <td>Switches the whole interface to Arabic and flips the layout to
+      right-to-left. Refused while a task is running.</td></tr>
+</table>
+</section>
+
+<section id="accessibility">
+<h2>Accessibility</h2>
+<table>
+  <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+A</kbd></td><td>Accessibility Settings&hellip;</td>
+      <td>Opens the settings window with every accessibility option as a
+      check box: high contrast, larger focus indicators, simplified layout,
+      announced progress and sounds.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+T</kbd></td><td>Show timestamps</td>
+      <td>Check box. Shows or hides the start and end time of every caption
+      in the editor, in plain text exports and in copied text. Subtitle
+      files always keep their times. Remembered between runs.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+H</kbd></td><td>High Contrast Theme</td>
+      <td>Check box. Switches to the black and yellow high contrast theme
+      and back.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+L</kbd></td><td>Larger Focus Indicators</td>
+      <td>Check box. Draws a thick, obvious focus rectangle around the
+      control you are on.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+S</kbd></td><td>Simplified Layout</td>
+      <td>Check box. Hides the advanced rows and keeps only the essential
+      controls on the main window.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+P</kbd></td><td>Announce Progress</td>
+      <td>Check box. Speaks every progress update while a task runs.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+M</kbd></td><td>Play Sounds</td>
+      <td>Check box. Plays a short sound when a task finishes or fails.</td></tr>
+</table>
+</section>
+
+<section id="tools">
+<h2>Tools</h2>
+<table>
+  <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+E</kbd></td><td>Extract Audio</td>
+      <td>Pulls the audio track out of the selected video into a temporary
+      file, without transcribing yet.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+X</kbd></td><td>Cancel Task</td>
+      <td>Asks the running task to stop at its next safe point and reports
+      the outcome in the status line.</td></tr>
+</table>
+</section>
+
+<section id="models">
+<h2>Models</h2>
+<table>
+  <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
+  <tr><td class="keys"><kbd>Ctrl+1</kbd></td><td>Download Tiny Model (fastest)</td>
+      <td>Downloads the smallest recognition model for the local engine;
+      quickest, with the least accuracy.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+2</kbd></td><td>Download Base Model (bundled)</td>
+      <td>Downloads the size the program uses by default. Already installed
+      models answer immediately.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+3</kbd></td><td>Download Small Model (most accurate)</td>
+      <td>Downloads the most accurate of the three local models.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+0</kbd></td><td>Model Status</td>
+      <td>Lists which models are installed, which are missing and the folder
+      that stores them.</td></tr>
+</table>
+</section>
+
+<section id="help">
+<h2>Help</h2>
+<table>
+  <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
+  <tr><td class="keys"><kbd>F1</kbd></td><td>User Guide</td>
+      <td>Opens the combined user guide in your web browser: this document
+      together with the keyboard shortcut list.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+/</kbd></td><td>Keyboard Shortcuts</td>
+      <td>Opens the same combined guide straight at the Keyboard Shortcuts
+      section.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+U</kbd></td><td>Check for Updates…</td>
+      <td>Checks the GitHub Releases page for a newer version and reports
+      the result in a clear message.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+U</kbd></td><td>Check Automatically at Startup</td>
+      <td>Turns the quiet startup check on or off. When it is on, the
+      program checks at most once a day, a few seconds after the window
+      opens, and only speaks up when a newer version exists.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+R</kbd></td><td>Release Notes on GitHub</td>
+      <td>Opens the release notes page in your web browser.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+B</kbd></td><td>Report a Problem</td>
+      <td>Opens the issue page in your web browser, where a problem can be
+      described.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+G</kbd></td><td>License Agreement</td>
+      <td>Opens the License Agreement section of the combined guide. The
+      program is for noncommercial use only.</td></tr>
+  <tr><td class="keys"><kbd>Ctrl+Shift+V</kbd></td><td>Open Log Folder</td>
+      <td>Opens the folder with the log file, for diagnosing problems.</td></tr>
+  <tr><td class="keys"><kbd>F12</kbd></td><td>About</td>
+      <td>Shows the About page: version, accessibility statement, privacy,
+      libraries, license summary and the author's contact details.</td></tr>
+</table>
+<p>The Help menu also offers <em>Open Guide File</em> and <em>Open Shortcut
+File</em> without shortcuts of their own; they open this guide and this list
+as files in your default browser.</p>
+</section>
+
+<section id="main">
+<h2>Main screen</h2>
+<table>
+  <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
+  <tr><td class="keys"><kbd>F5</kbd></td><td>Start</td>
+      <td>Runs the task selected in the Task list: transcribe the speech
+      into captions, or translate the captions already in the editor. Start
+      is the default button of the window.</td></tr>
+  <tr><td class="keys"><kbd>Alt+F4</kbd></td><td>Close the program</td>
+      <td>Windows closes the program; you are asked to confirm first and
+      thanked when it exits.</td></tr>
+</table>
+</section>
+
+<section id="tips">
+<h2>General keyboard tips</h2>
+<ul>
+  <li>Press <kbd>Alt</kbd> once to focus the menu bar, then use the arrow
+  keys; the underlined letters jump straight to a menu.</li>
+  <li>In list boxes, the arrow keys choose, Home and End jump to the first
+  and last entry, and typing a letter jumps to the next entry starting with
+  it.</li>
+  <li>In the transcript editor, <kbd>Tab</kbd> leaves the editor and moves
+  to the next control, so a long caption never traps you inside it.</li>
+  <li>Check boxes and menu items that are on carry a check mark; the screen
+  reader reports the state as well as the name.</li>
+  <li>The status line and the progress bar can hold focus: move onto them
+  whenever you want to hear the current state of the program.</li>
+  <li>If you ever lose track of a shortcut, open this list again from the
+  Help menu, or press <kbd>Ctrl+/</kbd> to open the combined guide at the
+  Keyboard Shortcuts section.</li>
+</ul>
+</section>
+
+</main>
+
+<footer>
+  <p><a href="#top">Back to the top of the list</a> &middot;
+  <a href="guide.html">Detailed user guide</a> &middot;
+  Accessible Video Transcriber 1.2 &copy; Iman Rammal</p>
+</footer>
+
+</body>
+</html>

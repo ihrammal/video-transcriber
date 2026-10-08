@@ -1,0 +1,146 @@
+﻿VID-TRANS USER AGREEMENT
+Video transcription, translation and subtitling application
+Version 2.0 - Effective date: 24 September 2026
+Copyright (c) Iman Rammal. All rights reserved.
+
+PLEASE READ THIS AGREEMENT CAREFULLY BEFORE INSTALLING, COPYING OR USING
+VID-TRANS ("the Application"). BY INSTALLING OR USING THE APPLICATION YOU
+ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD AND AGREE TO BE BOUND BY THIS
+AGREEMENT. IF YOU DO NOT AGREE, DO NOT INSTALL OR USE THE APPLICATION AND
+REMOVE IT FROM YOUR COMPUTER.
+
+------------------------------------------------------------------------
+1. WHAT THE APPLICATION DOES
+------------------------------------------------------------------------
+Vid-Trans is a desktop application for Windows that:
+  a) converts the speech contained in a video file into timed captions
+     (transcription) using an offline speech-recognition model;
+  b) optionally translates those captions into another language;
+  c) lets you edit the captions and export them as a standard .srt file or
+     burn them into a new video file.
+
+------------------------------------------------------------------------
+2. LICENSE GRANT
+------------------------------------------------------------------------
+Subject to the terms of this Agreement, the author grants you a personal,
+limited, non-exclusive, non-transferable, revocable, NON-COMMERCIAL licence
+to install and use the Application on computers that you own or control, for
+your own private, educational, research or other non-commercial purposes.
+
+You may:
+  - install and use the Application on your own devices;
+  - keep a reasonable number of backup copies.
+
+You may not:
+  - use the Application for commercial purposes of any kind, including but
+    not limited to charging other people for its use, offering it (or the
+    results it produces) as a paid product or service, incorporating it into
+    a service you sell, or using it as a service for hire or reward;
+  - sell, rent, lease, sublicense or distribute the Application
+    as a standalone product;
+  - reverse engineer, decompile, disassemble or otherwise attempt to derive
+    the source code of the Application, except to the extent that applicable
+    law expressly permits it;
+  - remove, alter or obscure any copyright, trademark or other proprietary
+    notice;
+  - use the Application to infringe the rights of any third party.
+
+------------------------------------------------------------------------
+3. PRIVACY AND DATA HANDLING
+------------------------------------------------------------------------
+Transcription is performed locally on your computer. Your video file, its
+audio track and the extracted captions are NOT uploaded to the author and
+are NOT stored by the author.
+
+When you press "Translate", the caption text is sent over the internet to a
+third-party translation service in order to produce the translation. The
+video and audio themselves are never sent. Translation therefore requires an
+internet connection and involves the transmission of caption text to that
+third party, whose own privacy policy applies to that transmission.
+
+Temporary files (extracted audio, work data) are created in your operating
+system temporary folder and are removed when you close the Application.
+Application logs are stored locally in your user data folder and contain no
+video content.
+
+No personal identification data, telemetry, advertising identifiers or
+analytics are collected by the Application.
+
+------------------------------------------------------------------------
+4. ACCEPTABLE USE
+------------------------------------------------------------------------
+You are solely responsible for the content you process with the Application.
+You agree not to use the Application for any unlawful purpose, including but
+not limited to creating content that infringes copyright, privacy, personality
+or any other right of third parties, or that violates applicable law.
+
+You must hold the necessary rights, or authorisation, over every video file
+you process.
+
+------------------------------------------------------------------------
+5. THIRD-PARTY COMPONENTS AND SERVICES
+------------------------------------------------------------------------
+The Application incorporates third-party open-source components (including
+PyQt6, faster-whisper, CTranslate2, FFmpeg, moviepy, deep-translator and srt)
+and may download speech-recognition model files from a public model
+repository. Those components and services are provided under their own
+licences and terms. This Agreement governs only the Application itself.
+
+The author is not responsible for the availability, accuracy, security or
+policies of any third-party service, including online translation services.
+
+------------------------------------------------------------------------
+6. UPDATES
+------------------------------------------------------------------------
+The author may release updated versions of the Application. This Agreement
+applies to any update unless it is accompanied by a different licence, in
+which case the latter prevails.
+
+------------------------------------------------------------------------
+7. NO WARRANTY
+------------------------------------------------------------------------
+THE APPLICATION IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY, QUIET
+ENJOYMENT OR NON-INFRINGEMENT.
+
+Speech recognition and machine translation are probabilistic: results may be
+incomplete, inaccurate or unsuitable for legal, medical, safety-critical or
+accessibility purposes. You must review every caption before relying on it.
+The author does not warrant that the Application will be uninterrupted, error
+free, or compatible with every video file or computer configuration.
+
+------------------------------------------------------------------------
+8. LIMITATION OF LIABILITY
+------------------------------------------------------------------------
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE AUTHOR SHALL NOT BE
+LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL OR PUNITIVE
+DAMAGES, OR ANY LOSS OF DATA, PROFITS, GOODWILL OR BUSINESS OPPORTUNITY,
+ARISING OUT OF OR IN CONNECTION WITH THE APPLICATION OR THIS AGREEMENT,
+EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+THE AUTHOR'S TOTAL AGGREGATE LIABILITY SHALL NOT EXCEED THE AMOUNT ACTUALLY
+PAID BY YOU FOR THE APPLICATION, OR, IF THE APPLICATION IS PROVIDED FREE OF
+CHARGE, FIFTY (50) US DOLLARS.
+
+------------------------------------------------------------------------
+9. TERMINATION
+------------------------------------------------------------------------
+This Agreement is effective until terminated. It terminates automatically if
+you fail to comply with any of its terms. On termination you must cease all
+use of the Application and destroy all copies in your possession. Sections 6,
+7, 8 and 9 survive termination.
+
+------------------------------------------------------------------------
+10. GOVERNING LAW AND CONTACT
+------------------------------------------------------------------------
+This Agreement is governed by the laws applicable at the author's place of
+business, without regard to conflict-of-law rules. If any provision is found
+unenforceable, the remaining provisions continue in full force.
+
+Questions about this Agreement:
+    Publisher: Iman Rammal
+    Product:   Vid-Trans
+
+------------------------------------------------------------------------
+END OF AGREEMENT

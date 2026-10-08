@@ -1,0 +1,30 @@
+# Vid-Trans runtime dependencies (Python 3.11 - 3.14, Windows)
+# Every version below is pinned with == so a fresh install reproduces the
+# program exactly as it was tested.
+
+# --- Program interface ----------------------------------------------------
+PyQt6==6.11.0
+
+# --- Speech to text (local, offline engine) -------------------------------
+faster-whisper==1.2.1
+ctranslate2==4.8.2
+av==18.1.0
+
+# --- Subtitles, translation, HTTP -----------------------------------------
+srt==3.5.3
+deep-translator==1.11.4
+requests==2.34.2
+
+# --- Video output and helpers used directly by the program ---------------
+moviepy==2.2.1
+numpy==2.5.3
+imageio-ffmpeg==0.6.0
+proglog==0.1.12
+
+# --- Model download, icon and font work -----------------------------------
+huggingface-hub==1.32.0
+Pillow==11.3.0
+
+# --- Build and test tools (not needed to run the program) -----------------
+pyinstaller==6.22.3
+pytest==9.1.1

@@ -1,0 +1,65 @@
+# ---- Python environments -------------------------------------------------
+.venv/
+venv/
+env/
+
+# ---- Python caches and test output ---------------------------------------
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+
+# ---- Build output: compiled program and installer ------------------------
+build/
+dist/
+installer_output/
+*.exe
+
+# ---- External tools downloaded for the program ---------------------------
+# bin/ffmpeg.exe is fetched from ffmpeg.org, never committed.
+bin/
+
+# ---- Downloaded Whisper model files (fetched on first run) ---------------
+models/
+
+# ---- Saved user settings, logs, key files --------------------------------
+prefs.json
+*.log
+e2e-report.txt
+*.tmp
+
+# Internal build and test notes kept for the author only
+REPORT.txt
+
+# Local backups and unpacked old sources: never belong in the repository
+backup_version_1_1/
+vid-trans-source/
+
+# Any file that could hold an API key
+api keys.txt
+*api*key*.txt
+*.env
+.env
+secrets.json
+credentials.json
+
+# ---- Temporary audio and video -------------------------------------------
+# Scratch media never belongs in the repository.  resources/*.wav is a
+# tracked test asset and is not matched by these patterns.
+/output/
+/tmp/
+/temp/
+/*.mp4
+/*.mkv
+/*.mov
+/*.avi
+/*.mp3
+/*.wav
+/*.m4a
+/*.webm
+/*.mpg
+/*.mpeg
+
+# Compressed copy of the source made for uploading
+*.zip
