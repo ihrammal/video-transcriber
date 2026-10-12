@@ -32,7 +32,7 @@ import traceback
 APP_NAME = "Accessible Video Transcriber"
 LEGACY_APP_NAME = "VidTrans"
 APP_DISPLAY_NAME = "Accessible Video Transcriber"
-APP_VERSION = "1.2.0"
+APP_VERSION = "1.3.0"
 LOG_FILENAME = "vidtrans.log"
 MAX_LOG_BYTES = 1_000_000
 

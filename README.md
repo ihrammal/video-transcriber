@@ -11,6 +11,13 @@ switches between English and Arabic, right to left.
 
 ## What it does
 
+Version 1.3 brings preferences into one tabbed window (Ctrl+,).
+General, Speech and translation, API keys, and Accessibility pages work with
+the mouse, arrow keys on the tabs, and Ctrl+Tab/Ctrl+Shift+Tab from any page.
+Turn off **Read control hints and details** on the Accessibility page to
+reduce screen-reader speech while keeping names, values and essential messages.
+See [release notes](RELEASE_NOTES.md) and the [accessibility review](ACCESSIBILITY_REVIEW.md).
+
 Transcribe. The program extracts the audio with ffmpeg and writes timestamped
 captions. The free offline Whisper engine needs no key and no account. You can
 also use OpenAI, Groq or Google Gemini when you bring your own key.

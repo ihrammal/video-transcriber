@@ -1481,6 +1481,8 @@ class MainWindow(QMainWindow):
             return
         self.current_lang = lang
         self._retranslate_ui()
+        import vt_a11y
+        vt_a11y.apply_descriptions(self)
 
     def _retranslate_ui(self):
         self.setWindowTitle(self.t("app_title"))
@@ -1555,6 +1557,8 @@ class MainWindow(QMainWindow):
             )
         self._sync_settings_menus()
         QApplication.processEvents()
+        import vt_a11y
+        vt_a11y.apply_descriptions(self)
         self.announce(self.t("status_ready"))
 
     # ---------------------------------------------------------------- theme
@@ -2337,7 +2341,7 @@ class MainWindow(QMainWindow):
     def on_progress(self, value):
         self.progress_bar.setValue(value)
         self.progress_bar.setAccessibleDescription(
-            self.t("acc_progress_d", value=value)
+            self.t("acc_progress_d", value=value) if self.accessibility_settings.get("read_hints", True) else ""
         )
         # Progress is spoken at the frequency the user chose in the
         # Accessibility settings (every 1, 5, 10, 25 percent or never);
@@ -2905,7 +2909,7 @@ class MainWindow(QMainWindow):
             self.editor.setTextCursor(cursor)
             self.editor.verticalScrollBar().setValue(scroll)
         self.editor.setAccessibleDescription(
-            self.t("acc_editor_d", count=len(self.subtitles))
+            self.t("acc_editor_d", count=len(self.subtitles)) if self.accessibility_settings.get("read_hints", True) else ""
         )
 
     def _editor_segments(self):

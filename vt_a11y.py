@@ -26,6 +26,7 @@ DEFAULTS = {
     "simplified_layout": False,
     "announce_progress": True,
     "sounds": True,
+    "read_hints": True,
 }
 
 FLAGS = tuple(DEFAULTS)
@@ -98,9 +99,24 @@ def apply(app):
             app.apply_layout_mode()
         if hasattr(app, "_sync_settings_menus"):
             app._sync_settings_menus()
+        apply_descriptions(app, settings["read_hints"])
     except Exception:  # noqa: BLE001 - applying settings must not crash the app
         logging.exception("could not apply accessibility settings")
     return settings
+
+
+def apply_descriptions(root, enabled=None):
+    """Keep names and values intact; hide only optional control descriptions."""
+    from PyQt6.QtWidgets import QWidget
+
+    if enabled is None:
+        enabled = load()["read_hints"]
+    for widget in [root, *root.findChildren(QWidget)]:
+        description = widget.accessibleDescription()
+        if description:
+            widget.setProperty("vidtrans_hint", description)
+        hint = widget.property("vidtrans_hint") or ""
+        widget.setAccessibleDescription(hint if enabled else "")
 
 
 def build_dialog(parent=None, lang="en"):
@@ -152,6 +168,7 @@ def build_dialog(parent=None, lang="en"):
         ("simplified_layout", "acc_lbl_simple", "acc_desc_simple"),
         ("announce_progress", "acc_lbl_progress", "acc_desc_progress"),
         ("sounds", "acc_lbl_sounds", "acc_desc_sounds"),
+        ("read_hints", "acc_lbl_hints", "acc_desc_hints"),
     )
     for key, label_key, desc_key in rows:
         box = QCheckBox(key_text(label_key))
@@ -184,6 +201,13 @@ def open_dialog(parent=None, lang="en"):
     """
     from PyQt6.QtCore import Qt
     from PyQt6.QtWidgets import QDialog
+
+    if parent is not None and hasattr(parent, "interface_combo"):
+        from vt_settings import SettingsDialog
+
+        dlg = SettingsDialog(parent=parent, lang=lang)
+        dlg.tabs.setCurrentIndex(3)
+        return dlg.exec() == QDialog.DialogCode.Accepted
 
     dlg, checks = build_dialog(parent=parent, lang=lang)
     dlg.show()

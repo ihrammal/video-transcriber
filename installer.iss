@@ -5,7 +5,7 @@
 ; old per-user copy can be found and removed. Keep the single braces here.
 
 #define AppName "Accessible Video Transcriber"
-#define AppVersion "1.2.0"
+#define AppVersion "1.3.0"
 #define AppPublisher "Iman Rammal"
 #define ExeName "AccessibleVideoTranscriber.exe"
 #define DistFolder "dist\AccessibleVideoTranscriber"

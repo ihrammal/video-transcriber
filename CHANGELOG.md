@@ -4,6 +4,15 @@ All notable changes to Accessible Video Transcriber are listed here.
 The format follows Keep a Changelog, and the project uses Calendar Versioning
 numbers of the form major.minor.patch.
 
+## 1.3.0 - 2026-10-12
+
+- Unified General, Speech and translation, API keys and Accessibility settings.
+- Arrow navigation on tabs and Ctrl+Tab/Ctrl+Shift+Tab across settings pages.
+- Optional screen-reader control hints, with essential labels preserved.
+- Saved language, timestamp, accessibility and automatic-update preferences.
+- Removed duplicate API-key result announcements.
+- English and Arabic release notes in RELEASE_NOTES.md.
+
 ## 1.2 - 2026-10-07
 
 Release tag: v1.2.0. Installer: AccessibleVideoTranscriber_Setup_1.2.0.exe.

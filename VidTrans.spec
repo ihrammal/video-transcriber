@@ -37,7 +37,7 @@ from PyInstaller.utils.win32.versioninfo import (
 # The release version of the program, written into the properties of the
 # executable.  It must match update_checker.APP_VERSION, installer.iss and
 # vt_bootstrap.APP_VERSION.
-VERSION = (1, 2, 0, 0)
+VERSION = (1, 3, 0, 0)
 VERSION_INFO = VSVersionInfo(
     ffi=FixedFileInfo(
         filevers=VERSION,
@@ -57,12 +57,12 @@ VERSION_INFO = VSVersionInfo(
                     kids=[
                         StringStruct("CompanyName", "Iman Rammal"),
                         StringStruct("FileDescription", "Accessible Video Transcriber and Translator"),
-                        StringStruct("FileVersion", "1.2.0.0"),
+                        StringStruct("FileVersion", "1.3.0.0"),
                         StringStruct("InternalName", "AccessibleVideoTranscriber"),
                         StringStruct("LegalCopyright", "Copyright (c) Iman Rammal. Noncommercial use only."),
                         StringStruct("OriginalFilename", "AccessibleVideoTranscriber.exe"),
                         StringStruct("ProductName", "Accessible Video Transcriber"),
-                        StringStruct("ProductVersion", "1.2.0.0"),
+                        StringStruct("ProductVersion", "1.3.0.0"),
                     ],
                 )
             ]

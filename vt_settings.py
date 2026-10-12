@@ -22,6 +22,8 @@ from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtWidgets import (
     QButtonGroup,
     QComboBox,
+    QCheckBox,
+    QTabWidget,
     QDialog,
     QFormLayout,
     QGroupBox,
@@ -95,6 +97,41 @@ class SettingsDialog(QDialog):
         self.setModal(True)
         self.setMinimumWidth(560)
         layout = QVBoxLayout(self)
+        self.tabs = QTabWidget(self)
+        layout.addWidget(self.tabs)
+        navigation_hint = QLabel(self.t("settings_tabs_hint"))
+        navigation_hint.setWordWrap(True)
+        layout.addWidget(navigation_hint)
+        self._pages = []
+        for key in ("general", "speech", "keys", "accessibility"):
+            page = QWidget(self.tabs)
+            page_layout = QVBoxLayout(page)
+            self.tabs.addTab(page, self.t("settings_tab_" + key))
+            self._pages.append(page_layout)
+        general, speech, keys_page, accessibility = self._pages
+        self.interface_choice = QComboBox(self)
+        self.interface_choice.addItem("English", "en")
+        self.interface_choice.addItem("العربية", "ar")
+        self.interface_choice.setCurrentIndex(1 if self.lang == "ar" else 0)
+        general_form = QFormLayout()
+        self.interface_label = QLabel(self.t("lbl_interface_lang"))
+        self.interface_label.setBuddy(self.interface_choice)
+        general_form.addRow(self.interface_label, self.interface_choice)
+        general.addLayout(general_form)
+        self.timestamps_choice = QCheckBox(self.t("act_timestamps").replace("&", ""))
+        self.timestamps_choice.setChecked(vt_prefs.load().get("show_timestamps", "true") != "false")
+        general.addWidget(self.timestamps_choice)
+        import update_checker
+        self.auto_update_choice = QCheckBox(self.t("act_auto_update").replace("&", ""))
+        self.auto_update_choice.setChecked(bool(update_checker.load_settings().get("auto_check", True)))
+        general.addWidget(self.auto_update_choice)
+        general.addStretch()
+        import vt_a11y
+        temporary, self.accessibility_checks = vt_a11y.build_dialog(lang=self.lang)
+        for box in self.accessibility_checks.values():
+            accessibility.addWidget(box)
+        temporary.deleteLater()
+        accessibility.addStretch()
 
         # ---------------------------------------------- transcription engine
         self.engine_box = QGroupBox(self)
@@ -106,7 +143,7 @@ class SettingsDialog(QDialog):
             self._engine_group.addButton(radio)
             self._engine_radios[key] = radio
             self.engine_layout.addWidget(radio)
-        layout.addWidget(self.engine_box)
+        speech.addWidget(self.engine_box)
 
         # ------------------------------------------------- local model choice
         self.model_box = QGroupBox(self)
@@ -117,7 +154,7 @@ class SettingsDialog(QDialog):
             self._model_group.addButton(radio)
             self._model_radios[key] = radio
             self.model_layout.addWidget(radio)
-        layout.addWidget(self.model_box)
+        speech.addWidget(self.model_box)
 
         # ---------------------------------------------------------- API keys
         # One provider at a time: pick the provider and its key row (with the
@@ -163,7 +200,8 @@ class SettingsDialog(QDialog):
             self._key_buttons[engine] = (show, test)
             self._get_buttons[engine] = get
             self._key_holders[engine] = holder
-        layout.addWidget(self.keys_box)
+        keys_page.addWidget(self.keys_box)
+        keys_page.addStretch()
 
         # -------------------------------------------------- translation engine
         self.translate_box = QGroupBox(self)
@@ -175,13 +213,14 @@ class SettingsDialog(QDialog):
             self._translate_group.addButton(radio)
             self._translate_radios[key] = radio
             self.translate_layout.addWidget(radio)
-        layout.addWidget(self.translate_box)
+        speech.addWidget(self.translate_box)
+        speech.addStretch()
 
         # -------------------------------------------------------------- footer
         self.note = QLabel(self)
         self.note.setWordWrap(True)
         self.note.setTextFormat(Qt.TextFormat.PlainText)
-        layout.addWidget(self.note)
+        keys_page.addWidget(self.note)
 
         buttons = QHBoxLayout()
         buttons.addStretch(1)
@@ -251,6 +290,7 @@ class SettingsDialog(QDialog):
             "transcribe_engine": engine,
             "whisper_model": model,
             "translate_engine": translate,
+            "show_timestamps": "true" if self.timestamps_choice.isChecked() else "false",
         }
         for name, edit in self._key_edits.items():
             data[name + "_api_key"] = edit.text().strip()
@@ -328,14 +368,7 @@ class SettingsDialog(QDialog):
         button.setEnabled(True)
         self.note.setText(message)
         self.note.setAccessibleDescription(message)
-        # Screen readers hear it twice: once from the status bar of the main
-        # window (the parent) and once from the message box below.
-        parent = self.parent()
-        if parent is not None and hasattr(parent, "announce"):
-            try:
-                parent.announce(message)
-            except Exception:  # noqa: BLE001 - announcing is best effort
-                pass
+        # The result dialog is the single announcement of this result.
         box = QMessageBox(self)
         box.setIcon(QMessageBox.Icon.Information if ok else QMessageBox.Icon.Warning)
         box.setWindowTitle(self.t("title_settings_error") if not ok else self.t("dlg_settings_title"))
@@ -396,7 +429,18 @@ class SettingsDialog(QDialog):
                 self.t("err_prefs_save"),
             )
             return
+        import update_checker
+        update_checker.set_auto_check(self.auto_update_choice.isChecked())
+        import vt_setup
+        vt_setup.save_setup(self.interface_choice.currentData())
         self.saved_data = data
+        import vt_a11y
+        vt_a11y.save({key: box.isChecked() for key, box in self.accessibility_checks.items()})
+        if self.parent() is not None:
+            parent = self.parent()
+            parent.interface_combo.setCurrentIndex(self.interface_choice.currentIndex())
+            parent.timestamps_check.setChecked(self.timestamps_choice.isChecked())
+            vt_a11y.apply(parent)
         self.accept()
 
     # ---------------------------------------------------------------- helpers
@@ -409,13 +453,22 @@ class SettingsDialog(QDialog):
         }.get(engine, engine)
 
     def t(self, key, **kwargs):
-        return tr(self.lang, key, **kwargs)
+        text = tr(self.lang, key, **kwargs)
+        if text == key:
+            from vid_trans_app import tr as app_tr
+            return app_tr(self.lang, key, **kwargs)
+        return text
 
     def retranslate(self, lang):
         self.lang = lang or self.lang
         self.setWindowTitle(self.t("dlg_settings_title"))
         self.setAccessibleName(self.t("dlg_settings_title"))
         self.setAccessibleDescription(self.t("dlg_settings_d"))
+        self.setLayoutDirection(Qt.LayoutDirection.RightToLeft if self.lang == "ar" else Qt.LayoutDirection.LeftToRight)
+        for index, key in enumerate(("general", "speech", "keys", "accessibility")):
+            self.tabs.setTabText(index, self.t("settings_tab_" + key))
+        self.tabs.setAccessibleName(self.t("dlg_settings_title"))
+        self.tabs.setAccessibleDescription(self.t("settings_tabs_hint"))
 
         self.engine_box.setTitle(self.t("grp_engine"))
         self.engine_box.setAccessibleDescription(self.t("grp_engine_d"))
@@ -473,6 +526,8 @@ class SettingsDialog(QDialog):
         self.save_button.setAccessibleDescription(self.t("acc_save_d"))
         self.cancel_button.setText(self.t("btn_cancel_dialog"))
         self._on_engine_changed()
+        import vt_a11y
+        vt_a11y.apply_descriptions(self)
 
 
 def open_settings(lang="en", parent=None) -> dict | None:

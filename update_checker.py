@@ -18,7 +18,7 @@ import urllib.error
 import urllib.request
 
 APP_NAME = "Accessible Video Transcriber"
-APP_VERSION = "1.2.0"       # raise this for every release
+from vt_bootstrap import APP_VERSION
 GITHUB_OWNER = "ihrammal"
 GITHUB_REPO = "video-transcriber"
 

@@ -63,3 +63,7 @@ credentials.json
 
 # Compressed copy of the source made for uploading
 *.zip
+# Local verification dependencies
+.test-deps/
+.test-temp/
+.test-temp-*/

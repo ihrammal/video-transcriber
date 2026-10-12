@@ -10,6 +10,13 @@ from __future__ import annotations
 
 TR = {
     "en": {
+        "settings_tab_general": "General",
+        "settings_tab_speech": "Speech and translation",
+        "settings_tab_keys": "API keys",
+        "settings_tab_accessibility": "Accessibility",
+        "settings_tabs_hint": "Use Left and Right on the tabs, or Ctrl+Tab and Ctrl+Shift+Tab from any page.",
+        "acc_lbl_hints": "Read control hints and details",
+        "acc_desc_hints": "Include optional descriptions when focusing controls. Labels, values, errors and completion messages remain available.",
         # ---------------------------------------------------------------- chrome
         "app_title": "Accessible Video Transcriber - Transcribe, translate and subtitle video",
         "app_name": "Accessible Video Transcriber",
@@ -402,6 +409,13 @@ TR = {
         "short_group_main": "Main screen",
     },
     "ar": {
+        "settings_tab_general": "عام",
+        "settings_tab_speech": "التفريغ والترجمة",
+        "settings_tab_keys": "مفاتيح API",
+        "settings_tab_accessibility": "إمكانية الوصول",
+        "settings_tabs_hint": "استخدم السهمين الأيسر والأيمن على علامات التبويب، أو Ctrl+Tab وCtrl+Shift+Tab من أي صفحة.",
+        "acc_lbl_hints": "قراءة تلميحات عناصر التحكم وتفاصيلها",
+        "acc_desc_hints": "تضمين الأوصاف الاختيارية عند التركيز على عناصر التحكم. تبقى التسميات والقيم والأخطاء ورسائل اكتمال المهام متاحة.",
         # ---------------------------------------------------------------- chrome
         "app_title": "Accessible Video Transcriber - تفريغ الفيديو وترجمته وإنشاء التسميات",
         "app_name": "Accessible Video Transcriber",
