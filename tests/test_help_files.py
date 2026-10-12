@@ -122,14 +122,16 @@ def test_the_author_contact_details_are_in_the_guide(lang):
     raw = _read(lang, "guide.html")
     assert 'id="contact"' in raw
     visible = _visible(raw)
-    assert "Iman Rammal" in visible
-    assert "+974" in visible
+    assert ("Iman Rammal" if lang == "en" else "إيمان رمّال") in visible
+    assert "+974" not in visible
     assert "iman.rammal@gmail.com" in visible
     for url in (
         "https://www.youtube.com/@Welcome2Sawa",
         "https://t.me/ImanSawa",
         "https://www.facebook.com/pretty.ammoona",
         "https://x.com/imanrammal",
+        "https://www.linkedin.com/in/ImanRammal",
+        "https://www.instagram.com/rammal_iman/",
     ):
         assert url in raw, url
 
@@ -140,7 +142,9 @@ def test_the_about_page_carries_the_contact_details():
     for lang in ("en", "ar"):
         about = vid_trans_app.TR[lang]["help_about"]
         assert "iman.rammal@gmail.com" in about, lang
-        assert "+974" in about, lang
+        assert "+974" not in about, lang
+        assert "https://www.linkedin.com/in/ImanRammal" in about, lang
+        assert "https://www.instagram.com/rammal_iman/" in about, lang
         assert "https://t.me/ImanSawa" in about, lang
 
 

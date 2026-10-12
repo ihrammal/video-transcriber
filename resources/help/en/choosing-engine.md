@@ -10,3 +10,6 @@ Automatic is the safe default. It remembers the engine that worked last time and
 
 ## Models
 The Models menu downloads the small local models: tiny is the fastest, base is balanced, and small is the most accurate of the three. Model status (Control plus 0) reports what is on disk and how much space it takes.
+
+
+Version 1.3.0 includes all three multilingual models (Tiny, Base and Small) in the installer. Choose Local in Settings to transcribe without an API key or internet connection.

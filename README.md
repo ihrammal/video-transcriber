@@ -73,7 +73,8 @@ Python, so a released install does not need Python at all.
 About 500 MB of disk space for the program, plus space for the 141 MB Whisper
 model and for a copy of each video you render.
 
-An internet connection is needed for the first model download, for the free
+The installer includes Tiny, Base and Small models for offline transcription.
+An internet connection is needed for optional model downloads, for the free
 translation engine, and for any cloud engine. Transcription with the local
 engine works offline after the first run.
 
@@ -205,8 +206,8 @@ Help, then Open Shortcut File.
 The program runs on Windows only. It uses the Windows Credential Manager,
 Windows sounds and Windows fonts, so it does not run on macOS or Linux.
 
-The first transcription downloads the 141 MB Whisper model, so it needs an
-internet connection once. After that the local engine is fully offline.
+The installer bundles multilingual Whisper Tiny, Base and Small. Local
+transcription works without an internet connection or API key.
 
 The free translation engine needs an internet connection and has no offline
 mode.
