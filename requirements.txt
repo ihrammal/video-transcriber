@@ -3,7 +3,7 @@
 # program exactly as it was tested.
 
 # --- Program interface ----------------------------------------------------
-PyQt6==6.11.0
+PySide6==6.11.2
 
 # --- Speech to text (local, offline engine) -------------------------------
 faster-whisper==1.2.1

@@ -25,7 +25,7 @@ Closing the application shows the mirrored goodbye dialog: the exact line
 ``Thank you for using my program, Goodbye.``, the farewell music and
 an OK button, so nothing closes before the message has been read.
 
-The module only depends on PyQt6, the standard library, ``vt_bootstrap`` (for
+The module only depends on PySide6, the standard library, ``vt_bootstrap`` (for
 the per user data folder) and ``vt_install`` (the installation work itself).
 Both jingles are synthesised on first run so no binary audio asset has to ship
 with the executable.
@@ -42,7 +42,7 @@ import sys
 import time
 import wave
 
-from PyQt6.QtCore import (
+from PySide6.QtCore import (
     QEasingCurve,
     QPointF,
     QPropertyAnimation,
@@ -51,9 +51,9 @@ from PyQt6.QtCore import (
     Qt,
     QThread,
     QTimer,
-    pyqtSignal,
+    Signal,
 )
-from PyQt6.QtGui import (
+from PySide6.QtGui import (
     QBrush,
     QColor,
     QFont,
@@ -63,7 +63,7 @@ from PyQt6.QtGui import (
     QPen,
     QRadialGradient,
 )
-from PyQt6.QtWidgets import (
+from PySide6.QtWidgets import (
     QButtonGroup,
     QCheckBox,
     QComboBox,
@@ -687,7 +687,7 @@ def _center(widget, width, height):
     screen = widget.screen() if hasattr(widget, "screen") else None
     if screen is None:
         try:
-            from PyQt6.QtWidgets import QApplication
+            from PySide6.QtWidgets import QApplication
 
             app = QApplication.instance()
             screen = app.primaryScreen() if app is not None else None
@@ -833,9 +833,9 @@ class InstallStep:
 class InstallThread(QThread):
     """Runs the installation steps off the GUI thread."""
 
-    stepChanged = pyqtSignal(int, str, str)
-    progress = pyqtSignal(int)
-    finished_ok = pyqtSignal(str)
+    stepChanged = Signal(int, str, str)
+    progress = Signal(int)
+    finished_ok = Signal(str)
 
     def __init__(self, steps, plan, parent=None):
         super().__init__(parent)
@@ -981,6 +981,8 @@ class SetupWizard(QDialog):
     # ------------------------------------------------------------------ pages
     def showEvent(self, event):
         super().showEvent(event)
+        from vt_a11y import apply_descriptions
+        apply_descriptions(self)
         # Our own window replaces the boot splash drawn by the bootloader.
         close_boot_splash()
         # Announce the welcome sentence to the screen reader as soon as the
@@ -1824,6 +1826,8 @@ class _WelcomePanel(QDialog):
         row.addWidget(self.continue_button)
         row.addStretch(1)
         root.addLayout(row)
+        from vt_a11y import apply_descriptions
+        apply_descriptions(self)
 
     # ----------------------------------------------------------------- window
     def showEvent(self, event):
@@ -2015,6 +2019,8 @@ def show_exit_screen(app, on_finished) -> bool:
 
         box.resize(640, 340)
         _centre(box)
+        from vt_a11y import apply_descriptions
+        apply_descriptions(box)
         box.show()
         box.raise_()
         box.activateWindow()

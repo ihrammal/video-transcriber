@@ -87,7 +87,7 @@ def test_main_screen_widgets_exist(window):
 
 
 def test_the_transcript_editor_is_a_plain_text_area(window):
-    from PyQt6.QtWidgets import QPlainTextEdit
+    from PySide6.QtWidgets import QPlainTextEdit
 
     assert isinstance(window.editor, QPlainTextEdit)
     assert window.editor.isReadOnly() is False
@@ -165,7 +165,7 @@ def test_combo_contents(window):
 
 
 def test_tab_order_reaches_every_control(window):
-    from PyQt6.QtCore import Qt
+    from PySide6.QtCore import Qt
 
     expected = [
         window.open_button, window.task_combo, window.language_combo,

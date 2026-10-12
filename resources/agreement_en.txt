@@ -1,10 +1,10 @@
-﻿VID-TRANS USER AGREEMENT
+Accessible Video Transcriber USER AGREEMENT
 Video transcription, translation and subtitling application
-Version 2.0 - Effective date: 24 September 2026
+Application version 1.3.0 - Effective date: 12 October 2026
 Copyright (c) Iman Rammal. All rights reserved.
 
 PLEASE READ THIS AGREEMENT CAREFULLY BEFORE INSTALLING, COPYING OR USING
-VID-TRANS ("the Application"). BY INSTALLING OR USING THE APPLICATION YOU
+Accessible Video Transcriber ("the Application"). BY INSTALLING OR USING THE APPLICATION YOU
 ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD AND AGREE TO BE BOUND BY THIS
 AGREEMENT. IF YOU DO NOT AGREE, DO NOT INSTALL OR USE THE APPLICATION AND
 REMOVE IT FROM YOUR COMPUTER.
@@ -12,7 +12,7 @@ REMOVE IT FROM YOUR COMPUTER.
 ------------------------------------------------------------------------
 1. WHAT THE APPLICATION DOES
 ------------------------------------------------------------------------
-Vid-Trans is a desktop application for Windows that:
+Accessible Video Transcriber is a desktop application for Windows that:
   a) converts the speech contained in a video file into timed captions
      (transcription) using an offline speech-recognition model;
   b) optionally translates those captions into another language;
@@ -81,10 +81,14 @@ you process.
 5. THIRD-PARTY COMPONENTS AND SERVICES
 ------------------------------------------------------------------------
 The Application incorporates third-party open-source components (including
-PyQt6, faster-whisper, CTranslate2, FFmpeg, moviepy, deep-translator and srt)
+PySide6, faster-whisper, CTranslate2, FFmpeg, moviepy, deep-translator and srt)
 and may download speech-recognition model files from a public model
 repository. Those components and services are provided under their own
 licences and terms. This Agreement governs only the Application itself.
+
+Nothing in this Agreement restricts rights granted by third-party licences,
+including modification, redistribution, replacement of LGPL libraries, and
+reverse engineering to debug modifications to those libraries.
 
 The author is not responsible for the availability, accuracy, security or
 policies of any third-party service, including online translation services.
@@ -140,7 +144,12 @@ unenforceable, the remaining provisions continue in full force.
 
 Questions about this Agreement:
     Publisher: Iman Rammal
-    Product:   Vid-Trans
+    Product:   Accessible Video Transcriber
+    Email:     iman.rammal@gmail.com
+    LinkedIn: https://www.linkedin.com/in/ImanRammal
+    Facebook: https://www.facebook.com/pretty.ammoona
+    Instagram: https://www.instagram.com/rammal_iman/
+    X: https://x.com/imanrammal
 
 ------------------------------------------------------------------------
 END OF AGREEMENT

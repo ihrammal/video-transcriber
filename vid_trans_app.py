@@ -1,6 +1,6 @@
 """vid_trans_app.py
 
-Accessible Windows 11 desktop application (PyQt6 / WCAG 2.1 AA + Windows UI Automation)
+Accessible Windows 11 desktop application (PySide6 / WCAG 2.1 AA + Windows UI Automation)
 that transcribes video audio with faster-whisper, translates subtitles with deep-translator,
 lets users edit captions line by line, and either burns styled captions into the video
 (moviepy) or exports a clean .srt file. The whole interface is available in English and
@@ -8,7 +8,7 @@ Arabic (with full right-to-left layout and translated screen-reader accessibilit
 
 Install (Python 3.14 / Windows 11):
 
-    pip install PyQt6 faster-whisper deep-translator srt moviepy
+    pip install PySide6 faster-whisper deep-translator srt moviepy
 
 Run:
 
@@ -310,7 +310,7 @@ TR = {
         ),
         "help_about": (
             "<h1>About Accessible Video Transcriber</h1>"
-            "<h2>Version 1.3</h2>"
+            "<h2>Version 1.3.0</h2>"
             "<p>Accessible desktop application by Iman Rammal for video work: transcribe "
             "speech to captions, translate them, edit the result and burn it back into the "
             "video.</p>"
@@ -325,7 +325,7 @@ TR = {
             "in the Windows Credential Manager and are only sent to the provider you chose. "
             "The log file never contains a key.</p>"
             "<h2>Libraries</h2>"
-            "<p>PyQt6, faster-whisper, ctranslate2, deep-translator, moviepy, srt, "
+            "<p>PySide6, faster-whisper, ctranslate2, deep-translator, moviepy, srt, "
             "requests.</p>"
             "<h2>License</h2>"
             "<p>Free for personal, educational, research and non-commercial use. See Help "
@@ -333,8 +333,9 @@ TR = {
             "<h2>Contact the author</h2>"
             "<p>Iman Rammal &mdash; Braille Training Specialist, NVDA Certified Expert, "
             "JAWS Certified, assistive technology trainer, translator and interpreter.</p>"
-            "<p>Phone: <a href=\"tel:+97455485652\">+974 55485652</a><br>"
-            "Email: <a href=\"mailto:iman.rammal@gmail.com\">iman.rammal@gmail.com</a><br>"
+            "<p>Email: <a href=\"mailto:iman.rammal@gmail.com\">iman.rammal@gmail.com</a><br>"
+            "LinkedIn: <a href=\"https://www.linkedin.com/in/ImanRammal\">LinkedIn</a><br>"
+            "Instagram: <a href=\"https://www.instagram.com/rammal_iman/\">Instagram</a><br>"
             "YouTube: <a href=\"https://www.youtube.com/@Welcome2Sawa\">@Welcome2Sawa</a><br>"
             "Telegram: <a href=\"https://t.me/ImanSawa\">t.me/ImanSawa</a><br>"
             "Facebook: <a href=\"https://www.facebook.com/pretty.ammoona\">pretty.ammoona</a><br>"
@@ -645,7 +646,7 @@ TR = {
         ),
         "help_about": (
             "<h1>حول برنامج تفريغ الفيديو الميسّر</h1>"
-            "<h2>الإصدار 1.3</h2>"
+            "<h2>الإصدار 1.3.0</h2>"
             "<p>تطبيق سطح مكتب من إعداد إيمان رمّال للعمل على الفيديو: تفريغ الكلام إلى "
             "تسميات، وترجمتها، وتعديل النتيجة، ودمجها داخل الفيديو.</p>"
             "<h2>إمكانية الوصول</h2>"
@@ -658,7 +659,7 @@ TR = {
             "Windows Credential Manager ولا تُرسل إلا إلى المزود الذي اخترته. ولا يحتوي "
             "ملف السجل على أي مفتاح.</p>"
             "<h2>المكتبات</h2>"
-            "<p>PyQt6 وfaster-whisper وctranslate2 وdeep-translator وmoviepy وsrt "
+            "<p>PySide6 وfaster-whisper وctranslate2 وdeep-translator وmoviepy وsrt "
             "وrequests.</p>"
             "<h2>الرخصة</h2>"
             "<p>مجاني للاستخدام الشخصي والتعليمي والبحثي وغير التجاري. انظر مساعد ← "
@@ -666,8 +667,9 @@ TR = {
             "<h2>التواصل مع المؤلف</h2>"
             "<p>إيمان رمّال &mdash; أخصائي تدريب على برايل، وخبير NVDA معتمد، "
             "وحاصل على شهادة JAWS، ومدرّب تقنيات مساعدة، ومترجم ومترجم فوري.</p>"
-            "<p>الهاتف: <a href=\"tel:+97455485652\">+974 55485652</a><br>"
-            "البريد الإلكتروني: <a href=\"mailto:iman.rammal@gmail.com\">iman.rammal@gmail.com</a><br>"
+            "<p>البريد الإلكتروني: <a href=\"mailto:iman.rammal@gmail.com\">iman.rammal@gmail.com</a><br>"
+            "لينكدإن: <a href=\"https://www.linkedin.com/in/ImanRammal\">لينكدإن</a><br>"
+            "إنستغرام: <a href=\"https://www.instagram.com/rammal_iman/\">إنستغرام</a><br>"
             "يوتيوب: <a href=\"https://www.youtube.com/@Welcome2Sawa\">@Welcome2Sawa</a><br>"
             "تيليجرام: <a href=\"https://t.me/ImanSawa\">t.me/ImanSawa</a><br>"
             "فيسبوك: <a href=\"https://www.facebook.com/pretty.ammoona\">pretty.ammoona</a><br>"
@@ -859,13 +861,13 @@ def trim_subtitles(subtitles):
     ]
 
 
-from PyQt6.QtCore import Qt, QThread, QTimer, pyqtSignal
+from PySide6.QtCore import Qt, QThread, QTimer, Signal
 
-from PyQt6.QtGui import QAction, QActionGroup, QFont, QIcon, QKeySequence, QShortcut
+from PySide6.QtGui import QAction, QActionGroup, QFont, QIcon, QKeySequence, QShortcut
 
 QAccessible = None
 
-from PyQt6.QtWidgets import (
+from PySide6.QtWidgets import (
     QApplication,
     QCheckBox,
     QComboBox,
@@ -891,10 +893,10 @@ from PyQt6.QtWidgets import (
 
 
 class ExtractAudioThread(QThread):
-    progress = pyqtSignal(int)
-    stages = pyqtSignal(str)
-    completed = pyqtSignal(str)
-    failed = pyqtSignal(str)
+    progress = Signal(int)
+    stages = Signal(str)
+    completed = Signal(str)
+    failed = Signal(str)
 
     def __init__(self, video_path, audio_path, lang="en", parent=None):
         super().__init__(parent)
@@ -931,10 +933,10 @@ class ExtractAudioThread(QThread):
 
 
 class TranscriptionThread(QThread):
-    progress = pyqtSignal(int)
-    stages = pyqtSignal(str)
-    completed = pyqtSignal(list, str, str)
-    failed = pyqtSignal(str)
+    progress = Signal(int)
+    stages = Signal(str)
+    completed = Signal(list, str, str)
+    failed = Signal(str)
 
     def __init__(self, video_path, audio_path, language, temp_dir, lang="en", parent=None):
         super().__init__(parent)
@@ -1029,10 +1031,10 @@ class TranscriptionThread(QThread):
 
 
 class TranslationThread(QThread):
-    progress = pyqtSignal(int)
-    stages = pyqtSignal(str)
-    completed = pyqtSignal(list)
-    failed = pyqtSignal(str)
+    progress = Signal(int)
+    stages = Signal(str)
+    completed = Signal(list)
+    failed = Signal(str)
 
     def __init__(self, subtitles, source, target, bilateral, lang="en", parent=None):
         super().__init__(parent)
@@ -1480,6 +1482,7 @@ class MainWindow(QMainWindow):
             )
             return
         self.current_lang = lang
+        vt_setup.save_setup(lang)
         self._retranslate_ui()
         import vt_a11y
         vt_a11y.apply_descriptions(self)
@@ -1790,6 +1793,12 @@ class MainWindow(QMainWindow):
         return act
 
     def _sync_settings_menus(self, *_args):
+        auto_update = getattr(self, "_auto_update_action", None)
+        if auto_update is not None:
+            import update_checker
+            previous = auto_update.blockSignals(True)
+            auto_update.setChecked(bool(update_checker.load_settings().get("auto_check", True)))
+            auto_update.blockSignals(previous)
         for lang, act in self._iface_actions.items():
             act.setChecked(lang == self.current_lang)
         if self._view_high_act is not None and self.high_contrast_check is not None:
@@ -2225,6 +2234,8 @@ class MainWindow(QMainWindow):
             text.setFocus(Qt.FocusReason.ShortcutFocusReason)
         else:
             contents.setFocus(Qt.FocusReason.OtherFocusReason)
+        from vt_a11y import apply_descriptions
+        apply_descriptions(dlg)
         dlg.show()
         dlg.raise_()
         dlg.activateWindow()
@@ -2278,6 +2289,8 @@ class MainWindow(QMainWindow):
         close_button.clicked.connect(dlg.accept)
         layout.addWidget(close_button)
         dlg.resize(780, 640)
+        from vt_a11y import apply_descriptions
+        apply_descriptions(dlg)
         dlg.show()
         dlg.raise_()
         dlg.activateWindow()
@@ -2777,7 +2790,7 @@ class MainWindow(QMainWindow):
         self._model_thread = threading.Thread(target=worker, daemon=True)
         self._model_thread.start()
         if self._model_timer is None:
-            from PyQt6.QtCore import QTimer
+            from PySide6.QtCore import QTimer
 
             self._model_timer = QTimer(self)
             self._model_timer.setInterval(800)
@@ -2880,6 +2893,8 @@ class MainWindow(QMainWindow):
         close_button.clicked.connect(dlg.accept)
         layout.addWidget(close_button)
         dlg.resize(720, 620)
+        from vt_a11y import apply_descriptions
+        apply_descriptions(dlg)
         dlg.show()
         dlg.raise_()
         dlg.activateWindow()
@@ -3352,7 +3367,7 @@ def _install_crash_log():
         except Exception:
             pass
         try:
-            from PyQt6.QtWidgets import QApplication, QMessageBox
+            from PySide6.QtWidgets import QApplication, QMessageBox
 
             app = QApplication.instance() or QApplication([])
             QMessageBox.critical(
@@ -3427,7 +3442,7 @@ def _run_frozen_self_test():
 
         if "QT_QPA_PLATFORM" not in _os.environ:
             _os.environ["QT_QPA_PLATFORM"] = "offscreen"
-        from PyQt6.QtWidgets import QApplication
+        from PySide6.QtWidgets import QApplication
 
         app = QApplication([])
         lines.append("      QApplication offscreen OK (style: " + str(app.style().objectName()) + ")")
@@ -3469,22 +3484,27 @@ def _run_frozen_self_test():
             try:
                 from faster_whisper import WhisperModel
 
-                opened = WhisperModel(folder, device="cpu", compute_type="int8")
-                # ... and actually run it, on real speech, with every download
-                # path still poisoned.  Proving the model opens is not the same
-                # as proving transcription works on the user's machine.
-                speech = vt_bootstrap.resource_path("resources", "selftest-speech.wav")
-                if not os.path.isfile(speech):
-                    raise RuntimeError("the self test speech sample is missing: %r" % speech)
-                segments, _info = opened.transcribe(
-                    speech, language="en", beam_size=5, vad_filter=False
-                )
-                heard = " ".join((s.text or "").strip() for s in segments).strip()
-                lines.append("      transcribed: " + repr(heard))
-                if "welcome" not in heard.lower():
-                    raise RuntimeError(
-                        "offline transcription returned the wrong text: %r" % heard
+                for model_name in ("tiny", "base", "small"):
+                    model_folder = vt_install.model_dir(model_name)
+                    if not model_folder:
+                        raise RuntimeError("Missing bundled model: " + model_name)
+                    opened = WhisperModel(model_folder, device="cpu", compute_type="int8")
+                    # ... and actually run it, on real speech, with every download
+                    # path still poisoned.  Proving the model opens is not the same
+                    # as proving transcription works on the user's machine.
+                    speech = vt_bootstrap.resource_path("resources", "selftest-speech.wav")
+                    if not os.path.isfile(speech):
+                        raise RuntimeError("the self test speech sample is missing: %r" % speech)
+                    segments, _info = opened.transcribe(
+                        speech, language="en", beam_size=5, vad_filter=False
                     )
+                    heard = " ".join((s.text or "").strip() for s in segments).strip()
+                    lines.append("      " + model_name + " transcribed: " + repr(heard))
+                    if "welcome" not in heard.lower():
+                        raise RuntimeError(
+                            "offline transcription returned the wrong text: %r" % heard
+                        )
+                    del opened
             finally:
                 if real_fw is not None:
                     fwu.snapshot_download = real_fw
@@ -3577,7 +3597,7 @@ def _run_frozen_self_test():
     check("srt", _srt)
     check("deep_translator", _translator)
     check("numpy", _numpy)
-    check("PyQt6/QApplication", _qt)
+    check("PySide6/QApplication", _qt)
     check("huggingface_hub", _model)
     check("video tool chain", _video_tools)
     check("install helpers", _install_helpers)
@@ -3687,7 +3707,7 @@ def main():
         else:
             window.setFocus(Qt.FocusReason.OtherFocusReason)
 
-    from PyQt6.QtCore import QTimer
+    from PySide6.QtCore import QTimer
 
     QTimer.singleShot(0, _land_on_first_action)
 

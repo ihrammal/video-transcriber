@@ -24,7 +24,7 @@ import pytest  # noqa: E402
 @pytest.fixture(scope="session")
 def qapp():
     """One application instance for the whole session."""
-    from PyQt6.QtWidgets import QApplication
+    from PySide6.QtWidgets import QApplication
 
     app = QApplication.instance()
     if app is None:

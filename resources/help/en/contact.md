@@ -6,12 +6,11 @@ Accessible Video Transcriber was written by Iman Rammal: Braille Training
 Specialist, NVDA Certified Expert, JAWS Certified, assistive technology
 trainer, and translator / interpreter.
 
-## Phone and email
+## Email
 
-- Phone: +974 55485652
 - Email: iman.rammal@gmail.com
 
-Write or call with any question about the program, or about transcription,
+Write with any question about the program, or about transcription,
 translation and accessibility work in general. Messages in English and
 Arabic are both welcome.
 
@@ -21,6 +20,9 @@ Arabic are both welcome.
 - Telegram: https://t.me/ImanSawa
 - Facebook: https://www.facebook.com/pretty.ammoona
 - X: https://x.com/imanrammal
+
+- LinkedIn: https://www.linkedin.com/in/ImanRammal
+- Instagram: https://www.instagram.com/rammal_iman/
 
 ## Before you write
 

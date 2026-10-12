@@ -10,7 +10,7 @@ a = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=['PyQt6', 'numpy', 'PIL', 'moviepy', 'faster_whisper'],
+    excludes=['PySide6', 'numpy', 'PIL', 'moviepy', 'faster_whisper'],
     noarchive=False,
     optimize=0,
 )

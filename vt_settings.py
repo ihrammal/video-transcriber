@@ -18,8 +18,8 @@ from __future__ import annotations
 import logging
 import os
 
-from PyQt6.QtCore import Qt, QThread, pyqtSignal
-from PyQt6.QtWidgets import (
+from PySide6.QtCore import Qt, QThread, Signal
+from PySide6.QtWidgets import (
     QButtonGroup,
     QComboBox,
     QCheckBox,
@@ -53,7 +53,7 @@ KEY_URLS = {
 
 
 class KeyTestThread(QThread):
-    finished = pyqtSignal(bool, str)
+    finished = Signal(bool, str)
 
     def __init__(self, engine, key, lang="en", parent=None):
         super().__init__(parent)
@@ -370,6 +370,8 @@ class SettingsDialog(QDialog):
         button.setEnabled(True)
         self.note.setText(message)
         self.note.setAccessibleDescription(message)
+        import vt_a11y
+        vt_a11y.apply_descriptions(self.note)
         # The result dialog is the single announcement of this result.
         box = QMessageBox(self)
         box.setIcon(QMessageBox.Icon.Information if ok else QMessageBox.Icon.Warning)
@@ -379,8 +381,8 @@ class SettingsDialog(QDialog):
 
     def _on_get_key(self, engine):
         """Open the provider page where a new API key can be created."""
-        from PyQt6.QtCore import QUrl
-        from PyQt6.QtGui import QDesktopServices
+        from PySide6.QtCore import QUrl
+        from PySide6.QtGui import QDesktopServices
 
         url = KEY_URLS.get(engine)
         message = self.t("msg_key_opened", engine=self._label(engine))

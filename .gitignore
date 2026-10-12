@@ -68,3 +68,4 @@ credentials.json
 .test-temp/
 .test-temp-*/
 .venv-release/
+VidTransDiagnostic.spec

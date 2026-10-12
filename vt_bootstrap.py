@@ -282,7 +282,7 @@ def _now() -> str:
 def _qt_message_box(title: str, text: str) -> None:
     """Show a native error box; used only for fatal, unhandled exceptions."""
     try:
-        from PyQt6.QtWidgets import QApplication, QMessageBox
+        from PySide6.QtWidgets import QApplication, QMessageBox
 
         app = QApplication.instance()
         if app is None:

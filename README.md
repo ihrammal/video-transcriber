@@ -166,7 +166,7 @@ application.
 `installer_output\AccessibleVideoTranscriber_Setup_<version>.exe` is the
 installer.
 
-The installer ships the `models\base` recognition model, a standalone
+The installer ships the `models\tiny`, `models\base` and `models\small` recognition models, a standalone
 `ffmpeg.exe`, both licence texts and the help folders, so the first
 transcription works without a network connection.
 
@@ -261,7 +261,10 @@ Iman Rammal, Braille Training Specialist and NVDA Certified Expert.
 
 Email: iman.rammal@gmail.com
 
-Phone: +974 55485652
+LinkedIn: https://www.linkedin.com/in/ImanRammal
+
+Instagram: https://www.instagram.com/rammal_iman/
+
 
 YouTube: https://www.youtube.com/@Welcome2Sawa
 

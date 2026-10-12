@@ -892,8 +892,8 @@ SUPPORTED_VIDEO_SUFFIXES = (
 
 def configure_qt_language(lang):
     """Translate Qt's standard buttons and dialog text as well as our labels."""
-    from PyQt6.QtCore import QLibraryInfo, QLocale, QTranslator
-    from PyQt6.QtWidgets import QApplication
+    from PySide6.QtCore import QLibraryInfo, QLocale, QTranslator
+    from PySide6.QtWidgets import QApplication
     app = QApplication.instance()
     if app is None:
         return

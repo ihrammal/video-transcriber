@@ -2,6 +2,9 @@
 
 ## English
 
+- Bundled multilingual Whisper Tiny, Base and Small for local transcription without API keys or a model download.
+- Migrated to PySide6; third-party LGPL rights remain independent of app terms.
+
 - All preferences now share one window with General, Speech and translation,
   API keys, and Accessibility tabs. Open it with Ctrl+, or use Ctrl+Shift+A to
   open its Accessibility page.
@@ -18,12 +21,19 @@
 - Arabic mode now refreshes group and menu descriptions when switching languages,
   translates welcome/farewell and update dialogs, and uses «إمكانية الوصول»
   consistently. Qt standard dialog buttons also use Arabic.
+- Updated the English and Arabic user agreements to application version 1.3.0,
+  corrected the Arabic author name, and linked the full agreement from Help.
+- Added LinkedIn and Instagram contact links; removed phone and WhatsApp references.
+- Fixed a packaged Qt startup failure caused by an incompatible bundled ICU DLL.
 
 Install the attached AccessibleVideoTranscriber_Setup_1.3.0.exe. Existing
 preferences are retained. Version 1.2 users can choose Help > Check for Updates
 (Ctrl+U); automatic checks follow the saved startup preference.
 
 ## العربية
+
+- يتضمن المثبّت نماذج Whisper Tiny وBase وSmall متعددة اللغات للتفريغ المحلي دون مفاتيح API أو تنزيل نموذج.
+- انتقل التطبيق إلى PySide6، مع الحفاظ على الحقوق التي تمنحها تراخيص المكوّنات التابعة لأطراف ثالثة.
 
 - جُمعت التفضيلات في نافذة واحدة تضم علامات التبويب: عام، والتفريغ والترجمة،
   ومفاتيح API، وإمكانية الوصول. افتحها باستخدام Ctrl+, أو افتح صفحة إمكانية
@@ -40,6 +50,9 @@ preferences are retained. Version 1.2 users can choose Help > Check for Updates
 - تظهر نتائج اختبار مفاتيح API مرة واحدة في مربع النتيجة.
 - صُححت الأسماء والأوصاف عند تبديل لغة الواجهة، وتُرجمت رسائل الترحيب والوداع
   والتحديثات وأزرار مربعات الحوار إلى العربية، ووُحّد مصطلح «إمكانية الوصول».
+- حُدثت اتفاقية المستخدم إلى إصدار التطبيق 1.3.0، وصُحح اسم المؤلف، وأضيفت
+  روابط لينكدإن وإنستغرام، وأزيلت معلومات الهاتف وواتساب.
+- أُصلح خلل كان يمنع النسخة المجمعة من بدء التشغيل.
 
 ثبّت الملف AccessibleVideoTranscriber_Setup_1.3.0.exe المرفق. تُحفظ التفضيلات
 الحالية. للتحقق من التحديثات استخدم قائمة المساعدة أو Ctrl+U.

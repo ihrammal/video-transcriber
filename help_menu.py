@@ -1,5 +1,5 @@
 """
-help_menu.py  (converted from wxPython to PyQt6, the toolkit this program
+help_menu.py  (converted from wxPython to PySide6, the toolkit this program
 uses.  update_checker.py stays the same and is shared with this file.)
 
 How to use in your main window class:
@@ -35,8 +35,8 @@ import threading
 import webbrowser
 from pathlib import Path
 
-from PyQt6.QtCore import QObject, pyqtSignal
-from PyQt6.QtWidgets import QMessageBox, QMenu
+from PySide6.QtCore import QObject, Signal
+from PySide6.QtWidgets import QMessageBox, QMenu
 
 import update_checker as uc
 
@@ -102,6 +102,7 @@ def build_help_menu(window):
     )
     auto.setCheckable(True)
     auto.setChecked(bool(uc.load_settings()["auto_check"]))
+    window._auto_update_action = auto
     make(
         menu,
         "act_release_notes",
@@ -116,7 +117,7 @@ def build_help_menu(window):
     )
     menu.addSeparator()
 
-    make(menu, "act_license", lambda: open_help(window, "license"), "Ctrl+Shift+G")
+    make(menu, "act_license", window.show_license, "Ctrl+Shift+G")
     make(menu, "act_about", window.show_about, "F12")
     menu.addSeparator()
 
@@ -131,7 +132,7 @@ def build_help_menu(window):
 class _Bridge(QObject):
     """Hands a result from the background thread back to the Qt main thread."""
 
-    finished = pyqtSignal(object, object, bool)
+    finished = Signal(object, object, bool)
 
 
 _bridge = None

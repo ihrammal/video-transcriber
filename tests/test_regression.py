@@ -14,7 +14,7 @@ import re
 import time
 from datetime import timedelta
 
-from PyQt6.QtCore import QTimer
+from PySide6.QtCore import QTimer
 
 
 def test_transcribe_done_does_not_crash(qapp, profile):

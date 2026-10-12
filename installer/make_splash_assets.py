@@ -23,9 +23,9 @@ import sys
 # usable font database and draws every glyph as an empty box.
 
 
-from PyQt6.QtCore import QPointF, QRectF, Qt  # noqa: E402
-from PyQt6.QtWidgets import QApplication  # noqa: E402
-from PyQt6.QtGui import (  # noqa: E402
+from PySide6.QtCore import QPointF, QRectF, Qt  # noqa: E402
+from PySide6.QtWidgets import QApplication  # noqa: E402
+from PySide6.QtGui import (  # noqa: E402
     QColor,
     QFont,
     QImage,

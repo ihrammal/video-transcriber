@@ -64,7 +64,7 @@ def run(argv) -> int:
         return _finish(lines, 2)
 
     os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
-    from PyQt6.QtWidgets import QApplication
+    from PySide6.QtWidgets import QApplication
 
     import vid_trans_app
 

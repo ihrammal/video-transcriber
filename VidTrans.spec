@@ -24,7 +24,7 @@ import shutil
 import sysconfig
 
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
-from PyQt6.QtCore import QLibraryInfo
+from PySide6.QtCore import QLibraryInfo
 from PyInstaller.utils.win32.versioninfo import (
     FixedFileInfo,
     StringFileInfo,
@@ -81,6 +81,7 @@ _PURELIB = sysconfig.get_paths()["purelib"]
 DIST_INFOS = [
     (path, os.path.basename(path))
     for path in sorted(glob.glob(os.path.join(_PURELIB, "*.dist-info")))
+    if "yqt" not in os.path.basename(path).lower()
 ]
 
 # faster-whisper keeps its speech-activity model as a data file.  Analysis only
@@ -96,7 +97,7 @@ a = Analysis(
     datas=DIST_INFOS
     + [('resources', 'resources')]
     + [('help', 'help')]  # the combined help guide (--add-data "help;help")
-    + [(os.path.join(QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath), 'qtbase_ar.qm'), 'PyQt6/Qt6/translations')]
+    + [(os.path.join(QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath), 'qtbase_ar.qm'), 'PySide6/translations')]
     + FASTER_WHISPER_DATA,
     hiddenimports=[
         'vt_setup',
@@ -122,11 +123,16 @@ a = Analysis(
     hookspath=['installer/hooks'],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[],
+    excludes=['PyQt6', 'PyQt5'],
     noarchive=False,
     optimize=0,
 )
 pyz = PYZ(a.pure)
+
+# Windows 11 supplies the ICU API used by Qt. A build runtime can contribute
+# another icuuc.dll with version-suffixed exports; shipping it shadows
+# Windows' copy and prevents QtCore from loading.
+a.binaries = [entry for entry in a.binaries if os.path.basename(entry[0]).lower() != 'icuuc.dll']
 
 splash = Splash(
     'installer/splash/splash.png',
@@ -196,6 +202,10 @@ if _ffmpeg_src and os.path.isfile(_ffmpeg_src):
     shutil.copy2(_ffmpeg_src, os.path.join(DIST, "ffmpeg.exe"))
 
 _models_src = os.path.join(SPECPATH, "models")
+for model in ("tiny", "base", "small"):
+    for required in ("config.json", "model.bin", "tokenizer.json", "vocabulary.txt"):
+        if not os.path.isfile(os.path.join(_models_src, model, required)):
+            raise RuntimeError("Release requires bundled Whisper " + model + ": " + required)
 if os.path.isdir(_models_src):
     _models_dst = os.path.join(DIST, "models")
     if os.path.isdir(_models_dst):

@@ -107,7 +107,7 @@ def apply(app):
 
 def apply_descriptions(root, enabled=None):
     """Keep names and values intact; hide only optional control descriptions."""
-    from PyQt6.QtWidgets import QWidget
+    from PySide6.QtWidgets import QWidget
 
     if enabled is None:
         enabled = load()["read_hints"]
@@ -127,8 +127,8 @@ def build_dialog(parent=None, lang="en"):
     Every control is reachable with Tab/Shift+Tab, and each label describes the
     effect of its checkbox for screen readers.
     """
-    from PyQt6.QtCore import Qt
-    from PyQt6.QtWidgets import (
+    from PySide6.QtCore import Qt
+    from PySide6.QtWidgets import (
         QCheckBox,
         QDialog,
         QDialogButtonBox,
@@ -199,8 +199,8 @@ def open_dialog(parent=None, lang="en"):
     Returns ``True`` when the user pressed OK, ``False`` otherwise.  The
     change is saved and pushed into the running window when OK is pressed.
     """
-    from PyQt6.QtCore import Qt
-    from PyQt6.QtWidgets import QDialog
+    from PySide6.QtCore import Qt
+    from PySide6.QtWidgets import QDialog
 
     if parent is not None and hasattr(parent, "interface_combo"):
         from vt_settings import SettingsDialog

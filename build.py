@@ -114,6 +114,7 @@ def selftest(exe: str, report: str) -> bool:
     if not os.path.isfile(exe):
         print("self test skipped: %s is missing" % exe)
         return False
+    os.makedirs(os.path.dirname(os.path.abspath(report)), exist_ok=True)
     if os.path.exists(report):
         os.remove(report)
     proc = subprocess.run([exe, "--selftest", report], capture_output=True, text=True, timeout=1800)
@@ -374,10 +375,7 @@ def main(argv=None) -> int:
 
     if no_setup:
         if not no_inno:
-            try:
-                compile_inno(version)
-            except SystemExit as exc:
-                print("Inno Setup skipped: %s" % exc, flush=True)
+            compile_inno(version)
         return 0 if ok else 1
 
     inno_exe = None

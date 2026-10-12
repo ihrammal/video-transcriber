@@ -44,7 +44,8 @@ def test_both_guides_exist_and_look_like_documents():
         assert '<meta charset="utf-8">' in raw, name
         assert "<title>" in raw
         assert "<script" not in raw.lower(), name
-        assert "1.2" in raw, name
+        from vt_bootstrap import APP_VERSION
+        assert APP_VERSION in raw, name
 
 
 def test_the_anchors_help_menu_jumps_to_exist():

@@ -14,6 +14,8 @@ numbers of the form major.minor.patch.
 - English and Arabic release notes in RELEASE_NOTES.md.
 - Arabic-only welcome, farewell and update dialogs, translated standard Qt
   buttons, refreshed group descriptions and consistent accessibility terminology.
+- Updated agreement versions and contact links, removed phone references,
+  and corrected a bundled DLL conflict that prevented Qt startup.
 
 ## 1.2 - 2026-10-07
 

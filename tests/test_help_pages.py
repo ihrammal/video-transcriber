@@ -1,4 +1,4 @@
-﻿"""The help window: topic files, search, shortcut list in words, dialogs.
+"""The help window: topic files, search, shortcut list in words, dialogs.
 
 The topics live as Markdown files in resources/help/<lang>/<topic>.md and
 are shown by MainWindow._open_help() as a Contents list plus a read-only
@@ -41,7 +41,7 @@ def window(qapp, profile):
 
 
 def _contents_and_text(dialog, window):
-    from PyQt6.QtWidgets import QListWidget, QPlainTextEdit
+    from PySide6.QtWidgets import QListWidget, QPlainTextEdit
 
     contents = next(
         child
@@ -149,8 +149,8 @@ def test_key_words_reads_in_words():
 
 
 def test_the_help_dialog_shows_contents_and_text(window):
-    from PyQt6.QtGui import QShortcut
-    from PyQt6.QtWidgets import QLabel, QApplication
+    from PySide6.QtGui import QShortcut
+    from PySide6.QtWidgets import QLabel, QApplication
     import vt_help
 
     dlg = window._open_help()
@@ -202,9 +202,9 @@ def test_enter_on_a_topic_keeps_the_focus_in_the_text(window):
     to read.  No button in the dialog may be the default, and Enter on
     both lists must leave the focus in the text area.
     """
-    from PyQt6.QtCore import Qt
-    from PyQt6.QtTest import QTest
-    from PyQt6.QtWidgets import QApplication, QLineEdit, QListWidget, QPushButton
+    from PySide6.QtCore import Qt
+    from PySide6.QtTest import QTest
+    from PySide6.QtWidgets import QApplication, QLineEdit, QListWidget, QPushButton
     import vt_help
 
     dlg = window._open_help()
@@ -264,7 +264,7 @@ def test_enter_on_a_topic_keeps_the_focus_in_the_text(window):
 
 
 def test_the_search_reports_and_opens_results(window):
-    from PyQt6.QtWidgets import (
+    from PySide6.QtWidgets import (
         QApplication,
         QLabel,
         QLineEdit,
@@ -326,7 +326,7 @@ def test_the_search_reports_and_opens_results(window):
 
 
 def test_the_shortcut_dialog_opens_on_the_shortcut_topic_in_words(window):
-    from PyQt6.QtWidgets import QApplication
+    from PySide6.QtWidgets import QApplication
     import vt_help
 
     dlg = window.show_shortcuts()
@@ -354,7 +354,7 @@ def test_the_shortcut_dialog_opens_on_the_shortcut_topic_in_words(window):
 
 
 def test_the_arabic_help_dialog_flips_to_right_to_left(qapp, profile):
-    from PyQt6.QtWidgets import QApplication
+    from PySide6.QtWidgets import QApplication
     import vid_trans_app
     import vt_help
 
@@ -379,7 +379,7 @@ def test_the_arabic_help_dialog_flips_to_right_to_left(qapp, profile):
 
 
 def test_the_about_page_stays_a_single_page(window):
-    from PyQt6.QtWidgets import QApplication, QListWidget, QTextBrowser
+    from PySide6.QtWidgets import QApplication, QListWidget, QTextBrowser
 
     dlg = window.show_about()
     try:

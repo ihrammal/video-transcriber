@@ -19,7 +19,15 @@ def test_arabic_license_is_non_commercial():
     text = io.open(ROOT / "resources" / "agreement_ar.txt", encoding="utf-8").read()
     assert "غير تجاري" in text
     assert "لأي غرض تجاري" in text
-    assert "إيمان رمل" in text or "إيمان رمل" in text or "رمل" in text
+    assert "إيمان رمّال" in text
+
+
+def test_agreement_versions_match_release():
+    from vt_bootstrap import APP_VERSION
+    for lang in ("en", "ar"):
+        text = (ROOT / "resources" / ("agreement_" + lang + ".txt")).read_text(encoding="utf-8")
+        assert APP_VERSION in text.splitlines()[2]
+        assert "iman.rammal@gmail.com" in text
 
 
 def test_installer_ships_both_licenses():

@@ -1,6 +1,6 @@
 """Keyboard navigation and optional descriptions in unified settings."""
-from PyQt6.QtCore import Qt
-from PyQt6.QtTest import QTest
+from PySide6.QtCore import Qt
+from PySide6.QtTest import QTest
 
 
 def test_pages_and_keyboard_navigation(qapp, profile, fake_secrets):
@@ -62,7 +62,7 @@ def test_save_preferences_and_reopen(qapp, profile, fake_secrets):
 def test_switching_to_arabic_updates_group_and_menu_descriptions(qapp, profile):
     import re
     from vid_trans_app import MainWindow
-    from PyQt6.QtWidgets import QDialogButtonBox
+    from PySide6.QtWidgets import QDialogButtonBox
     window = MainWindow("en")
     window.interface_combo.setCurrentIndex(1)
     for widget, _ in window._title_map:
@@ -85,4 +85,24 @@ def test_arabic_welcome_contains_no_english(qapp, profile):
     assert not re.search(r"[A-Za-z]", dialog.continue_button.accessibleDescription())
     assert vt_setup.tr("ar", "farewell_message") != vt_setup.FAREWELL_TEXT
     dialog.deleteLater()
+    qapp.processEvents()
+
+
+def test_saved_preferences_update_main_window_and_menus(qapp, profile, fake_secrets):
+    import vt_setup
+    from vid_trans_app import MainWindow
+    from vt_settings import SettingsDialog
+    window = MainWindow("en")
+    dialog = SettingsDialog(parent=window)
+    dialog.interface_choice.setCurrentIndex(1)
+    dialog.timestamps_choice.setChecked(False)
+    dialog.auto_update_choice.setChecked(False)
+    dialog.accessibility_checks["read_hints"].setChecked(False)
+    dialog._on_save()
+    assert window.current_lang == "ar"
+    assert vt_setup.saved_language() == "ar"
+    assert window.timestamps_check.isChecked() is False
+    assert window._auto_update_action.isChecked() is False
+    assert window.open_button.accessibleDescription() == ""
+    window.deleteLater()
     qapp.processEvents()

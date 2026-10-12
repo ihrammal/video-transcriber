@@ -56,6 +56,7 @@ Source: "{#DistFolder}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 ; folder (the same files the 1.1 installer shipped).
 Source: "resources\agreement_en.txt"; DestDir: "{app}"; DestName: "License.txt"; Flags: ignoreversion
 Source: "resources\agreement_ar.txt"; DestDir: "{app}"; DestName: "License.ar.txt"; Flags: ignoreversion
+Source: "THIRD-PARTY-LICENSES.md"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#AppName}"; Filename: "{app}\{#ExeName}"; WorkingDir: "{app}"; Tasks: startmenuicon

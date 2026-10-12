@@ -149,7 +149,7 @@ def selftest(result_path: str = "") -> int:
 
     def _wizard():
         os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
-        from PyQt6.QtWidgets import QApplication, QLabel
+        from PySide6.QtWidgets import QApplication, QLabel
 
         app = QApplication.instance() or QApplication([])
         wizard = vt_setup.SetupWizard(mode="setup", payload=payload_archive())
@@ -231,8 +231,8 @@ def main(argv=None) -> int:
             desktop="--no-desktop" not in args,
         )
 
-    from PyQt6.QtGui import QFont
-    from PyQt6.QtWidgets import QApplication
+    from PySide6.QtGui import QFont
+    from PySide6.QtWidgets import QApplication
 
     app = QApplication(argv)
     app.setApplicationName("Accessible Video Transcriber Setup")

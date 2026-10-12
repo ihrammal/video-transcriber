@@ -32,7 +32,7 @@ from datetime import timedelta
 import numpy as np
 import srt
 
-from PyQt6.QtCore import QThread, pyqtSignal
+from PySide6.QtCore import QThread, Signal
 
 from vt_i18n import tr
 
@@ -306,10 +306,10 @@ def _looks_like_network_error(exc: BaseException) -> bool:
 
 # --------------------------------------------------------------------- threads
 class ExtractAudioThread(QThread):
-    progress = pyqtSignal(int)
-    stages = pyqtSignal(str)
-    completed = pyqtSignal(str)
-    failed = pyqtSignal(str)
+    progress = Signal(int)
+    stages = Signal(str)
+    completed = Signal(str)
+    failed = Signal(str)
 
     def __init__(self, video_path, audio_path, lang="en", parent=None):
         super().__init__(parent)
@@ -338,10 +338,10 @@ class ExtractAudioThread(QThread):
 
 
 class TranscriptionThread(QThread):
-    progress = pyqtSignal(int)
-    stages = pyqtSignal(str)
-    completed = pyqtSignal(list, str, str)
-    failed = pyqtSignal(str)
+    progress = Signal(int)
+    stages = Signal(str)
+    completed = Signal(list, str, str)
+    failed = Signal(str)
 
     def __init__(self, video_path, audio_path, language, temp_dir, model_name="base",
                  lang="en", engine="local", api_key="", parent=None):
@@ -556,10 +556,10 @@ class TranscriptionThread(QThread):
 
 
 class TranslationThread(QThread):
-    progress = pyqtSignal(int)
-    stages = pyqtSignal(str)
-    completed = pyqtSignal(list)
-    failed = pyqtSignal(str)
+    progress = Signal(int)
+    stages = Signal(str)
+    completed = Signal(list)
+    failed = Signal(str)
 
     def __init__(self, subtitles, source, target, bilateral, lang="en",
                  engine="local", api_key="", translate_model="", parent=None):
@@ -684,10 +684,10 @@ class TranslationThread(QThread):
 
 
 class RenderThread(QThread):
-    progress = pyqtSignal(int)
-    stages = pyqtSignal(str)
-    completed = pyqtSignal(str)
-    failed = pyqtSignal(str)
+    progress = Signal(int)
+    stages = Signal(str)
+    completed = Signal(str)
+    failed = Signal(str)
 
     def __init__(self, video_path, subtitles, output_path, temp_dir, font_path=None, lang="en", parent=None):
         super().__init__(parent)

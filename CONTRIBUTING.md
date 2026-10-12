@@ -46,7 +46,7 @@ That produces the exe, runs its self test and compiles the installer.
 
 Keep the settings and preference modules importable with the standard
 library only. `vt_prefs.py`, `vt_i18n.py` and friends must open even when
-PyQt6 or the network packages are missing.
+PySide6 or the network packages are missing.
 
 Every new control needs an accessible name and an accessible description,
 in English and in Arabic. `vt_a11y.py` holds the helpers. A control without
