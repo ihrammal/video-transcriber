@@ -167,10 +167,11 @@ def run_check(window, silent=False):
 
 
 def _show_result(window, payload, silent):
+    t = window.t
     try:
         if isinstance(payload, Exception):
             if not silent:
-                QMessageBox.warning(window, CHECK_TITLE, str(payload))
+                QMessageBox.warning(window, t("update_title"), t("update_failed"))
             return
 
         info = payload
@@ -178,26 +179,27 @@ def _show_result(window, payload, silent):
             if not silent:
                 QMessageBox.information(
                     window,
-                    CHECK_TITLE,
-                    "You are up to date. You are using version %s, "
-                    "which is the latest version." % info["current"],
+                    t("update_title"),
+                    t("update_current", version=info["current"]),
                 )
             return
 
-        message = (
-            "Version %s is available. "
-            "You are using version %s.\n\n"
-            "Would you like to download it now?" % (info["latest"], info["current"])
-        )
-        if info["notes"]:
-            message += "\n\nWhat is new:\n" + info["notes"][:1200]
+        message = t("update_offer", latest=info["latest"], current=info["current"])
+        notes = info["notes"]
+        if "## العربية" in notes:
+            english, arabic = notes.split("## العربية", 1)
+            notes = arabic if getattr(window, "current_lang", "en") == "ar" else english
+        elif getattr(window, "current_lang", "en") == "ar":
+            notes = ""
+        if notes:
+            message += "\n\n" + t("update_notes") + "\n" + notes[:1200]
 
         box = QMessageBox(window)
-        box.setWindowTitle("Update Available")
+        box.setWindowTitle(t("update_available"))
         box.setText(message)
         box.setIcon(QMessageBox.Icon.Information)
-        download = box.addButton("Download", QMessageBox.ButtonRole.AcceptRole)
-        box.addButton("Later", QMessageBox.ButtonRole.RejectRole)
+        download = box.addButton(t("update_download"), QMessageBox.ButtonRole.AcceptRole)
+        box.addButton(t("update_later"), QMessageBox.ButtonRole.RejectRole)
         box.setDefaultButton(download)
         box.exec()
         if box.clickedButton() is download:

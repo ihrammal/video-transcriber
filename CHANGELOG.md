@@ -12,6 +12,8 @@ numbers of the form major.minor.patch.
 - Saved language, timestamp, accessibility and automatic-update preferences.
 - Removed duplicate API-key result announcements.
 - English and Arabic release notes in RELEASE_NOTES.md.
+- Arabic-only welcome, farewell and update dialogs, translated standard Qt
+  buttons, refreshed group descriptions and consistent accessibility terminology.
 
 ## 1.2 - 2026-10-07
 

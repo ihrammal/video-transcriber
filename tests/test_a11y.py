@@ -45,7 +45,7 @@ def test_dialog_is_built_with_every_option(qapp, profile):
 def test_dialog_in_arabic(qapp, profile):
     dialog, checks = vt_a11y.build_dialog(lang="ar")
     try:
-        assert dialog.windowTitle() == "إعدادات الوصول"
+        assert dialog.windowTitle() == "إعدادات إمكانية الوصول"
         assert checks["high_contrast"].accessibleDescription()
     finally:
         dialog.close()

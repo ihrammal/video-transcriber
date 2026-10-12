@@ -67,3 +67,4 @@ credentials.json
 .test-deps/
 .test-temp/
 .test-temp-*/
+.venv-release/

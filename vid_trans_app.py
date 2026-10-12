@@ -310,7 +310,7 @@ TR = {
         ),
         "help_about": (
             "<h1>About Accessible Video Transcriber</h1>"
-            "<h2>Version 1.2</h2>"
+            "<h2>Version 1.3</h2>"
             "<p>Accessible desktop application by Iman Rammal for video work: transcribe "
             "speech to captions, translate them, edit the result and burn it back into the "
             "video.</p>"
@@ -377,14 +377,14 @@ TR = {
         "acc_desc_sounds": "Play a short tone when a task finishes or fails.",
     },
     "ar": {
-        "app_title": "Accessible Video Transcriber - تفريغ الفيديو وترجمته وإنشاء التسميات التوضيحية مع دعم الوصولية",
+        "app_title": "برنامج تفريغ الفيديو الميسّر - تفريغ الفيديو وترجمته وإنشاء التسميات التوضيحية مع دعم إمكانية الوصول",
         "grp_video": "١.  اختر ملف الفيديو",
         "grp_lang": "٢.  اللغات والترجمة",
         "grp_process": "٣.  المعالجة",
         "grp_editor": "٤.  محرر التسميات (سطرًا بسطر، متاح بلوحة المفاتيح)",
         "grp_output": "٥.  الإخراج",
         "lbl_interface_lang": "لغة الواجهة:",
-        "iface_en": "English",
+        "iface_en": "الإنجليزية",
         "iface_ar": "العربية",
         "chk_high_contrast": "وضع التباين العالي (أسود وأصفر)",
         "lbl_audio_lang": "لغة الصوت:",
@@ -578,7 +578,7 @@ TR = {
         "menu_file": "&ملف",
         "menu_edit": "&تحرير",
         "menu_settings": "&الإعدادات",
-        "menu_accessibility": "إ&تاحة الوصول",
+        "menu_accessibility": "إمكانية الو&صول",
         "menu_tools": "&أدوات",
         "menu_models": "ال&نماذج",
         "menu_help": "&مساعدة",
@@ -596,7 +596,7 @@ TR = {
         "act_iface_lang": "&لغة الواجهة",
         "act_iface_en": "الواجهة بالإن&جليزية",
         "act_iface_ar": "الواجهة بالعربية",
-        "act_a11y_settings": "&إعدادات إتاحة الوصول\u2026",
+        "act_a11y_settings": "&إعدادات إمكانية الوصول\u2026",
         "act_high_contrast": "سمة التباين ال&عالي",
         "act_large_focus": "&مؤشرات تركيز أكبر",
         "act_simplified": "&تخطيط مبسّط",
@@ -626,14 +626,14 @@ TR = {
         "out_trans": "الترجمة &فقط (عكس لغة الفيديو)",
         "out_both": "&الاثنتان (الأصل بالأعلى والترجمة بالأسفل)",
         "acc_menu_n": "شريط القوائم",
-        "acc_menu_d": "قوائم ملف وتحرير وإعدادات وإتاحة الوصول والأدوات والنماذج ومساعدة. "
+        "acc_menu_d": "قوائم ملف وتحرير وإعدادات وإمكانية الوصول والأدوات والنماذج ومساعدة. "
         "اضغط Alt للانتقال إلى شريط القوائم، ثم استخدم الحرف المظلل أو أسهم لوحة المفاتيح.",
         "settings_iface_d": "لغة الواجهة: الإنجليزية أو العربية.",
         "settings_audio_d": "لغة الفيديو: تلقائي أو الإنجليزية أو العربية.",
         "settings_output_d": "لغة الإخراج: الأصل أو الترجمة أو الاثنتان معًا.",
         "help_title_guide": "دليل الاستخدام",
         "help_title_shortcuts": "اختصارات لوحة المفاتيح",
-        "help_title_about": "حول Accessible Video Transcriber",
+        "help_title_about": "حول برنامج تفريغ الفيديو الميسّر",
         "btn_close": "إغلاق",
         "help_contents_n": "محتويات المساعدة",
         "help_details_n": "تفاصيل العنوان المحدد",
@@ -644,11 +644,11 @@ TR = {
             "واضغط F6 للتنقل بين المحتويات ومنطقة النص."
         ),
         "help_about": (
-            "<h1>حول Accessible Video Transcriber</h1>"
-            "<h2>الإصدار 1.2</h2>"
-            "<p>تطبيق سطح مكتب من إعداد عُمر رمّال للعمل على الفيديو: تفريغ الكلام إلى "
+            "<h1>حول برنامج تفريغ الفيديو الميسّر</h1>"
+            "<h2>الإصدار 1.3</h2>"
+            "<p>تطبيق سطح مكتب من إعداد إيمان رمّال للعمل على الفيديو: تفريغ الكلام إلى "
             "تسميات، وترجمتها، وتعديل النتيجة، ودمجها داخل الفيديو.</p>"
-            "<h2>الوصولية</h2>"
+            "<h2>إمكانية الوصول</h2>"
             "<p>مصمّم وفق معيار WCAG 2.1 AA وWindows UI Automation: لكل عنصر اسم ووصف، "
             "وكل البرنامج يمكن الوصول إليه بلوحة المفاتيح، ومؤشر التركيز دائم الظهور، "
             "والتقدم يُعلن، والتخطيط ينعكس من اليمين إلى اليسار في الواجهة العربية. جُرِّب "
@@ -664,7 +664,7 @@ TR = {
             "<p>مجاني للاستخدام الشخصي والتعليمي والبحثي وغير التجاري. انظر مساعد ← "
             "اتفاقية الرخصة (Ctrl+Shift+G) للنص الكامل.</p>"
             "<h2>التواصل مع المؤلف</h2>"
-            "<p>Iman Rammal &mdash; أخصائي تدريب على برايل، وخبير NVDA معتمد، "
+            "<p>إيمان رمّال &mdash; أخصائي تدريب على برايل، وخبير NVDA معتمد، "
             "وحاصل على شهادة JAWS، ومدرّب تقنيات مساعدة، ومترجم ومترجم فوري.</p>"
             "<p>الهاتف: <a href=\"tel:+97455485652\">+974 55485652</a><br>"
             "البريد الإلكتروني: <a href=\"mailto:iman.rammal@gmail.com\">iman.rammal@gmail.com</a><br>"
@@ -696,12 +696,12 @@ TR = {
         "msg_a11y_announce_off": "تم إيقاف الإعلان عن التقدّم.",
         "msg_a11y_sounds_on": "تم تفعيل التنبيهات الصوتية.",
         "msg_a11y_sounds_off": "تم إيقاف التنبيهات الصوتية.",
-        "acc_title": "إعدادات الوصول",
+        "acc_title": "إعدادات إمكانية الوصول",
         "acc_intro": "اختر شكل البرنامج وطريقة كلامه. انتقل بين الخيارات بمفتاح Tab وغيّر أحدها بمفتاح المسافة. يُطبَّق التغيير عند ضغط موافق.",
         "acc_lbl_hc": "وضع التباين العالي",
         "acc_desc_hc": "سمة أسود وأبيض بأقصى تباين، أسهل للقراءة في الإضاءة الساطعة أو مع ضعف البصر.",
         "acc_lbl_focus": "مؤشر تركيز أكبر",
-        "acc_desc_focus": "إطار أسمق وأبرز حول العنصر الذي يحتفظ بتركيز لوحة المفاتيح.",
+        "acc_desc_focus": "إطار أسمك وأبرز حول العنصر الذي يحتفظ بتركيز لوحة المفاتيح.",
         "acc_lbl_simple": "تخطيط مبسّط للشاشة الرئيسية",
         "acc_desc_simple": "إخفاء اختياري اللغة والمحرك المتقدّمين والاكتفاء بما يلزم أول تشغيل.",
         "acc_lbl_progress": "الإعلان عن التقدّم",
@@ -1485,7 +1485,12 @@ class MainWindow(QMainWindow):
         vt_a11y.apply_descriptions(self)
 
     def _retranslate_ui(self):
+        from vt_i18n import configure_qt_language
+        configure_qt_language(self.current_lang)
         self.setWindowTitle(self.t("app_title"))
+        self.centralWidget().setAccessibleName(self.t("acc_main_n"))
+        self.menuBar().setAccessibleName(self.t("acc_menu_n"))
+        self.menuBar().setAccessibleDescription(self.t("acc_menu_d"))
         for menu, key in self._menu_map:
             menu.setTitle(self.t(key))
         for act, key in self._action_map:
@@ -1496,6 +1501,15 @@ class MainWindow(QMainWindow):
                 pass
         for widget, key in self._title_map:
             widget.setTitle(self.t(key))
+        for (widget, _), (name, description) in zip(self._title_map, (
+            ("acc_grp_input_n", "acc_grp_input_d"),
+            ("acc_grp_lang_n", "acc_grp_lang_d"),
+            ("acc_run_n", "acc_run_d"),
+            ("acc_progress_group_n", "acc_progress_group_d"),
+            ("acc_results_n", "acc_results_d"),
+        )):
+            widget.setAccessibleName(self.t(name))
+            widget.setAccessibleDescription(self.t(description))
         for widget, key in self._text_map:
             widget.setText(self.t(key))
         for widget, name_key, desc_key in self._acc_map:
@@ -3285,7 +3299,7 @@ class MainWindow(QMainWindow):
         box = QMessageBox(self)
         box.setIcon(QMessageBox.Icon.Question)
         box.setWindowTitle(self.t("title_exit_confirm"))
-        box.setText(self.t("body_exit_confirm", text=vt_setup.FAREWELL_TEXT))
+        box.setText(self.t("body_exit_confirm", text=vt_setup.tr(self.current_lang, "farewell_message")))
         yes = box.addButton(self.t("btn_exit_yes"), QMessageBox.ButtonRole.AcceptRole)
         no = box.addButton(self.t("btn_exit_no"), QMessageBox.ButtonRole.RejectRole)
         box.setDefaultButton(no)

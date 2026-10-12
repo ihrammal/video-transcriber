@@ -24,6 +24,7 @@ import shutil
 import sysconfig
 
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
+from PyQt6.QtCore import QLibraryInfo
 from PyInstaller.utils.win32.versioninfo import (
     FixedFileInfo,
     StringFileInfo,
@@ -95,6 +96,7 @@ a = Analysis(
     datas=DIST_INFOS
     + [('resources', 'resources')]
     + [('help', 'help')]  # the combined help guide (--add-data "help;help")
+    + [(os.path.join(QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath), 'qtbase_ar.qm'), 'PyQt6/Qt6/translations')]
     + FASTER_WHISPER_DATA,
     hiddenimports=[
         'vt_setup',

@@ -78,6 +78,8 @@ class SettingsDialog(QDialog):
     def __init__(self, lang="en", parent=None):
         super().__init__(parent)
         self.lang = lang or "en"
+        from vt_i18n import configure_qt_language
+        configure_qt_language(self.lang)
         self._tester = None
         self._engine_group = QButtonGroup(self)
         self._model_group = QButtonGroup(self)
@@ -110,7 +112,7 @@ class SettingsDialog(QDialog):
             self._pages.append(page_layout)
         general, speech, keys_page, accessibility = self._pages
         self.interface_choice = QComboBox(self)
-        self.interface_choice.addItem("English", "en")
+        self.interface_choice.addItem(self.t("iface_en"), "en")
         self.interface_choice.addItem("العربية", "ar")
         self.interface_choice.setCurrentIndex(1 if self.lang == "ar" else 0)
         general_form = QFormLayout()

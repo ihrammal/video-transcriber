@@ -10,6 +10,14 @@ from __future__ import annotations
 
 TR = {
     "en": {
+        "update_title": "Check for Updates",
+        "update_current": "You are up to date. You are using version {version}.",
+        "update_available": "Update available",
+        "update_offer": "Version {latest} is available. You are using {current}. Download it now?",
+        "update_failed": "Could not check for updates. Check your internet connection and try again.",
+        "update_notes": "What is new:",
+        "update_download": "Download",
+        "update_later": "Later",
         "settings_tab_general": "General",
         "settings_tab_speech": "Speech and translation",
         "settings_tab_keys": "API keys",
@@ -265,7 +273,7 @@ TR = {
         "settings_theme_d": "Appearance: dark, light or high contrast.",
         # -------------------------------------------------------- settings dialog
         "act_preferences": "Speech & Translation Settings...",
-        "dlg_settings_title": "Speech and translation settings",
+        "dlg_settings_title": "Settings and preferences",
         "dlg_settings_d": "Choose how captions are produced: the free local recogniser or a cloud API, and how they are translated.",
         "grp_engine": "Transcription (speech to text)",
         "grp_engine_d": "Pick the engine that turns the video audio into captions.",
@@ -409,6 +417,14 @@ TR = {
         "short_group_main": "Main screen",
     },
     "ar": {
+        "update_title": "التحقق من التحديثات",
+        "update_current": "تستخدم أحدث إصدار، وهو {version}.",
+        "update_available": "يتوفر تحديث",
+        "update_offer": "يتوفر الإصدار {latest}. تستخدم حاليًا الإصدار {current}. هل تريد تنزيل التحديث الآن؟",
+        "update_failed": "تعذّر التحقق من التحديثات. تحقق من اتصالك بالإنترنت وأعد المحاولة.",
+        "update_notes": "الجديد في هذا الإصدار:",
+        "update_download": "تنزيل",
+        "update_later": "لاحقًا",
         "settings_tab_general": "عام",
         "settings_tab_speech": "التفريغ والترجمة",
         "settings_tab_keys": "مفاتيح API",
@@ -417,12 +433,12 @@ TR = {
         "acc_lbl_hints": "قراءة تلميحات عناصر التحكم وتفاصيلها",
         "acc_desc_hints": "تضمين الأوصاف الاختيارية عند التركيز على عناصر التحكم. تبقى التسميات والقيم والأخطاء ورسائل اكتمال المهام متاحة.",
         # ---------------------------------------------------------------- chrome
-        "app_title": "Accessible Video Transcriber - تفريغ الفيديو وترجمته وإنشاء التسميات",
-        "app_name": "Accessible Video Transcriber",
+        "app_title": "برنامج تفريغ الفيديو الميسّر - تفريغ الفيديو وترجمته وإنشاء التسميات",
+        "app_name": "برنامج تفريغ الفيديو الميسّر",
         "app_tagline": "تفريغ  |  ترجمة  |  تسميات",
         "lbl_interface_lang": "لغة الواجهة",
         "lbl_theme": "المظهر",
-        "iface_en": "English",
+        "iface_en": "الإنجليزية",
         "iface_ar": "العربية",
         "theme_dark": "داكن",
         "theme_light": "فاتح",
@@ -480,9 +496,9 @@ TR = {
         "trans_ar_en": "العربية إلى الإنجليزية",
         "trans_en_ar": "الإنجليزية إلى العربية",
         "trans_bilingual": "مزدوجة (الأصل بالأعلى والترجمة بالأسفل)",
-        "model_tiny": "سريع - tiny (أسرع دقة أقل)",
-        "model_base": "متوازن - base (موصى به)",
-        "model_small": "دقيق - small (أبطأ وأدق)",
+        "model_tiny": "سريع (أسرع ودقته أقل)",
+        "model_base": "متوازن (موصى به)",
+        "model_small": "دقيق (أبطأ وأدق)",
         "hdr_no": "الرقم",
         "hdr_start": "البداية",
         "hdr_end": "النهاية",
@@ -529,11 +545,11 @@ TR = {
         "msg_render_cancel": "تم إلغاء الإنشاء.",
         "msg_cancel_requested": "طُلب الإلغاء؛ ستتوقف المهمة عند أقرب نقطة آمنة.",
         "msg_task_cancelled": "أُلغيت المهمة.",
-        "title_exit_confirm": "الخروج من Accessible Video Transcriber",
-        "body_exit_confirm": "هل أنت متأكد من إغلاق Accessible Video Transcriber؟\n\nستظهر رسالة وداع قصيرة قبل إغلاق التطبيق: {text}",
+        "title_exit_confirm": "الخروج من برنامج تفريغ الفيديو الميسّر",
+        "body_exit_confirm": "هل أنت متأكد من إغلاق برنامج تفريغ الفيديو الميسّر؟\n\nستظهر رسالة وداع قصيرة قبل إغلاق التطبيق: {text}",
         "btn_exit_yes": "نعم، اخرج",
         "btn_exit_no": "لا، ابقَ",
-        "msg_exit_cancelled": "أُلغي الخروج؛ يبقى Accessible Video Transcriber مفتوحًا.",
+        "msg_exit_cancelled": "أُلغي الخروج؛ يبقى برنامج تفريغ الفيديو الميسّر مفتوحًا.",
         "msg_row_added": "تمت إضافة سطر تسمية فارغ رقم {num}.",
         "msg_rows_deleted": "تم حذف {count} سطر(ور) محددة.",
         "msg_no_rows": "المؤشر ليس على سطر تسمية.",
@@ -596,7 +612,7 @@ TR = {
         "stage_repair_audio": "يجري إعادة إرفاق المسار الصوتي الأصلي",
         "err_render_no_audio": "تعذّر كتابة المسار الصوتي داخل الفيديو: {path}",
         # ----------------------------------------------------------- accessibility
-        "acc_win_n": "النافذة الرئيسية لبرنامج Accessible Video Transcriber",
+        "acc_win_n": "النافذة الرئيسية لبرنامج برنامج تفريغ الفيديو الميسّر",
         "acc_win_d": "مساحة عمل متاحة لتفريغ الفيديو وترجمته وإنشاء التسميات.",
         "acc_header_n": "رأس التطبيق",
         "acc_header_d": "عنوان التطبيق مع أدوات لغة الواجهة والمظهر.",
@@ -664,7 +680,7 @@ TR = {
         "settings_theme_d": "المظهر: داكن أو فاتح أو تباين عالٍ.",
         # -------------------------------------------------------- settings dialog
         "act_preferences": "إعدادات التعرّف والترجمة...",
-        "dlg_settings_title": "إعدادات التعرّف والترجمة",
+        "dlg_settings_title": "الإعدادات والتفضيلات",
         "dlg_settings_d": "اختر كيف تُنتَج التسميات: المُتعرّف المحلي المجاني أو واجهة برمجة تطبيقات سحابية، وكذلك كيفية ترجمتها.",
         "grp_engine": "التفريغ (من الكلام إلى نص)",
         "grp_engine_d": "اختر المحرك الذي يحوّل صوت الفيديو إلى تسميات.",
@@ -716,12 +732,12 @@ TR = {
         "acc_engine_gemini_d": "يرسل الصوت المستخرج إلى واجهة Google Gemini. يتطلب مفتاح API في الحقل أدناه.",
         "acc_key_n": "حقل مفتاح واجهة برمجة التطبيقات",
         "acc_key_d": "الصق المفتاح السري لـ {engine}. يُحفظ في ملفك الشخصي المحلي فقط ولا يُرسل إلى أي جهة غير {engine}.",
-        "acc_test_key_n": "زر اختبار مفتاح وواجهة برمجة التطبيقات",
+        "acc_test_key_n": "اختبار مفتاح واجهة برمجة التطبيقات",
         "acc_test_key_d": "يرسل طلبًا صغيرًا إلى {engine} للتأكد من صلاحية المفتاح ثم يعرض النتيجة في مربع رسالة.",
         "acc_save_n": "زر حفظ الإعدادات",
         "acc_save_d": "يخزّن هذه الإعدادات للمهام القادمة ويغلق هذه النافذة.",
         "acc_model_group_n": "مجموعة اختيار النموذج المحلي",
-        "acc_model_group_d": "أزرار راديو لنماذج التعرّف tiny و base و small.",
+        "acc_model_group_d": "أزرار راديو لنماذج التعرّف السريع والمتوازن والدقيق.",
         # ----------------------------------------------------------------- menus
         "menu_file": "ملف",
         "menu_edit": "تحرير",
@@ -754,7 +770,7 @@ TR = {
         # ------------------------------------------------------------------ help
         "help_title_guide": "دليل الاستخدام",
         "help_title_shortcuts": "اختصارات لوحة المفاتيح",
-        "help_title_about": "حول Accessible Video Transcriber",
+        "help_title_about": "حول برنامج تفريغ الفيديو الميسّر",
         # ------------------------------------------------- transcript editor
         "acc_editor_n": "محرّر النص المفرَّغ",
         "acc_editor_d": (
@@ -872,6 +888,26 @@ SUPPORTED_VIDEO_SUFFIXES = (
     ".asf",
     ".mxf",
 )
+
+
+def configure_qt_language(lang):
+    """Translate Qt's standard buttons and dialog text as well as our labels."""
+    from PyQt6.QtCore import QLibraryInfo, QLocale, QTranslator
+    from PyQt6.QtWidgets import QApplication
+    app = QApplication.instance()
+    if app is None:
+        return
+    previous = getattr(app, "_vidtrans_qt_translator", None)
+    if previous is not None:
+        app.removeTranslator(previous)
+    app._vidtrans_qt_translator = None
+    QLocale.setDefault(QLocale("ar" if lang == "ar" else "en"))
+    if lang == "ar":
+        translator = QTranslator(app)
+        folder = QLibraryInfo.path(QLibraryInfo.LibraryPath.TranslationsPath)
+        if translator.load("qtbase_ar", folder):
+            app.installTranslator(translator)
+            app._vidtrans_qt_translator = translator
 
 
 def tr(lang: str, key: str, **kwargs) -> str:

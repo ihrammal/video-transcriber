@@ -96,6 +96,8 @@ MODE_CUSTOM = "custom"
 
 SETUP_TR = {
     "en": {
+        "welcome_message": WELCOME_TEXT,
+        "farewell_message": FAREWELL_TEXT,
         "setup_title": "Accessible Video Transcriber - Setup",
         "iface_en": "English",
         "iface_ar": "Arabic",
@@ -208,16 +210,18 @@ SETUP_TR = {
         "acc_steps_d": "List of the setup steps and their current state.",
     },
     "ar": {
-        "setup_title": "إعداد Accessible Video Transcriber",
-        "iface_en": "English",
+        "welcome_message": "أهلًا بك في برنامج تفريغ الفيديو الميسّر من إعداد إيمان رمّال",
+        "farewell_message": "شكرًا لاستخدامك البرنامج. إلى اللقاء.",
+        "setup_title": "إعداد برنامج تفريغ الفيديو الميسّر",
+        "iface_en": "الإنجليزية",
         "iface_ar": "العربية",
-        "setup_access": "معالج إعداد Accessible Video Transcriber",
+        "setup_access": "معالج إعداد برنامج تفريغ الفيديو الميسّر",
         "setup_access_d": "إعداد من خطوتين: الترحيب، ثم نوع التثبيت والاختصارات.",
         "welcome_hint": "أهلًا بك! اختر اللغة ثم اضغط «التالي» للمتابعة.",
         "welcome_access": "لوحة الترحيب",
-        "welcome_access_d": WELCOME_TEXT,
+        "welcome_access_d": "أهلًا بك في برنامج تفريغ الفيديو الميسّر من إعداد إيمان رمّال",
         "welcome_status_n": "رسالة الترحيب",
-        "welcome_title": "أهلًا بك في Accessible Video Transcriber",
+        "welcome_title": "أهلًا بك في برنامج تفريغ الفيديو الميسّر",
         "welcome_auto": "يفتح البرنامج تلقائيًا خلال 3 ثوانٍ. اضغط «متابعة» للبدء الآن.",
         "btn_continue": "متابعة",
         "btn_continue_n": "زر متابعة",
@@ -232,34 +236,34 @@ SETUP_TR = {
         "acc_lang_n": "لغة الإعداد",
         "acc_lang_d": "تختار لغة شاشات الإعداد ولغة التطبيق.",
         "install_title": "نوع التثبيت",
-        "install_hint": "اختر طريقة تثبيت Accessible Video Transcriber ثم اضغط «تثبيت وتشغيل».",
+        "install_hint": "اختر طريقة تثبيت برنامج تفريغ الفيديو الميسّر ثم اضغط «تثبيت وتشغيل».",
         "mode_standard": "قياسي (موصى به)",
         "mode_standard_d": "تثبيت للمستخدم الحالي في مجلد البرامج الشخصية، مع إنشاء اختصارات قائمة "
-        "البدء وسطح المكتب وتسجيل Accessible Video Transcriber في تطبيقات Windows.",
+        "البدء وسطح المكتب وتسجيل برنامج تفريغ الفيديو الميسّر في تطبيقات Windows.",
         "mode_portable": "محمول",
-        "mode_portable_d": "إبقاء Accessible Video Transcriber في مجلد واحد مكتفي: بلا اختصار في قائمة ابدأ وبلا "
+        "mode_portable_d": "إبقاء برنامج تفريغ الفيديو الميسّر في مجلد واحد مكتفي: بلا اختصار في قائمة ابدأ وبلا "
         "اختصار على سطح المكتب وبلا تسجيل في تطبيقات Windows.",
         "mode_custom": "مجلد مخصص",
         "mode_custom_d": "التثبيت في مجلد تختاره أنت.",
         "lbl_install_dir": "مجلد التثبيت:",
         "btn_browse": "استعراض...",
         "acc_browse_n": "زر استعراض المجلد",
-        "acc_browse_d": "يفتح نافذة اختيار المجلد الذي سيُثبَّت فيه Accessible Video Transcriber.",
+        "acc_browse_d": "يفتح نافذة اختيار المجلد الذي سيُثبَّت فيه برنامج تفريغ الفيديو الميسّر.",
         "acc_folder_n": "مجلد التثبيت",
-        "acc_folder_d": "المجلد الذي سيُثبَّت فيه Accessible Video Transcriber.",
+        "acc_folder_d": "المجلد الذي سيُثبَّت فيه برنامج تفريغ الفيديو الميسّر.",
         "shortcuts_title": "الاختصارات والمكونات الإضافية",
-        "chk_start_menu": "إنشاء اختصار Accessible Video Transcriber في قائمة ابدأ",
-        "chk_desktop": "إنشاء اختصار Accessible Video Transcriber على سطح المكتب",
+        "chk_start_menu": "إنشاء اختصار برنامج تفريغ الفيديو الميسّر في قائمة ابدأ",
+        "chk_desktop": "إنشاء اختصار برنامج تفريغ الفيديو الميسّر على سطح المكتب",
         "chk_model": "تنزيل نموذج التعرّف على الكلام الآن (نحو 150 ميغابايت، مطلوب للتفريغ)",
         "acc_start_menu_n": "اختصار قائمة ابدأ",
-        "acc_start_menu_d": "يضيف Accessible Video Transcriber إلى قائمة ابدأ في Windows ويسجّله في التطبيقات.",
+        "acc_start_menu_d": "يضيف برنامج تفريغ الفيديو الميسّر إلى قائمة ابدأ في Windows ويسجّله في التطبيقات.",
         "acc_desktop_n": "اختصار سطح المكتب",
-        "acc_desktop_d": "يضيف اختصار Accessible Video Transcriber إلى سطح المكتب.",
+        "acc_desktop_d": "يضيف اختصار برنامج تفريغ الفيديو الميسّر إلى سطح المكتب.",
         "acc_model_n": "تنزيل نموذج التعرّف على الكلام",
         "acc_model_d": "ينزّل نموذج Whisper ليعمل التفريغ حتى بدون اتصال بالإنترنت.",
-        "chk_launch": "تشغيل Accessible Video Transcriber عند انتهاء التثبيت",
-        "acc_launch_n": "تشغيل Accessible Video Transcriber الآن",
-        "acc_launch_d": "يفتح Accessible Video Transcriber فور انتهاء التثبيت.",
+        "chk_launch": "تشغيل برنامج تفريغ الفيديو الميسّر عند انتهاء التثبيت",
+        "acc_launch_n": "تشغيل برنامج تفريغ الفيديو الميسّر الآن",
+        "acc_launch_d": "يفتح برنامج تفريغ الفيديو الميسّر فور انتهاء التثبيت.",
         "tools_title": "أدوات التفريغ وإخراج الفيديو",
         "tool_ffmpeg": "محرك الفيديو (ffmpeg)",
         "tool_ffprobe": "فاحص المسارات (ffprobe)",
@@ -285,10 +289,10 @@ SETUP_TR = {
         "step_folder": "إنشاء مجلد التطبيق",
         "step_payload": "نسخ ملفات التطبيق",
         "step_shortcuts": "إنشاء اختصارات قائمة البدء وسطح المكتب",
-        "step_register": "إضافة Accessible Video Transcriber إلى تطبيقات Windows",
+        "step_register": "إضافة برنامج تفريغ الفيديو الميسّر إلى تطبيقات Windows",
         "step_tools": "فحص أدوات الفيديو (ffmpeg والتسميات ونموذج الكلام)",
         "step_final": "إنهاء التثبيت",
-        "install_done": "اكتمل الإعداد. اضغط «تشغيل Accessible Video Transcriber» لفتحه.",
+        "install_done": "اكتمل الإعداد. اضغط «تشغيل برنامج تفريغ الفيديو الميسّر» لفتحه.",
         "install_ready": "كل شيء مثبَّت بالفعل وفي آخر تحديث.",
         "install_portable": "الوضع المحمول: لم يُنسخ أي ملف ولم يُنشأ أي اختصار.",
         "install_failed": "فشلت الخطوة: {msg}",
@@ -298,17 +302,17 @@ SETUP_TR = {
         "btn_back": "السابق",
         "btn_next": "التالي",
         "btn_install": "تثبيت وتشغيل",
-        "btn_start": "تشغيل Accessible Video Transcriber",
-        "btn_finish": "تشغيل Accessible Video Transcriber",
+        "btn_start": "تشغيل برنامج تفريغ الفيديو الميسّر",
+        "btn_finish": "تشغيل برنامج تفريغ الفيديو الميسّر",
         "btn_exit": "خروج",
         "acc_back_n": "زر السابق",
         "acc_back_d": "يعيدك إلى شاشة الترحيب.",
         "acc_next_n": "زر التالي",
         "acc_next_d": "ينقلك إلى شاشة التثبيت.",
         "acc_install_n": "زر التثبيت والتشغيل",
-        "acc_install_d": "يثبّت Accessible Video Transcriber بالخيارات المحددة ثم يشغّله.",
-        "acc_finish_n": "زر تشغيل Accessible Video Transcriber",
-        "acc_finish_d": "يغلق الإعداد ويفتح Accessible Video Transcriber.",
+        "acc_install_d": "يثبّت برنامج تفريغ الفيديو الميسّر بالخيارات المحددة ثم يشغّله.",
+        "acc_finish_n": "زر تشغيل برنامج تفريغ الفيديو الميسّر",
+        "acc_finish_d": "يغلق الإعداد ويفتح برنامج تفريغ الفيديو الميسّر.",
         "acc_exit_n": "زر الخروج",
         "acc_exit_d": "يغلق الإعداد دون تثبيت.",
         "acc_progress_n": "شريط تقدم التثبيت",
@@ -983,7 +987,7 @@ class SetupWizard(QDialog):
         # startup screen appears, then let the user Tab onward.
         try:
             self.welcome_status.setFocus(Qt.FocusReason.OtherFocusReason)
-            self.welcome_status.setAccessibleDescription(WELCOME_TEXT)
+            self.welcome_status.setAccessibleDescription(tr(self.language, "welcome_message"))
         except Exception:  # noqa: BLE001 - announcement is best effort
             pass
 
@@ -992,18 +996,18 @@ class SetupWizard(QDialog):
         layout = QVBoxLayout(page)
         layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(10)
-        self.banner = AnimatedBanner(WELCOME_TEXT, mode="welcome")
+        self.banner = AnimatedBanner(tr(self.language, "welcome_message"), mode="welcome")
         self.banner.setAccessibleName(tr(self.language, "welcome_access"))
-        self.banner.setAccessibleDescription(WELCOME_TEXT)
+        self.banner.setAccessibleDescription(tr(self.language, "welcome_message"))
         layout.addWidget(self.banner, 2)
 
         # Visible + screen-reader announcement of the exact welcome sentence.
-        self.welcome_status = QLabel(WELCOME_TEXT)
+        self.welcome_status = QLabel(tr(self.language, "welcome_message"))
         self.welcome_status.setObjectName("wizTitle")
         self.welcome_status.setWordWrap(True)
         self.welcome_status.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.welcome_status.setAccessibleName(tr(self.language, "welcome_status_n"))
-        self.welcome_status.setAccessibleDescription(WELCOME_TEXT)
+        self.welcome_status.setAccessibleDescription(tr(self.language, "welcome_message"))
         self.welcome_status.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         layout.addWidget(self.welcome_status)
 
@@ -1178,6 +1182,8 @@ class SetupWizard(QDialog):
         self._apply_language(data if data in ("en", "ar") else "en")
 
     def _apply_language(self, lang):
+        from vt_i18n import configure_qt_language
+        configure_qt_language(lang)
         self.language = lang
         rtl = lang == "ar"
         self.setLayoutDirection(
@@ -1187,9 +1193,12 @@ class SetupWizard(QDialog):
         self.setWindowTitle(tr(lang, "setup_title"))
         self.setAccessibleName(tr(lang, "setup_access"))
         self.setAccessibleDescription(tr(lang, "setup_access_d"))
-        self.title_label.setText(APP_TITLE)
+        self.title_label.setText(tr(lang, "setup_title"))
         self.subtitle_label.setText(tr(lang, "setup_access_d"))
         self.welcome_hint.setText(tr(lang, "welcome_hint"))
+        self.welcome_status.setText(tr(lang, "welcome_message"))
+        self.banner._text = tr(lang, "welcome_message")
+        self.banner.update()
         self.lang_label.setText(tr(lang, "lbl_setup_language"))
         selected = self.lang_combo.currentData()
         self.lang_combo.blockSignals(True)
@@ -1761,11 +1770,13 @@ class _WelcomePanel(QDialog):
     def __init__(self, language: str, seconds: float = WELCOME_SECONDS, parent=None):
         super().__init__(parent)
         self.language = language if language in ("en", "ar") else "en"
+        from vt_i18n import configure_qt_language
+        configure_qt_language(self.language)
         self._seconds = max(0.0, float(seconds))
 
         self.setWindowFlag(Qt.WindowType.WindowContextHelpButtonHint, False)
         self.setWindowTitle(tr(self.language, "welcome_title"))
-        self.setAccessibleName(WELCOME_TEXT)
+        self.setAccessibleName(tr(self.language, "welcome_message"))
         self.setAccessibleDescription(tr(self.language, "welcome_access_d"))
         self.setLayoutDirection(
             Qt.LayoutDirection.RightToLeft
@@ -1777,17 +1788,17 @@ class _WelcomePanel(QDialog):
         root.setContentsMargins(24, 20, 24, 20)
         root.setSpacing(14)
 
-        self.banner = AnimatedBanner(WELCOME_TEXT, mode="welcome")
+        self.banner = AnimatedBanner(tr(self.language, "welcome_message"), mode="welcome")
         self.banner.setAccessibleName(tr(self.language, "welcome_access"))
-        self.banner.setAccessibleDescription(WELCOME_TEXT)
+        self.banner.setAccessibleDescription(tr(self.language, "welcome_message"))
         root.addWidget(self.banner, 2)
 
         # The exact sentence: focused first so it is announced automatically.
-        self.message = QLabel(WELCOME_TEXT)
+        self.message = QLabel(tr(self.language, "welcome_message"))
         self.message.setObjectName("wizTitle")
         self.message.setWordWrap(True)
         self.message.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.message.setAccessibleName(WELCOME_TEXT)
+        self.message.setAccessibleName(tr(self.language, "welcome_message"))
         self.message.setAccessibleDescription(tr(self.language, "welcome_status_n"))
         self.message.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         root.addWidget(self.message)
@@ -1803,7 +1814,7 @@ class _WelcomePanel(QDialog):
         self.continue_button.setObjectName("welcomeContinue")
         self.continue_button.setAccessibleName(tr(self.language, "btn_continue_n"))
         self.continue_button.setAccessibleDescription(
-            WELCOME_TEXT + ". " + tr(self.language, "btn_continue_d")
+            tr(self.language, "welcome_message") + ". " + tr(self.language, "btn_continue_d")
         )
         self.continue_button.setAutoDefault(True)
         self.continue_button.setDefault(True)
@@ -1957,7 +1968,7 @@ def show_exit_screen(app, on_finished) -> bool:
         box.setModal(True)
         box.setWindowFlag(Qt.WindowType.WindowContextHelpButtonHint, False)
         box.setWindowTitle(tr(language, "exit_title"))
-        box.setAccessibleName(FAREWELL_TEXT)
+        box.setAccessibleName(tr(language, "farewell_message"))
         box.setAccessibleDescription(tr(language, "exit_hint"))
         box.setLayoutDirection(
             Qt.LayoutDirection.RightToLeft
@@ -1969,16 +1980,16 @@ def show_exit_screen(app, on_finished) -> bool:
         root.setContentsMargins(24, 20, 24, 20)
         root.setSpacing(14)
 
-        banner = AnimatedBanner(FAREWELL_TEXT, mode="exit")
-        banner.setAccessibleName(FAREWELL_TEXT)
-        banner.setAccessibleDescription(FAREWELL_TEXT)
+        banner = AnimatedBanner(tr(language, "farewell_message"), mode="exit")
+        banner.setAccessibleName(tr(language, "farewell_message"))
+        banner.setAccessibleDescription(tr(language, "farewell_message"))
         root.addWidget(banner, 2)
 
-        message = QLabel(FAREWELL_TEXT)
+        message = QLabel(tr(language, "farewell_message"))
         message.setObjectName("wizTitle")
         message.setWordWrap(True)
         message.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        message.setAccessibleName(FAREWELL_TEXT)
+        message.setAccessibleName(tr(language, "farewell_message"))
         message.setAccessibleDescription(tr(language, "welcome_status_n"))
         message.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         root.addWidget(message)
@@ -1992,7 +2003,7 @@ def show_exit_screen(app, on_finished) -> bool:
 
         ok_button = QPushButton(tr(language, "btn_ok"))
         ok_button.setAccessibleName(tr(language, "btn_ok_n"))
-        ok_button.setAccessibleDescription(FAREWELL_TEXT + ". " + tr(language, "exit_hint"))
+        ok_button.setAccessibleDescription(tr(language, "farewell_message") + ". " + tr(language, "exit_hint"))
         ok_button.setAutoDefault(True)
         ok_button.setDefault(True)
         ok_button.clicked.connect(box.accept)

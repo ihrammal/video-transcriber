@@ -57,3 +57,32 @@ def test_save_preferences_and_reopen(qapp, profile, fake_secrets):
     assert reopened.save_button.accessibleName()
     assert reopened.save_button.accessibleDescription() == ""
     reopened.close()
+
+
+def test_switching_to_arabic_updates_group_and_menu_descriptions(qapp, profile):
+    import re
+    from vid_trans_app import MainWindow
+    from PyQt6.QtWidgets import QDialogButtonBox
+    window = MainWindow("en")
+    window.interface_combo.setCurrentIndex(1)
+    for widget, _ in window._title_map:
+        assert not re.search(r"[A-Za-z]", widget.accessibleName())
+        assert widget.accessibleName()
+    assert "إمكانية الوصول" in window.menuBar().accessibleDescription()
+    assert "Accessible Video Transcriber" not in window.windowTitle()
+    assert window.interface_combo.itemText(0) == "الإنجليزية"
+    buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Cancel)
+    assert not re.search(r"[A-Za-z]", buttons.button(QDialogButtonBox.StandardButton.Cancel).text())
+    window.deleteLater()
+    qapp.processEvents()
+
+
+def test_arabic_welcome_contains_no_english(qapp, profile):
+    import re
+    import vt_setup
+    dialog = vt_setup._WelcomePanel("ar")
+    assert not re.search(r"[A-Za-z]", dialog.message.text())
+    assert not re.search(r"[A-Za-z]", dialog.continue_button.accessibleDescription())
+    assert vt_setup.tr("ar", "farewell_message") != vt_setup.FAREWELL_TEXT
+    dialog.deleteLater()
+    qapp.processEvents()

@@ -15,6 +15,9 @@
   simplified layout, progress announcements and sounds.
 - API-key test results are announced once in the result dialog.
 - English and Arabic labels and right-to-left settings layout are supported.
+- Arabic mode now refreshes group and menu descriptions when switching languages,
+  translates welcome/farewell and update dialogs, and uses «إمكانية الوصول»
+  consistently. Qt standard dialog buttons also use Arabic.
 
 Install the attached AccessibleVideoTranscriber_Setup_1.3.0.exe. Existing
 preferences are retained. Version 1.2 users can choose Help > Check for Updates
@@ -35,6 +38,8 @@ preferences are retained. Version 1.2 users can choose Help > Check for Updates
   التحديثات، وتشمل إعدادات الوصول التباين والتركيز والتخطيط المبسط وإعلانات
   التقدم والأصوات.
 - تظهر نتائج اختبار مفاتيح API مرة واحدة في مربع النتيجة.
+- صُححت الأسماء والأوصاف عند تبديل لغة الواجهة، وتُرجمت رسائل الترحيب والوداع
+  والتحديثات وأزرار مربعات الحوار إلى العربية، ووُحّد مصطلح «إمكانية الوصول».
 
 ثبّت الملف AccessibleVideoTranscriber_Setup_1.3.0.exe المرفق. تُحفظ التفضيلات
 الحالية. للتحقق من التحديثات استخدم قائمة المساعدة أو Ctrl+U.
