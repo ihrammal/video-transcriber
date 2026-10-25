@@ -10,3 +10,22 @@ It is built against WCAG 2.1 AA and Windows UI Automation: every control has a n
 
 ## Where things live
 Settings and API keys are stored in your user profile, and the help topics are read from the program folder, so the text you are reading now is part of the installation.
+
+## Author information
+
+Iman Rammal
+
+- Braille Training Specialist
+- NVDA Certified Expert
+- Microsoft Word with NVDA Certified Expert
+- JAWS Certified
+- Assistive technology trainer
+- Translator / interpreter
+
+Email: iman.rammal@gmail.com
+
+- YouTube: https://www.youtube.com/@ihrammal
+- Telegram: https://t.me/ihrammal
+- Facebook: https://www.facebook.com/ihrammal
+- X: https://x.com/ihrammal
+- TikTok: https://tiktok.com/ihrammal

@@ -126,12 +126,11 @@ def test_the_author_contact_details_are_in_the_guide(lang):
     assert "+974" not in visible
     assert "iman.rammal@gmail.com" in visible
     for url in (
-        "https://www.youtube.com/@Welcome2Sawa",
-        "https://t.me/ImanSawa",
-        "https://www.facebook.com/pretty.ammoona",
-        "https://x.com/imanrammal",
-        "https://www.linkedin.com/in/ImanRammal",
-        "https://www.instagram.com/rammal_iman/",
+        "https://www.youtube.com/@ihrammal",
+        "https://t.me/ihrammal",
+        "https://www.facebook.com/ihrammal",
+        "https://x.com/ihrammal",
+        "https://tiktok.com/ihrammal",
     ):
         assert url in raw, url
 
@@ -143,9 +142,10 @@ def test_the_about_page_carries_the_contact_details():
         about = vid_trans_app.TR[lang]["help_about"]
         assert "iman.rammal@gmail.com" in about, lang
         assert "+974" not in about, lang
-        assert "https://www.linkedin.com/in/ImanRammal" in about, lang
-        assert "https://www.instagram.com/rammal_iman/" in about, lang
-        assert "https://t.me/ImanSawa" in about, lang
+        assert "linkedin.com" not in about, lang
+        assert "https://tiktok.com/ihrammal" in about, lang
+        assert "Microsoft Word" in about, lang
+        assert "https://t.me/ihrammal" in about, lang
 
 
 def test_html_path_points_at_the_documents():

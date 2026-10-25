@@ -258,19 +258,19 @@ is in `THIRD-PARTY-LICENSES.md`.
 
 ## Author
 
-Iman Rammal, Braille Training Specialist and NVDA Certified Expert.
+Iman Rammal
+
+- Braille Training Specialist
+- NVDA Certified Expert
+- Microsoft Word with NVDA Certified Expert
+- JAWS Certified
+- Assistive technology trainer
+- Translator / interpreter
 
 Email: iman.rammal@gmail.com
 
-LinkedIn: https://www.linkedin.com/in/ImanRammal
-
-Instagram: https://www.instagram.com/rammal_iman/
-
-
-YouTube: https://www.youtube.com/@Welcome2Sawa
-
-Telegram: https://t.me/ImanSawa
-
-Facebook: https://www.facebook.com/pretty.ammoona
-
-X: https://x.com/imanrammal
+- YouTube: https://www.youtube.com/@ihrammal
+- Telegram: https://t.me/ihrammal
+- Facebook: https://www.facebook.com/ihrammal
+- X: https://x.com/ihrammal
+- TikTok: https://tiktok.com/ihrammal

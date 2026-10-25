@@ -1,28 +1,21 @@
 # Contact the author
 
-## Who wrote this program
+Iman Rammal
 
-Accessible Video Transcriber was written by Iman Rammal: Braille Training
-Specialist, NVDA Certified Expert, JAWS Certified, assistive technology
-trainer, and translator / interpreter.
+- Braille Training Specialist
+- NVDA Certified Expert
+- Microsoft Word with NVDA Certified Expert
+- JAWS Certified
+- Assistive technology trainer
+- Translator / interpreter
 
-## Email
+Email: iman.rammal@gmail.com
 
-- Email: iman.rammal@gmail.com
-
-Write with any question about the program, or about transcription,
-translation and accessibility work in general. Messages in English and
-Arabic are both welcome.
-
-## Social media
-
-- YouTube: https://www.youtube.com/@Welcome2Sawa
-- Telegram: https://t.me/ImanSawa
-- Facebook: https://www.facebook.com/pretty.ammoona
-- X: https://x.com/imanrammal
-
-- LinkedIn: https://www.linkedin.com/in/ImanRammal
-- Instagram: https://www.instagram.com/rammal_iman/
+- YouTube: https://www.youtube.com/@ihrammal
+- Telegram: https://t.me/ihrammal
+- Facebook: https://www.facebook.com/ihrammal
+- X: https://x.com/ihrammal
+- TikTok: https://tiktok.com/ihrammal
 
 ## Before you write
 

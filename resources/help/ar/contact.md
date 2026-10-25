@@ -1,27 +1,21 @@
 # التواصل مع المؤلف
 
-## من كتب هذا البرنامج
+إيمان رمّال
 
-كتب برنامج تفريغ الفيديو الميسّر إيمان رمّال:
-أخصائي تدريب على برايل، وخبير NVDA معتمد، وحاصل على شهادة JAWS،
-ومدرّب تقنيات مساعدة، ومترجم ومترجم فوري.
+- أخصائي تدريب على برايل
+- خبير NVDA معتمد
+- خبير معتمد في Microsoft Word باستخدام NVDA
+- حاصل على شهادة JAWS
+- مدرّب تقنيات مساعدة
+- مترجم ومترجم فوري
 
-## البريد الإلكتروني
+البريد الإلكتروني: iman.rammal@gmail.com
 
-- البريد الإلكتروني: iman.rammal@gmail.com
-
-اكتب لأي سؤال عن البرنامج، أو عن أعمال التفريغ والترجمة
-وإمكانية الوصول عمومًا. نرحّب برسائلك بالعربية أو الإنجليزية.
-
-## وسائل التواصل
-
-- يوتيوب: https://www.youtube.com/@Welcome2Sawa
-- تيليجرام: https://t.me/ImanSawa
-- فيسبوك: https://www.facebook.com/pretty.ammoona
-- إكس: https://x.com/imanrammal
-
-- لينكدإن: https://www.linkedin.com/in/ImanRammal
-- إنستغرام: https://www.instagram.com/rammal_iman/
+- يوتيوب: https://www.youtube.com/@ihrammal
+- تيليجرام: https://t.me/ihrammal
+- فيسبوك: https://www.facebook.com/ihrammal
+- إكس: https://x.com/ihrammal
+- تيك توك: https://tiktok.com/ihrammal
 
 ## قبل أن تكتب
 
