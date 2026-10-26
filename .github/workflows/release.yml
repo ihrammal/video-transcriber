@@ -63,6 +63,11 @@ jobs:
         run: |
           $version = python -c "from vt_bootstrap import APP_VERSION; print(APP_VERSION)"
           $tag = "v$version"
+          & gh release view $tag --json tagName *> $null
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host 'Release already exists; preserving its published assets and status.'
+            exit 0
+          }
           if ('${{ github.ref_type }}' -eq 'tag' -and '${{ github.ref_name }}' -ne $tag) {
             throw 'The release tag does not match the application version.'
           }

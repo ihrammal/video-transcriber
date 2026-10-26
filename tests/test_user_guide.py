@@ -18,14 +18,14 @@ GUIDES = ("user_guide.html", "user_guide_ar.html")
 PHRASES = {
     "user_guide.html": (
         "Check for Updates",
-        "Check Automatically at Startup",
+        "Check for updates automatically at startup",
         "Release Notes on GitHub",
         "Report a Problem",
         "Installing the program",
     ),
     "user_guide_ar.html": (
         "التحقق من التحديثات",
-        "التحقق التلقائي عند بدء التشغيل",
+        "التحقق من وجود تحديثات تلقائيًا عند بدء التشغيل",
         "ملاحظات الإصدار على GitHub",
         "الإبلاغ عن مشكلة",
         "تثبيت البرنامج",

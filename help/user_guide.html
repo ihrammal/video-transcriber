@@ -109,7 +109,7 @@
 </ul>
 <p>Two documents belong together: this guide, and the shortcut list. Use the
 link <em>Keyboard Shortcuts</em> in the contents above, or the
-Help menu entry <em>Open Shortcut File</em> inside the program. Inside the
+Keyboard Shortcuts command (Ctrl+/) inside the program. Inside the
 program, <kbd>F1</kbd> opens the combined user guide and
 <kbd>Ctrl+/</kbd> opens the same guide straight at the Keyboard Shortcuts
 section.</p>
@@ -129,7 +129,7 @@ readers, braille displays and low-vision users.</p>
 <h3>What it can open</h3>
 <p>MP4, MOV, AVI, MKV, WMV, WebM, FLV, M4V, MPEG, MPG, 3GP, 3G2, TS, MTS,
 M2TS, OGV, VOB, ASF and MXF video files, plus any other file your computer
-can play. You choose a file with the <em>Open Video</em> button, with
+can play. You choose a file with the <em>Open audio or video</em> button, with
 <kbd>Ctrl+O</kbd>, or by dragging the file onto the window.</p>
 
 <h3>What it produces</h3>
@@ -177,9 +177,9 @@ your language there, then press <em>Continue</em>; if you do nothing, the
 program opens by itself after three seconds. When you close the program later
 it thanks you and asks you to confirm that you really want to exit.</p>
 
-<h3>Open your first video</h3>
+<h3>Open your first recording</h3>
 <ol>
-  <li>Press <kbd>Alt+O</kbd>, or move to the <em>Open Video</em> button with
+  <li>Press <kbd>Alt+O</kbd>, or move to the <em>Open audio or video</em> button with
   <kbd>Tab</kbd> and press <kbd>Enter</kbd>, or press <kbd>Ctrl+O</kbd>.</li>
   <li>Choose the file in the file dialog. The full path appears next to the
   button and is announced.</li>
@@ -218,8 +218,8 @@ runs; only choices that would break the running task are blocked.</p>
 name, a description for the screen reader, and controls that
 <kbd>Tab</kbd> moves through in visual order.</p>
 
-<h3>1. Choose a video file</h3>
-<p>The <em>Open Video</em> button, the label that shows the selected path
+<h3>1. Choose an audio or video recording</h3>
+<p>The <em>Open audio or video</em> button, the label that shows the selected path
 (the text is selectable with the mouse), and the hint that you can also drop
 a file onto the window.</p>
 
@@ -237,7 +237,7 @@ asks the running task to stop. Start is the default button, so pressing
 greyed out while nothing runs.</p>
 
 <h3>4. Progress</h3>
-<p>The status line (for example <em>Status: Ready. Press the Open Video
+<p>The status line (for example <em>Status: Ready. Press the Open audio or video
 button and use Alt+O to open a video file.</em>) and a progress bar. Both
 take focus on purpose: park on the status line or the bar and the screen
 reader reads the current message or percentage back to you at any time.</p>
@@ -528,7 +528,7 @@ keyboard alone.</p>
   <tr><td>Check for Updates…</td><td><kbd>Ctrl+U</kbd></td><td>Checks the
   GitHub Releases page for a newer version and reports the result in a clear
   message.</td></tr>
-  <tr><td>Check Automatically at Startup</td><td><kbd>Ctrl+Shift+U</kbd></td>
+  <tr><td>Check for updates automatically at startup</td><td><kbd>Ctrl+Shift+U</kbd></td>
   <td>Turns the quiet startup check on or off. When it is on, the program
   checks at most once a day, a few seconds after the window opens, and only
   speaks up when a newer version exists.</td></tr>
@@ -541,10 +541,8 @@ keyboard alone.</p>
   <tr><td>About</td><td><kbd>F12</kbd></td><td>Version, accessibility
   statement, privacy, libraries, license summary and the contact details of
   the author (section 15).</td></tr>
-  <tr><td>Open Guide File</td><td>&mdash;</td><td>This document, in your
-  default web browser: the detailed guide with headings and subheadings.</td></tr>
-  <tr><td>Open Shortcut File</td><td>&mdash;</td><td>The detailed shortcut
-  list, also as a heading-structured document in the browser.</td></tr>
+  
+  
   <tr><td>Open Log Folder</td><td><kbd>Ctrl+Shift+V</kbd></td><td>The folder
   with the log file (section 13).</td></tr>
 </table>
@@ -563,7 +561,7 @@ or installed until you press that button, and the check runs in the
 background, so the window never freezes.</p>
 
 <h3>The automatic check at startup</h3>
-<p>The item <em>Check Automatically at Startup</em>, or
+<p>The item <em>Check for updates automatically at startup</em>, or
 <kbd>Ctrl+Shift+U</kbd>, switches the quiet startup check on or off, and a
 tick mark shows its state. When it is on, the program checks at most once a
 day, a few seconds after the window opens, and only speaks when a newer
@@ -581,7 +579,7 @@ License Agreement section of the combined guide, reached by Help &rarr;
 <em>License Agreement</em> (<kbd>Ctrl+Shift+G</kbd>), and the licensed text
 in English or Arabic also ships inside the program
 (<code>agreement_en.txt</code> and <code>agreement_ar.txt</code>). The
-program bundles PyQt6, faster-whisper, ctranslate2, deep-translator,
+program bundles PySide6, faster-whisper, ctranslate2, deep-translator,
 moviepy, srt and requests, each under its own license.</p>
 </section>
 
@@ -608,7 +606,7 @@ line explaining what each one does.</p>
 <h3>File</h3>
 <table>
   <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
-  <tr><td class="keys"><kbd>Ctrl+O</kbd></td><td>Open Video&hellip;</td>
+  <tr><td class="keys"><kbd>Ctrl+O</kbd></td><td>Open audio or video&hellip;</td>
       <td>Opens the file dialog to choose an audio or video recording (or an audio file) to work on.
       You can also drag a file onto the window instead.</td></tr>
   <tr><td class="keys"><kbd>Ctrl+I</kbd></td><td>Import .srt&hellip;</td>
@@ -738,7 +736,7 @@ line explaining what each one does.</p>
   <tr><td class="keys"><kbd>Ctrl+U</kbd></td><td>Check for Updates…</td>
       <td>Checks the GitHub Releases page for a newer version and reports
       the result in a clear message.</td></tr>
-  <tr><td class="keys"><kbd>Ctrl+Shift+U</kbd></td><td>Check Automatically at Startup</td>
+  <tr><td class="keys"><kbd>Ctrl+Shift+U</kbd></td><td>Check for updates automatically at startup</td>
       <td>Turns the quiet startup check on or off. When it is on, the
       program checks at most once a day, a few seconds after the window
       opens, and only speaks up when a newer version exists.</td></tr>
