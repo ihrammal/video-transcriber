@@ -2,7 +2,9 @@
 
 ## 26 October: user-reported Settings issue
 
-The user reported unnamed “grouping” stops on Settings pages and an ambiguous startup-check label. Scroll areas and their content no longer take keyboard focus; both have localized page names. Instructions explain Tab/Shift+Tab for controls, Space for checkboxes, and arrows for tab selection. The automatic-check label explicitly mentions updates in both languages. All 156 regression tests passed, including focus traversal from the tab bar into General in English and Arabic. This verifies keyboard and accessibility properties; a new live spoken-output check is recorded separately when completed.
+The user reported unnamed “grouping” stops on Settings pages and an ambiguous startup-check label. Scroll areas and their content no longer take keyboard focus; both have localized page names. Instructions explain Tab/Shift+Tab for controls, Space for checkboxes, and arrows for tab selection. The automatic-check label explicitly mentions updates in both languages. All 159 regression tests passed, including focus traversal from the tab bar into General in English and Arabic and compatibility of the renamed installer with update checking.
+
+Live Windows accessibility inspection exposed the corrected English and Arabic update labels and named General pages. The rebuilt application's eleven checked modules match current source, and its offline transcription/render self-test passed. The isolated 1.3.1 installer passed fresh install, upgrade, shortcuts, API-only installation and uninstall. Fresh NVDA speech for the reported issue remains pending: automatic approval review rejected replacing the active reader without explicit permission. No replacement was attempted after that rejection. These observations do not establish a new spoken-output pass.
 
 ## Verified in this continuation
 

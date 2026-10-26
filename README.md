@@ -11,7 +11,7 @@ coverage and the remaining reader-specific checks.
 
 ## What it does
 
-Version 1.4 supports audio and video, batch transcription, recovery of unfinished
+Version 1.3.1 supports audio and video, batch transcription, recovery of unfinished
 transcripts, adjustable text size, and optional welcome and farewell messages
 that close within three seconds. Preferences share one tabbed window (Ctrl+,).
 General, Speech and translation, API keys, and Accessibility pages work with
