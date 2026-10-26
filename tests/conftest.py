@@ -37,10 +37,24 @@ def profile(tmp_path, monkeypatch):
     """Redirect ``%LOCALAPPDATA%\\Accessible Video Transcriber`` into a temporary folder."""
     monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
     monkeypatch.delenv("HF_HOME", raising=False)
-    return tmp_path
+    import tempfile
+    scratch = tmp_path / "scratch"
+    scratch.mkdir()
+    monkeypatch.setattr(tempfile, "tempdir", str(scratch))
+    yield tmp_path
+    # Flush queued widget deletion while this temporary profile is still set.
+    from PySide6.QtCore import QCoreApplication, QEvent
+    from PySide6.QtWidgets import QApplication
+    app = QApplication.instance()
+    if app is not None:
+        for widget in app.topLevelWidgets():
+            timer = getattr(widget, "_recovery_timer", None)
+            if timer is not None:
+                timer.stop()
+        QCoreApplication.sendPostedEvents(None, QEvent.Type.DeferredDelete)
 
 
-@pytest.fixture()
+@pytest.fixture(autouse=True)
 def fake_secrets(monkeypatch):
     """In-memory replacement for the Windows Credential Manager helpers.
 
@@ -52,6 +66,8 @@ def fake_secrets(monkeypatch):
     store = {}
 
     def _store(name, value):
+        if not vt_secrets.is_available():
+            return False
         # mirrors the real behaviour: an empty value removes the secret
         if not value:
             store.pop(name, None)

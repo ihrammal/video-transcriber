@@ -235,7 +235,7 @@ def main(argv=None) -> int:
     from PySide6.QtWidgets import QApplication
 
     app = QApplication(argv)
-    app.setApplicationName("Accessible Video Transcriber Setup")
+    app.setApplicationName("Accessible Media Transcriber Setup")
     app.setApplicationDisplayName(vt_install.APP_DISPLAY_NAME)
     app.setStyle("Fusion")
     app.setFont(QFont("Segoe UI", 11))

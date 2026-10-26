@@ -36,682 +36,7 @@ from datetime import timedelta
 
 import srt
 
-TR = {
-    "en": {
-        "app_title": "Accessible Video Transcriber - Transcribe, translate and subtitle video",
-        "grp_video": "1.  Choose a video file",
-        "grp_lang": "2.  Languages and translation",
-        "grp_process": "3.  Process",
-        "grp_editor": "4.  Subtitle editor (line by line, keyboard accessible)",
-        "grp_output": "5.  Output",
-        "lbl_interface_lang": "Interface language:",
-        "iface_en": "English",
-        "iface_ar": "Arabic",
-        "chk_high_contrast": "High &contrast mode (black and yellow, WCAG AAA)",
-        "lbl_audio_lang": "Audio language:",
-        "lbl_trans_mode": "Translation mode:",
-        "lang_auto": "Automatic detection",
-        "lang_en": "English",
-        "lang_ar": "Arabic",
-        "lang_zh": "Chinese",
-        "lang_es": "Spanish",
-        "lang_fr": "French",
-        "lang_de": "German",
-        "lang_hi": "Hindi",
-        "lang_ja": "Japanese",
-        "lang_pt": "Portuguese",
-        "lang_ru": "Russian",
-        "trans_ar_en": "Arabic \u2192 English",
-        "trans_en_ar": "English \u2192 Arabic",
-        "trans_bilingual": "Bilingual stacked (original above, translation below)",
-        "lbl_task": "Task:",
-        "acc_task_n": "Task",
-        "acc_task_d": "Choose what Start does: transcribe the speech into captions, "
-        "or translate the captions that are already in the table.",
-        "task_transcribe": "Transcribe speech into captions",
-        "task_translate": "Translate the captions",
-        "lbl_source_lang": "Source language (spoken in the video):",
-        "lbl_target_lang": "Target language:",
-        "acc_target_n": "Target language",
-        "acc_target_d": "The language the captions are translated into. Choose "
-        "No translation to keep the original text.",
-        "target_none": "No translation (keep the original language)",
-        "lbl_engine": "Engine:",
-        "acc_engine_n": "Speech engine",
-        "acc_engine_d": "Which service does the work. Automatic uses your saved choice "
-        "and falls back to the free offline engine when a key is missing.",
-        "eng_auto": "Automatic (my saved choice, with automatic fallback)",
-        "eng_local": "Local Whisper (free, offline)",
-        "eng_openai": "OpenAI API (needs a key)",
-        "eng_groq": "Groq API (needs a key)",
-        "eng_gemini": "Google Gemini API (needs a key)",
-        "btn_start": "&Start",
-        "btn_save_results": "&Save results",
-        "btn_copy": "&Copy results",
-        "acc_start_n": "Start button",
-        "acc_start_d": "Runs the task selected in the Task list. Shortcut F5.",
-        "acc_cancel_run_n": "Cancel the running task button",
-        "acc_save_results_n": "Save results button",
-        "acc_save_results_d": "Writes the captions to a UTF-8 .srt subtitle file.",
-        "acc_copy_n": "Copy results button",
-        "acc_copy_d": "Copies every caption, with its times, to the Windows clipboard "
-        "so it can be pasted anywhere.",
-        "acc_run_n": "Run controls group",
-        "acc_run_d": "Start and cancel the selected task.",
-        "acc_progress_group_n": "Progress group",
-        "acc_progress_group_d": "Shows the text status and the progress bar of the running task.",
-        "acc_results_n": "Results group",
-        "acc_results_d": "The finished captions. Edit cells with the arrow keys, then save "
-        "or copy them.",
-        "lbl_drop_hint": "You can also drag a video file onto this window.",
-        "msg_dropped": "Selected video: {name} at {path}",
-        "msg_copy_done": "Copied {count} caption(s) to the clipboard.",
-        "msg_engine_chosen": "Engine for this run: {engine}",
-        "msg_fallback_engine": "The {engine} key is missing, so the free offline engine "
-        "was used instead.",
-        "msg_task_cancelled": "No task was started.",
-        "btn_open": "&Open Video\u2026",
-        "btn_extract": "&Extract Audio",
-        "btn_transcribe": "&Transcribe",
-        "btn_translate": "&Translate",
-        "btn_cancel": "Canc&el",
-        "btn_add_row": "Add ro&w",
-        "btn_delete_row": "&Delete selected row",
-        "btn_import": "&Import .srt",
-        "btn_render": "&Render Subtitled Video",
-        "btn_open_folder": "&Open Output Folder",
-        "hdr_no": "#",
-        "hdr_start": "Start",
-        "hdr_end": "End",
-        "hdr_text": "Caption text",
-        "lbl_no_video": "No video selected",
-        "status_prefix": "Status:",
-        "status_ready": "Ready. Press the Open V    ideo button and use Alt+O to open a video file.",
-        "dlg_open_video"                        : "Select a video file",
-                                "dlg_video_filter": "Video files (*.mp4 *.mov *.avi *.mkv *.wmv *.webm *.flv *.m4v *.mpeg *.mpg *.3gp *.3g2 *.ts *.mts *.m2ts *.ogv *.vob *.asf *.mxf);;All files (*.*)",
-        "dlg_save_video": "Save subtitled video",
-        "dlg_mp4_filter": "MP4 video (*.mp4)",
-        "dlg_import_srt": "Import subtitle file",
-        "dlg_srt_filter": "Subtitle files (*.srt);;All files (*.*)",
-        "dlg_export_srt": "Export subtitle file",
-        "title_no_video": "No video selected",
-        "body_no_video": "Choose a supported video such as MP4, MOV, AVI, MKV, WebM, FLV, 3GP, or MPEG first.",
-        "title_busy": "Busy",
-        "body_busy": "A background task is already running.",
-        "title_no_subs": "Nothing to translate",
-        "body_no_subs": "There are no subtitles yet. Transcribe the audio or import an .srt file first.",
-        "title_invalid": "Invalid subtitles",
-        "body_ts_invalid": "Row {row} has an invalid timestamp. Use HH:MM:SS,mmm. Detail: {detail}",
-        "body_ts_range": "Row {row}: the end timestamp must be later than the start timestamp.",
-        "title_nothing_render": "Nothing to render",
-        "title_nothing_export": "Nothing to export",
-        "body_nothing_export": "There are no subtitles to export yet.",
-        "title_import_failed": "Import failed",
-        "body_import_failed": "Could not read the .srt file: {err}",
-        "title_export_failed": "Export failed",
-        "title_task_complete": "Task complete",
-        "msg_video_select_cancel": "Video selection cancelled",
-        "msg_video_selected": "Selected video: {name} at {path}",
-        "msg_extract_start": "Extracting audio from the video in the background",
-        "msg_extract_done": "Audio extraction finished and saved to {path}",
-        "msg_transcribe_start": "Transcribing the audio in the background",
-        "msg_transcribe_done": "Transcription finished: {count} captions created. Detected audio language: {language}.",
-        "msg_translate_start": "Translating subtitles in the background",
-        "msg_translate_done": "Translation finished. {count} captions updated.",
-        "msg_render_start": "Rendering the subtitled video in the background",
-        "msg_render_done": "Rendering finished. The subtitled video was saved to {path}",
-        "msg_render_cancel": "Rendering cancelled",
-        "msg_cancel_requested": "Cancellation requested; the task will stop at the next safe point.",
-        "msg_row_added": "Added empty subtitle row number {num}",
-        "msg_rows_deleted": "Deleted {count} selected row(s)",
-        "msg_no_rows": "No rows selected to delete",
-        "msg_import_done": "Imported {count} captions from {path}",
-        "msg_export_done": "Exported {count} captions to {path}",
-        "msg_folder_opened": "Opened output folder {path}",
-        "msg_progress": "Progress {value} percent",
-        "status_task_failed": "Task failed: {msg}",
-        "msg_busy_lang": "Cannot change the interface language while a task is running.",
-        "stage_extract": "Extracting audio with ffmpeg (moviepy)",
-        "stage_extract2": "Extracting audio from video",
-        "stage_whisper": "Loading faster-whisper base model (first run downloads it)",
-        "stage_transcribing": "Transcribing audio to text",
-        "stage_test_translator": "Testing translation service connection",
-        "stage_translating": "Translating subtitles",
-        "stage_loading_video": "Loading video for caption rendering",
-        "stage_burning": "Burning {count} caption line(s) onto video",
-        "err_extract": "Audio extraction failed: {msg}",
-        "err_transcribe": "Transcription failed: {msg}",
-        "err_translate": "Translation failed: {msg}",
-        "err_render": "Rendering failed: {msg}",
-        "acc_grp_input_n": "Input video group",
-        "acc_grp_input_d": "Group for selecting the video file that will be processed.",
-        "acc_open_n": "Open video file button",
-        "acc_open_d": "Opens a file dialog to choose a supported video file, including MP4, MOV, AVI, MKV, WebM, FLV, 3GP, or MPEG. The chosen path is "
-        "announced in the status area below.",
-        "acc_path_n": "Selected video path",
-        "acc_path_d": "Reports the full path of the currently selected video file.",
-        "acc_grp_lang_n": "Languages and translation group",
-        "acc_grp_lang_d": "Choose the audio language and translation mode.",
-        "acc_audio_lang_n": "Audio language",
-        "acc_audio_lang_d": "The language spoken in the video audio. Automatic lets Whisper detect it.",
-        "acc_trans_mode_n": "Translation mode",
-        "acc_trans_mode_d": "Arabic to English, English to Arabic, or stacked bilingual subtitles that show "
-        "the original line and the translated line together.",
-        "acc_lang_label_n": "Interface language label",
-        "acc_iface_n": "Interface language",
-        "acc_iface_d": "Switches the whole interface, including screen-reader descriptions, between "
-        "English and Arabic. The layout flips right-to-left automatically.",
-        "acc_high_n": "High contrast mode",
-        "acc_high_d": "Toggles a black and yellow high contrast visual theme for low vision users.",
-        "acc_grp_process_n": "Processing controls group",
-        "acc_grp_process_d": "Buttons that extract audio, transcribe speech to text, and translate the captions.",
-        "acc_extract_n": "Extract audio button",
-        "acc_extract_d": "Extracts the audio track from the selected video with ffmpeg into a temporary file.",
-        "acc_transcribe_n": "Transcribe button",
-        "acc_transcribe_d": "Extracts audio if needed and transcribes it to timestamps subtitles with "
-        "faster-whisper in the background. The interface stays responsive.",
-        "acc_translate_n": "Translate button",
-        "acc_translate_d": "Translates the caption text with Google Translate in the background using the "
-        "chosen translation mode.",
-        "acc_cancel_n": "Cancel current task button",
-        "acc_cancel_d": "Requests cancellation of the current background job between units of work.",
-        "acc_grp_editor_n": "Subtitle editor group",
-        "acc_grp_editor_d": "Table of subtitles. Each row is one caption: number, start timestamp, end "
-        "timestamp, and text. Use arrow keys to move between cells and type to edit. "
-        "Braille displays follow the cell focus.",
-        "acc_table_n": "Subtitles table",
-        "acc_table_d": "Editable table of {count} subtitle rows with columns number, start timestamp, end "
-        "timestamp, and caption text. Navigate with arrow keys and edit inside cells.",
-        "acc_add_n": "Add subtitle row button",
-        "acc_add_d": "Inserts an empty subtitle row after the last one with default timestamps.",
-        "acc_delete_n": "Delete selected rows button",
-        "acc_delete_d": "Removes every subtitle row that currently has a selected cell.",
-        "acc_import_n": "Import srt file button",
-        "acc_import_d": "Loads captions from an existing subtitle file into the editor.",
-        "acc_grp_output_n": "Output group",
-        "acc_grp_output_d": "Renders a new video with the captions burned in, or opens the output folder.",
-        "acc_render_n": "Render subtitled video button",
-        "acc_render_d": "Uses moviepy in a background thread to burn the styled white captions with black "
-        "outline into the video and saves it as an MP4 file with AAC audio.",
-        "acc_folder_n": "Open output folder button",
-        "acc_folder_d": "Opens the folder containing the last exported or rendered file.",
-        "acc_status_n": "Processing status",
-        "acc_status_d": "Reports the current task and its progress.",
-        "acc_progress_n": "Task progress bar",
-        "acc_progress_d": "Percentage progress of the currently running background task: {value} percent. "
-        "Percentage progress of the currently running background task.",
-        "menu_file": "&File",
-        "menu_edit": "&Edit",
-        "menu_settings": "&Settings",
-        "menu_accessibility": "&Accessibility",
-        "menu_tools": "&Tools",
-        "menu_models": "&Models",
-        "menu_help": "&Help",
-        "act_open_video": "&Open Video\u2026",
-        "act_import_srt": "&Import .srt\u2026",
-        "act_export_srt": "&Export .srt\u2026",
-        "act_render": "&Render Subtitled Video\u2026",
-        "act_open_folder": "&Open Output Folder",
-        "act_exit": "E&xit",
-        "act_add_row": "&Add Row",
-        "act_delete_row": "&Delete Selected Row",
-        "act_copy_results": "&Copy Results",
-        "act_extract": "&Extract Audio",
-        "act_cancel": "&Cancel Task",
-        "act_iface_lang": "&Interface Language",
-        "act_iface_en": "Interface in &English",
-        "act_iface_ar": "الواجهة بالعربية",
-        "act_a11y_settings": "&Accessibility Settings\u2026",
-        "act_high_contrast": "High &Contrast Theme",
-        "act_large_focus": "&Larger Focus Indicators",
-        "act_simplified": "&Simplified Layout",
-        "act_announce_progress": "&Announce Progress",
-        "act_sounds": "Play &Sounds",
-        "act_model_tiny": "Download &Tiny Model (fastest)",
-        "act_model_base": "Download &Base Model (bundled)",
-        "act_model_small": "Download &Small Model (most accurate)",
-        "act_model_status": "Model &Status",
-        "act_user_guide": "&User Guide",
-        "act_shortcuts": "&Keyboard Shortcuts",
-        "act_check_updates": "&Check for Updates\u2026",
-        "act_auto_update": "Check Automatically at &Startup",
-        "act_release_notes": "&Release Notes on GitHub",
-        "act_report_problem": "Report a &Problem",
-        "act_license": "&License Agreement",
-        "act_open_log": "Open Log &Folder",
-        "act_about": "&About",
-        "act_guide_file": "Open &Guide File",
-        "act_shortcuts_file": "&Open Shortcut File",
-        "msg_help_file_open": "The file is open in your default web browser.",
-        "msg_help_file_missing": "The help file was not found on this computer.",
-        "act_preferences": "&Speech && Translation Settings\u2026",
-        "trans_none": "Original (no translation)",
-        "msg_no_translation": "No translation requested: the output language is set to Original.",
-        "out_orig": "&Original only",
-        "out_trans": "&Translated only (opposite of the video language)",
-        "out_both": "&Both (original above, translated below)",
-        "acc_menu_n": "Application menu bar",
-        "acc_menu_d": "File, Edit, Settings, Accessibility, Tools, Models and Help menus. "
-        "Press Alt to focus the menu bar, then the mnemonic letter or the arrow keys.",
-        "settings_iface_d": "Interface Language: English or Arabic.",
-        "settings_audio_d": "Video Language: Automatic, English, or Arabic.",
-        "settings_output_d": "Output Language: Original, Translated, or Both.",
-        "help_title_guide": "User Guide",
-        "help_title_shortcuts": "Keyboard Shortcuts",
-        "help_title_about": "About Accessible Video Transcriber",
-        "btn_close": "Close",
-        "help_contents_n": "Help contents",
-        "help_details_n": "Details of the selected heading",
-        "help_hint": (
-            "Use the up and down arrows to move through the contents. "
-            "Press Enter to open a topic and read it in the text area. "
-            "Press Escape inside the text area to come back to the contents. "
-            "Press F6 to jump between the contents and the text."
-        ),
-        "help_about": (
-            "<h1>About Accessible Video Transcriber</h1>"
-            "<h2>Version 1.3.0</h2>"
-            "<p>Accessible desktop application by Iman Rammal for video work: transcribe "
-            "speech to captions, translate them, edit the result and burn it back into the "
-            "video.</p>"
-            "<h2>Accessibility</h2>"
-            "<p>Designed against WCAG 2.1 AA and Windows UI Automation: every control has a "
-            "name and a description, the whole program is reachable with the keyboard, the "
-            "focus is always visible, progress is announced, and the layout flips "
-            "right-to-left for the Arabic interface. Tested with NVDA, JAWS, Narrator and "
-            "braille displays.</p>"
-            "<h2>Privacy</h2>"
-            "<p>The free local engine keeps the audio on this computer. API keys are stored "
-            "in the Windows Credential Manager and are only sent to the provider you chose. "
-            "The log file never contains a key.</p>"
-            "<h2>Libraries</h2>"
-            "<p>PySide6, faster-whisper, ctranslate2, deep-translator, moviepy, srt, "
-            "requests.</p>"
-            "<h2>License</h2>"
-            "<p>Free for personal, educational, research and non-commercial use. See Help "
-            "&rarr; License Agreement (Ctrl+Shift+G) for the full text.</p>"
-            "<h2>Contact the author</h2>"
-            "<p>Iman Rammal &mdash; Braille Training Specialist, NVDA Certified Expert, "
-            "JAWS Certified, assistive technology trainer, translator and interpreter.</p>"
-            "<p>Email: <a href=\"mailto:iman.rammal@gmail.com\">iman.rammal@gmail.com</a><br>"
-            "LinkedIn: <a href=\"https://www.linkedin.com/in/ImanRammal\">LinkedIn</a><br>"
-            "Instagram: <a href=\"https://www.instagram.com/rammal_iman/\">Instagram</a><br>"
-            "YouTube: <a href=\"https://www.youtube.com/@Welcome2Sawa\">@Welcome2Sawa</a><br>"
-            "Telegram: <a href=\"https://t.me/ImanSawa\">t.me/ImanSawa</a><br>"
-            "Facebook: <a href=\"https://www.facebook.com/pretty.ammoona\">pretty.ammoona</a><br>"
-            "X: <a href=\"https://x.com/imanrammal\">x.com/imanrammal</a></p>"
-        ),
-        "grp_task": "2.  Task and languages",
-        "grp_run": "3.  Run",
-        "grp_progress": "4.  Progress",
-        "grp_results": "5.  Results",
-        "acc_main_n": "Main screen: choose a video, a task, the languages and an engine, then press Start.",
-        "btn_ok_n": "OK",
-        "model_installed": " (installed)",
-        "model_missing": " not installed",
-        "msg_model_cached": "{model} is already installed on this computer.",
-        "msg_model_start": "Downloading the {model} recognition model. Progress is reported as it goes.",
-        "msg_model_progress": "Downloading {model}: {percent} percent.",
-        "msg_model_done": "The {model} model finished downloading and is ready to use.",
-        "msg_model_fail": "The {model} model could not be downloaded: {error}",
-        "msg_model_status_header": "Recognition models on this computer:",
-        "msg_model_folder": "Installed models folder: {path}",
-        "msg_a11y_large_focus_on": "Larger focus indicator on.",
-        "msg_a11y_large_focus_off": "Larger focus indicator off.",
-        "msg_a11y_simplified_on": "Simplified main layout on.",
-        "msg_a11y_simplified_off": "Simplified main layout off.",
-        "msg_a11y_announce_on": "Progress announcements on.",
-        "msg_a11y_announce_off": "Progress announcements off.",
-        "msg_a11y_sounds_on": "Sound feedback on.",
-        "msg_a11y_sounds_off": "Sound feedback off.",
-        "acc_title": "Accessibility Settings",
-        "acc_intro": "Choose how the program looks and speaks. Move through the options with Tab and change one with the Space bar. The change is applied when you press OK.",
-        "acc_lbl_hc": "High contrast mode",
-        "acc_desc_hc": "Black and white theme with maximum contrast, easier to read in bright light or with low vision.",
-        "acc_lbl_focus": "Larger focus indicator",
-        "acc_desc_focus": "Thicker and brighter rectangle around the control that has the keyboard focus.",
-        "acc_lbl_simple": "Simplified main layout",
-        "acc_desc_simple": "Hide the advanced language and engine pickers, keeping only what a first run needs.",
-        "acc_lbl_progress": "Announce progress",
-        "acc_desc_progress": "Speak the percentage completed while a task is running.",
-        "acc_lbl_sounds": "Sound feedback",
-        "acc_desc_sounds": "Play a short tone when a task finishes or fails.",
-    },
-    "ar": {
-        "app_title": "برنامج تفريغ الفيديو الميسّر - تفريغ الفيديو وترجمته وإنشاء التسميات التوضيحية مع دعم إمكانية الوصول",
-        "grp_video": "١.  اختر ملف الفيديو",
-        "grp_lang": "٢.  اللغات والترجمة",
-        "grp_process": "٣.  المعالجة",
-        "grp_editor": "٤.  محرر التسميات (سطرًا بسطر، متاح بلوحة المفاتيح)",
-        "grp_output": "٥.  الإخراج",
-        "lbl_interface_lang": "لغة الواجهة:",
-        "iface_en": "الإنجليزية",
-        "iface_ar": "العربية",
-        "chk_high_contrast": "وضع التباين العالي (أسود وأصفر)",
-        "lbl_audio_lang": "لغة الصوت:",
-        "lbl_trans_mode": "نمط الترجمة:",
-        "lang_auto": "كشف تلقائي",
-        "lang_en": "الإنجليزية",
-        "lang_ar": "العربية",
-        "lang_zh": "الصينية",
-        "lang_es": "الإسبانية",
-        "lang_fr": "الفرنسية",
-        "lang_de": "الألمانية",
-        "lang_hi": "الهندية",
-        "lang_ja": "اليابانية",
-        "lang_pt": "البرتغالية",
-        "lang_ru": "الروسية",
-        "trans_ar_en": "العربية \u2192 الإنجليزية",
-        "trans_en_ar": "الإنجليزية \u2192 العربية",
-        "trans_bilingual": "ترجمة مزدوجة (الأصل بالأعلى والترجمة بالأسفل)",
-        "lbl_task": "المهمة:",
-        "acc_task_n": "المهمة",
-        "acc_task_d": "يختار ما يفعله زر «بدء»: تفريغ الكلام إلى تسميات، أو ترجمة "
-        "التسميات الموجودة في الجدول.",
-        "task_transcribe": "تفريغ الكلام إلى تسميات",
-        "task_translate": "ترجمة التسميات",
-        "lbl_source_lang": "لغة المصدر (المنطوقة في الفيديو):",
-        "lbl_target_lang": "لغة الهدف:",
-        "acc_target_n": "لغة الهدف",
-        "acc_target_d": "اللغة التي تُترجم إليها التسميات. اختر «بدون ترجمة» للإبقاء "
-        "على النص الأصلي.",
-        "target_none": "بدون ترجمة (إبقاء اللغة الأصلية)",
-        "lbl_engine": "المحرك:",
-        "acc_engine_n": "محرك التعرّف",
-        "acc_engine_d": "الخدمة التي تنفّذ العمل. «تلقائي» يستخدم اختيارك المحفوظ ويرجع "
-        "إلى المحرك المحلي المجاني عند غياب المفتاح.",
-        "eng_auto": "تلقائي (اختياري المحفوظ مع رجوع تلقائي)",
-        "eng_local": "Whisper المحلي (مجاني ودون اتصال)",
-        "eng_openai": "واجهة OpenAI (تحتاج مفتاحًا)",
-        "eng_groq": "واجهة Groq (تحتاج مفتاحًا)",
-        "eng_gemini": "واجهة Google Gemini (تحتاج مفتاحًا)",
-        "btn_start": "&بدء",
-        "btn_save_results": "&حفظ النتائج",
-        "btn_copy": "&نسخ النتائج",
-        "acc_start_n": "زر البدء",
-        "acc_start_d": "يُنفّذ المهمة المختارة في قائمة «المهمة». الاختصار F5.",
-        "acc_cancel_run_n": "زر إلغاء المهمة الجارية",
-        "acc_save_results_n": "زر حفظ النتائج",
-        "acc_save_results_d": "يكتب التسميات في ملف .srt بترميز UTF-8.",
-        "acc_copy_n": "زر نسخ النتائج",
-        "acc_copy_d": "ينسخ كل التسميات مع أزمنتها إلى الحافظة للصقها في أي مكان.",
-        "acc_run_n": "مجموعة بدء وإلغاء المهمة",
-        "acc_run_d": "يبدأ المهمة المختارة أو يلغيها.",
-        "acc_progress_group_n": "مجموعة التقدم",
-        "acc_progress_group_d": " تعرض حالة النص وشريط تقدم المهمة الجارية.",
-        "acc_results_n": "مجموعة النتائج",
-        "acc_results_d": "التسميات النهائية حرّر الخلايا بمفاتيح الأسهم ثم احفظها أو انسخها.",
-        "lbl_drop_hint": "يمكنك أيضًا سحب ملف فيديو وإفلاته داخل هذه النافذة.",
-        "msg_dropped": "تم اختيار الفيديو: {name} في {path}",
-        "msg_copy_done": "تم نسخ {count} تسمية إلى الحافظة.",
-        "msg_engine_chosen": "محرك هذه المهمة: {engine}",
-        "msg_fallback_engine": "مفتاح {engine} مفقود، لذلك استُخدم المحرك المحلي المجاني "
-        "بدلاً منه.",
-        "msg_task_cancelled": "لم تبدأ أي مهمة.",
-        "btn_open": "&فتح الفيديو\u2026",
-        "btn_extract": "&استخراج الصوت",
-        "btn_transcribe": "&التفريغ الصوتي",
-        "btn_translate": "&ترجمة",
-        "btn_cancel": "&إلغاء",
-        "btn_add_row": "إ&ضافة صف",
-        "btn_delete_row": "&حذف الصف المحدد",
-        "btn_import": "&استيراد .srt",
-        "btn_render": "&إنشاء الفيديو بالتسميات",
-        "btn_open_folder": "&فتح مجلد الإخراج",
-        "hdr_no": "الرقم",
-        "hdr_start": "البداية",
-        "hdr_end": "النهاية",
-        "hdr_text": "نص التسمية",
-        "lbl_no_video": "لم يتم اختيار فيديو",
-        "status_prefix": "الحالة:",
-        "status_ready": "جاهز. اضغط زر فتح الفيديو واستخدم Alt+O لفتح ملف فيديو.",
-        "dlg_open_video": "اختر ملف فيديو",
-        "dlg_video_filter": "ملفات الفيديو (*.mp4 *.mov *.avi *.mkv *.wmv *.webm *.flv *.m4v *.mpeg *.mpg *.3gp *.3g2 *.ts *.mts *.m2ts *.ogv *.vob *.asf *.mxf);;كل الملفات (*.*)",
-        "dlg_save_video": "احفظ الفيديو بالتسميات",
-        "dlg_mp4_filter": "فيديو MP4 (*.mp4)",
-        "dlg_import_srt": "استيراد ملف التسميات",
-        "dlg_srt_filter": "ملفات التسميات (*.srt);;كل الملفات (*.*)",
-        "dlg_export_srt": "تصدير ملف التسميات",
-        "title_no_video": "لم يتم اختيار فيديو",
-        "body_no_video": "اختر أولًا ملف فيديو مدعومًا مثل MP4 أو MOV أو AVI أو MKV أو WebM أو FLV أو 3GP أو MPEG.",
-        "title_busy": "مشغول",
-        "body_busy": "هناك مهمة قيد التشغيل في الخلفية بالفعل.",
-        "title_no_subs": "لا يوجد شيء للترجمة",
-        "body_no_subs": "لا توجد تسميات بعد. فُرِّغ الصوت أولًا أو استورد ملف .srt.",
-        "title_invalid": "تسميات غير صالحة",
-        "body_ts_invalid": "الصف {row} يحتوي على طابع زمني غير صالح. استخدم الصيغة HH:MM:SS,mmm. التفاصيل: {detail}",
-        "body_ts_range": "الصف {row}: يجب أن يكون طابع النهاية أحدث من طابع البداية.",
-        "title_nothing_render": "لا يوجد شيء للإنشاء",
-        "title_nothing_export": "لا يوجد شيء للتصدير",
-        "body_nothing_export": "لا توجد تسميات للتصدير بعد.",
-        "title_import_failed": "فشل الاستيراد",
-        "body_import_failed": "تعذّرت قراءة ملف .srt: {err}",
-        "title_export_failed": "فشل التصدير",
-        "title_task_complete": "اكتملت المهمة",
-        "msg_video_select_cancel": "تم إلغاء اختيار الفيديو",
-        "msg_video_selected": "الفيديو المحدد: {name} في {path}",
-        "msg_extract_start": "يجري استخراج الصوت من الفيديو في الخلفية",
-        "msg_extract_done": "اكتمل استخراج الصوت وحُفظ في {path}",
-        "msg_transcribe_start": "يجري تفريغ الصوت في الخلفية",
-        "msg_transcribe_done": "اكتمل التفريغ: أُنشئت {count} تسمية. لغة الصوت المكتشفة: {language}.",
-        "msg_translate_start": "يجري ترجمة التسميات في الخلفية",
-        "msg_translate_done": "اكتملت الترجمة: حُدِّثت {count} تسمية.",
-        "msg_render_start": "يجري إنشاء الفيديو بالتسميات في الخلفية",
-        "msg_render_done": "اكتمل الإنشاء: حُفظ الفيديو بالتسميات في {path}",
-        "msg_render_cancel": "تم إلغاء الإنشاء",
-        "msg_cancel_requested": "طُلب الإلغاء؛ ستتوقف المهمة عند أقرب نقطة آمنة.",
-        "msg_row_added": "أُضيف صف فارغ رقم {num}",
-        "msg_rows_deleted": "تم حذف {count} صف(وف) محددة",
-        "msg_no_rows": "لم يتم تحديد أي صفوف للحذف",
-        "msg_import_done": "تم استيراد {count} تسمية من {path}",
-        "msg_export_done": "تم تصدير {count} تسمية إلى {path}",
-        "msg_folder_opened": "تم فتح مجلد الإخراج {path}",
-        "msg_progress": "التقدم {value} بالمئة",
-        "status_task_failed": "فشلت المهمة: {msg}",
-        "msg_busy_lang": "لا يمكن تغيير لغة الواجهة أثناء تشغيل مهمة.",
-        "stage_extract": "يجري استخراج الصوت باستخدام ffmpeg (moviepy)",
-        "stage_extract2": "يجري استخراج الصوت من الفيديو",
-        "stage_whisper": "يجري تحميل نموذج faster-whisper الأساسي (يُنزَّل عند أول تشغيل)",
-        "stage_transcribing": "يجري تحويل الصوت إلى نص",
-        "stage_test_translator": "يجري اختبار الاتصال بخدمة الترجمة",
-        "stage_translating": "يجري ترجمة التسميات",
-        "stage_loading_video": "يجري تحميل الفيديو لتوليد التسميات",
-        "stage_burning": "يجري حرق {count} سطر تسمية على الفيديو",
-        "err_extract": "فشل استخراج الصوت: {msg}",
-        "err_transcribe": "فشل التفريغ: {msg}",
-        "err_translate": "فشلت الترجمة: {msg}",
-        "err_render": "فشل الإنشاء: {msg}",
-        "acc_grp_input_n": "مجموعة إدخال الفيديو",
-        "acc_grp_input_d": "مجموعة لاختيار ملف الفيديو الذي ستتم معالجته.",
-        "acc_open_n": "زر فتح ملف الفيديو",
-        "acc_open_d": "يفتح مربع حوار لاختيار ملف فيديو مدعوم، مثل MP4 أو MOV أو AVI أو MKV أو WebM أو FLV أو 3GP أو MPEG. يُعلَن المسار المختار "
-        "في منطقة الحالة بالأسفل.",
-        "acc_path_n": "مسار الفيديو المحدد",
-        "acc_path_d": "يعرض المسار الكامل لملف الفيديو المحدد حاليًا.",
-        "acc_grp_lang_n": "مجموعة اللغات والترجمة",
-        "acc_grp_lang_d": "اختر لغة الصوت ونمط الترجمة.",
-        "acc_audio_lang_n": "لغة الصوت",
-        "acc_audio_lang_d": "اللغة المنطوقة في صوت الفيديو. الخيار التلقائي يجعل Whisper يكتشفها.",
-        "acc_trans_mode_n": "نمط الترجمة",
-        "acc_trans_mode_d": "من العربية إلى الإنجليزية، أو من الإنجليزية إلى العربية، أو تسميات مزدوجة "
-        "تعرض السطر الأصلي مع سطر الترجمة معًا.",
-        "acc_lang_label_n": "تسمية لغة الواجهة",
-        "acc_iface_n": "لغة الواجهة",
-        "acc_iface_d": "تبدّل الواجهة كاملة، بما فيها وصف شاشات قراءة الشاشة، بين اللغة الإنجليزية "
-        "والعربية. وينعكس الاتجاه تلقائيًا من اليمين إلى اليسار.",
-        "acc_high_n": "وضع التباين العالي",
-        "acc_high_d": "يبدّل مظهرًا أسود وأصفر عالي التباين للمستخدمين من ضعاف البصر.",
-        "acc_grp_process_n": "مجموعة أدوات المعالجة",
-        "acc_grp_process_d": "أزرار تستخرج الصوت وتفرِّغ الكلام إلى نص وتترجم التسميات.",
-        "acc_extract_n": "زر استخراج الصوت",
-        "acc_extract_d": "يستخرج المسار الصوتي من الفيديو المحدد باستخدام ffmpeg إلى ملف مؤقت.",
-        "acc_transcribe_n": "زر التفريغ الصوتي",
-        "acc_transcribe_d": "تستخرج الصوت إن لزم ثم تفرّغه إلى تسميات بزمن محدد باستخدام faster-whisper "
-        "في الخلفية، مع بقاء الواجهة سريعة الاستجابة.",
-        "acc_translate_n": "زر الترجمة",
-        "acc_translate_d": "يترجم نص التسميات باستخدام Google Translate في الخلفية وفق نمط الترجمة المختار.",
-        "acc_cancel_n": "زر إلغاء المهمة الحالية",
-        "acc_cancel_d": "طلَب إلغاء المهمة الحالية التي تعمل في الخلفية عند أول فرصة آمنة.",
-        "acc_grp_editor_n": "مجموعة محرر التسميات",
-        "acc_grp_editor_d": "جدول التسميات. كل صف يمثل تسمية واحدة: الرقم، وطابع البداية، وطابع النهاية، "
-        "والنص. استخدم أسهم لوحة المفاتيح للتنقل بين الخلايا واكتب للتعديل. وتتبع شاشات برايل "
-        "موضع التركيز في الخلايا.",
-        "acc_table_n": "جدول التسميات",
-        "acc_table_d": "جدول قابل للتعديل يتكون من {count} صف تسمية بأعمدة الرقم وطابع البداية وطابع "
-        "النهاية ونص التسمية. تنقّل بأسهم لوحة المفاتيح وعدّل داخل الخلايا مباشرة.",
-        "acc_add_n": "زر إضافة صف تسمية",
-        "acc_add_d": "يدرج صفًا فارغًا بعد آخر صف بطوابع زمنية افتراضية.",
-        "acc_delete_n": "زر حذف الصفوف المحددة",
-        "acc_delete_d": "يزيل كل صف ترجمة فيه خلية محددة حاليًا.",
-        "acc_import_n": "زر استيراد ملف .srt",
-        "acc_import_d": "يحمل التسميات من ملف تسميات موجود إلى المحرر.",
-        "acc_grp_output_n": "مجموعة الإخراج",
-        "acc_grp_output_d": "ينشئ فيديو جديدًا بالتسميات المدمجة فيه، أو يفتح مجلد الإخراج.",
-        "acc_render_n": "زر إنشاء الفيديو بالتسميات",
-        "acc_render_d": "يستخدم moviepy في خاصية خلفية لدمج التسميات البيضاء ذات الإطار الأسود داخل "
-        "الفيديو وحفظه كملف MP4 بصوت AAC.",
-        "acc_folder_n": "زر فتح مجلد الإخراج",
-        "acc_folder_d": "يفتح المجلد الذي يحتوي على آخر ملف تم تصديره أو إنشاؤه.",
-        "acc_status_n": "حالة المعالجة",
-        "acc_status_d": "يعرض المهمة الحالية ومدى تقدمها.",
-        "acc_progress_n": "شريط تقدم المهمة",
-        "acc_progress_d": "نسبة تقدم المهمة الحالية التي تعمل في الخلفية: {value} بالمئة.",
-        "menu_file": "&ملف",
-        "menu_edit": "&تحرير",
-        "menu_settings": "&الإعدادات",
-        "menu_accessibility": "إمكانية الو&صول",
-        "menu_tools": "&أدوات",
-        "menu_models": "ال&نماذج",
-        "menu_help": "&مساعدة",
-        "act_open_video": "&فتح الفيديو\u2026",
-        "act_import_srt": "&استيراد .srt\u2026",
-        "act_export_srt": "&تصدير .srt\u2026",
-        "act_render": "&إنشاء الفيديو بالتسميات\u2026",
-        "act_open_folder": "&فتح مجلد الإخراج",
-        "act_exit": "&خروج",
-        "act_add_row": "&إضافة صف",
-        "act_delete_row": "&حذف الصف المحدد",
-        "act_copy_results": "&نسخ النتائج",
-        "act_extract": "&استخراج الصوت",
-        "act_cancel": "إ&لغاء المهمة",
-        "act_iface_lang": "&لغة الواجهة",
-        "act_iface_en": "الواجهة بالإن&جليزية",
-        "act_iface_ar": "الواجهة بالعربية",
-        "act_a11y_settings": "&إعدادات إمكانية الوصول\u2026",
-        "act_high_contrast": "سمة التباين ال&عالي",
-        "act_large_focus": "&مؤشرات تركيز أكبر",
-        "act_simplified": "&تخطيط مبسّط",
-        "act_announce_progress": "الإ&علان عن التقدم",
-        "act_sounds": "تشغيل ال&أصوات",
-        "act_model_tiny": "تنزيل النموذج &الصغير (الأسرع)",
-        "act_model_base": "تنزيل النموذج الأساسي (مضمّن)",
-        "act_model_small": "تنزيل النموذج الأ&كبر (الأدق)",
-        "act_model_status": "حالة ال&نماذج",
-        "act_user_guide": "&دليل الاستخدام",
-        "act_shortcuts": "&اختصارات لوحة المفاتيح",
-        "act_check_updates": "التحقق من ال&تحديثات",
-        "act_auto_update": "التحقق التلقائي عند &بدء التشغيل",
-        "act_release_notes": "م&لاحظات الإصدار على GitHub",
-        "act_report_problem": "الإبلاغ عن &مشكلة",
-        "act_license": "اتفاقية ال&رخصة",
-        "act_open_log": "فتح &مجلد السجل",
-        "act_about": "&حول",
-        "act_guide_file": "&فتح ملف الدليل",
-        "act_shortcuts_file": "فتح ملف ال&اختصارات",
-        "msg_help_file_open": "الملف مفتوح في متصفّحك الافتراضي.",
-        "msg_help_file_missing": "لم يُعثر على ملف المساعدة على هذا الحاسوب.",
-        "act_preferences": "إعدادات &التفريغ والترجمة…",
-        "trans_none": "الأصل (بدون ترجمة)",
-        "msg_no_translation": "لا توجد ترجمة مطلوبة: لغة الإخراج مضبوطة على «الأصل».",
-        "out_orig": "الأصل &فقط",
-        "out_trans": "الترجمة &فقط (عكس لغة الفيديو)",
-        "out_both": "&الاثنتان (الأصل بالأعلى والترجمة بالأسفل)",
-        "acc_menu_n": "شريط القوائم",
-        "acc_menu_d": "قوائم ملف وتحرير وإعدادات وإمكانية الوصول والأدوات والنماذج ومساعدة. "
-        "اضغط Alt للانتقال إلى شريط القوائم، ثم استخدم الحرف المظلل أو أسهم لوحة المفاتيح.",
-        "settings_iface_d": "لغة الواجهة: الإنجليزية أو العربية.",
-        "settings_audio_d": "لغة الفيديو: تلقائي أو الإنجليزية أو العربية.",
-        "settings_output_d": "لغة الإخراج: الأصل أو الترجمة أو الاثنتان معًا.",
-        "help_title_guide": "دليل الاستخدام",
-        "help_title_shortcuts": "اختصارات لوحة المفاتيح",
-        "help_title_about": "حول برنامج تفريغ الفيديو الميسّر",
-        "btn_close": "إغلاق",
-        "help_contents_n": "محتويات المساعدة",
-        "help_details_n": "تفاصيل العنوان المحدد",
-        "help_hint": (
-            "استخدم السهمين الأعلى والأسفل للتنقل بين المحتويات. "
-            "اضغط Enter لفتح موضوع وقراءته في منطقة النص. "
-            "اضغط Escape داخل منطقة النص للعودة إلى المحتويات. "
-            "واضغط F6 للتنقل بين المحتويات ومنطقة النص."
-        ),
-        "help_about": (
-            "<h1>حول برنامج تفريغ الفيديو الميسّر</h1>"
-            "<h2>الإصدار 1.3.0</h2>"
-            "<p>تطبيق سطح مكتب من إعداد إيمان رمّال للعمل على الفيديو: تفريغ الكلام إلى "
-            "تسميات، وترجمتها، وتعديل النتيجة، ودمجها داخل الفيديو.</p>"
-            "<h2>إمكانية الوصول</h2>"
-            "<p>مصمّم وفق معيار WCAG 2.1 AA وWindows UI Automation: لكل عنصر اسم ووصف، "
-            "وكل البرنامج يمكن الوصول إليه بلوحة المفاتيح، ومؤشر التركيز دائم الظهور، "
-            "والتقدم يُعلن، والتخطيط ينعكس من اليمين إلى اليسار في الواجهة العربية. جُرِّب "
-            "مع NVDA وJAWS وNarrator وشاشات برايل.</p>"
-            "<h2>الخصوصية</h2>"
-            "<p>المحرك المجاني المحلي يُبقي الصوت على هذا الحاسوب. وتُحفظ مفاتيح API في "
-            "Windows Credential Manager ولا تُرسل إلا إلى المزود الذي اخترته. ولا يحتوي "
-            "ملف السجل على أي مفتاح.</p>"
-            "<h2>المكتبات</h2>"
-            "<p>PySide6 وfaster-whisper وctranslate2 وdeep-translator وmoviepy وsrt "
-            "وrequests.</p>"
-            "<h2>الرخصة</h2>"
-            "<p>مجاني للاستخدام الشخصي والتعليمي والبحثي وغير التجاري. انظر مساعد ← "
-            "اتفاقية الرخصة (Ctrl+Shift+G) للنص الكامل.</p>"
-            "<h2>التواصل مع المؤلف</h2>"
-            "<p>إيمان رمّال &mdash; أخصائي تدريب على برايل، وخبير NVDA معتمد، "
-            "وحاصل على شهادة JAWS، ومدرّب تقنيات مساعدة، ومترجم ومترجم فوري.</p>"
-            "<p>البريد الإلكتروني: <a href=\"mailto:iman.rammal@gmail.com\">iman.rammal@gmail.com</a><br>"
-            "لينكدإن: <a href=\"https://www.linkedin.com/in/ImanRammal\">لينكدإن</a><br>"
-            "إنستغرام: <a href=\"https://www.instagram.com/rammal_iman/\">إنستغرام</a><br>"
-            "يوتيوب: <a href=\"https://www.youtube.com/@Welcome2Sawa\">@Welcome2Sawa</a><br>"
-            "تيليجرام: <a href=\"https://t.me/ImanSawa\">t.me/ImanSawa</a><br>"
-            "فيسبوك: <a href=\"https://www.facebook.com/pretty.ammoona\">pretty.ammoona</a><br>"
-            "إكس: <a href=\"https://x.com/imanrammal\">x.com/imanrammal</a></p>"
-        ),
-        "grp_task": "٢.  المهمة واللغات",
-        "grp_run": "٣.  التشغيل",
-        "grp_progress": "٤.  التقدم",
-        "grp_results": "٥.  النتائج",
-        "acc_main_n": "الشاشة الرئيسية: اختر فيديو ومهمة ولغات ومحركًا ثم اضغط ابدأ.",
-        "btn_ok_n": "موافق",
-        "model_installed": " (مثبّت)",
-        "model_missing": " غير مثبّت",
-        "msg_model_cached": "{model} مثبّت بالفعل على هذا الحاسوب.",
-        "msg_model_start": "جارٍ تنزيل نموذج التعرّف على {model}. سيُبلَّغ عن التقدّم أثناء التنزيل.",
-        "msg_model_progress": "تنزيل {model}: {percent} بالمئة.",
-        "msg_model_done": "اكتمل تنزيل نموذج {model} وأصبح جاهزًا للاستخدام.",
-        "msg_model_fail": "تعذّر تنزيل نموذج {model}: {error}",
-        "msg_model_status_header": "نماذج التعرّف على هذا الحاسوب:",
-        "msg_model_folder": "مجلد النماذج المثبّتة: {path}",
-        "msg_a11y_large_focus_on": "تم تفعيل مؤشر التركيز الكبير.",
-        "msg_a11y_large_focus_off": "تم إيقاف مؤشر التركيز الكبير.",
-        "msg_a11y_simplified_on": "تم تفعيل التخطيط المبسّط.",
-        "msg_a11y_simplified_off": "تم إيقاف التخطيط المبسّط.",
-        "msg_a11y_announce_on": "تم تفعيل الإعلان عن التقدّم.",
-        "msg_a11y_announce_off": "تم إيقاف الإعلان عن التقدّم.",
-        "msg_a11y_sounds_on": "تم تفعيل التنبيهات الصوتية.",
-        "msg_a11y_sounds_off": "تم إيقاف التنبيهات الصوتية.",
-        "acc_title": "إعدادات إمكانية الوصول",
-        "acc_intro": "اختر شكل البرنامج وطريقة كلامه. انتقل بين الخيارات بمفتاح Tab وغيّر أحدها بمفتاح المسافة. يُطبَّق التغيير عند ضغط موافق.",
-        "acc_lbl_hc": "وضع التباين العالي",
-        "acc_desc_hc": "سمة أسود وأبيض بأقصى تباين، أسهل للقراءة في الإضاءة الساطعة أو مع ضعف البصر.",
-        "acc_lbl_focus": "مؤشر تركيز أكبر",
-        "acc_desc_focus": "إطار أسمك وأبرز حول العنصر الذي يحتفظ بتركيز لوحة المفاتيح.",
-        "acc_lbl_simple": "تخطيط مبسّط للشاشة الرئيسية",
-        "acc_desc_simple": "إخفاء اختياري اللغة والمحرك المتقدّمين والاكتفاء بما يلزم أول تشغيل.",
-        "acc_lbl_progress": "الإعلان عن التقدّم",
-        "acc_desc_progress": "النطق بالنسبة المئوية للإنجاز أثناء تشغيل المهمة.",
-        "acc_lbl_sounds": "التنبيهات الصوتية",
-        "acc_desc_sounds": "تشغيل نغمة قصيرة عند انتهاء المهمة أو فشلها.",
-    },
-}
+from vt_i18n import TR, tr
 
 LANG_COMBO_ITEMS = [
     ("lang_auto", "auto"),
@@ -774,25 +99,6 @@ LANG_NAMES = {
     "ru": "lang_ru",
 }
 
-
-def tr(lang, key, **kwargs):
-    table = TR.get(lang, TR["en"])
-    text = table.get(key, TR["en"].get(key))
-    if text is None:
-        # Fall back to the shared string table (settings, API errors, stages)
-        # so every module can share one translation of the same message.
-        try:
-            from vt_i18n import tr as shared_tr
-
-            return shared_tr(lang, key, **kwargs)
-        except Exception:  # noqa: BLE001 - never fail over a missing string
-            return key
-    if kwargs:
-        try:
-            text = text.format(**kwargs)
-        except (KeyError, IndexError):
-            pass
-    return text
 
 
 def _pick_font():
@@ -863,9 +169,10 @@ def trim_subtitles(subtitles):
 
 from PySide6.QtCore import Qt, QThread, QTimer, Signal
 
-from PySide6.QtGui import QAction, QActionGroup, QFont, QIcon, QKeySequence, QShortcut
-
-QAccessible = None
+from PySide6.QtGui import (
+    QAction, QActionGroup, QFont, QIcon, QKeySequence, QShortcut,
+    QAccessible, QAccessibleAnnouncementEvent,
+)
 
 from PySide6.QtWidgets import (
     QApplication,
@@ -886,6 +193,7 @@ from PySide6.QtWidgets import (
     QPlainTextEdit,
     QProgressBar,
     QPushButton,
+    QScrollArea,
     QTextBrowser,
     QVBoxLayout,
     QWidget,
@@ -1181,6 +489,14 @@ class MainWindow(QMainWindow):
         # Sets the window title, the RTL direction and every translated string
         # for the language that the setup wizard chose.
         self._retranslate_ui()
+        self._transcript_dirty = False
+        self._restoring_session = False
+        self._recovery_timer = QTimer(self)
+        self._recovery_timer.setSingleShot(True)
+        self._recovery_timer.setInterval(600)
+        self._recovery_timer.timeout.connect(self.save_recovery)
+        self.editor.textChanged.connect(self._on_transcript_edited)
+        self.update_recovery_preference()
 
     def t(self, key, **kwargs):
         return tr(self.current_lang, key, **kwargs)
@@ -1194,6 +510,7 @@ class MainWindow(QMainWindow):
         if screen is None:
             return
         area = screen.availableGeometry()
+        self.resize(min(self.width(), area.width()), min(self.height(), area.height()))
         self.move(
             area.x() + max(0, (area.width() - self.width()) // 2),
             area.y() + max(0, (area.height() - self.height()) // 2),
@@ -1208,8 +525,12 @@ class MainWindow(QMainWindow):
         area with the Save and Copy buttons.
         """
         central = QWidget()
-        central.setAccessibleName(self.t("acc_main_n"))
-        self.setCentralWidget(central)
+        scroll = QScrollArea(self)
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QScrollArea.Shape.NoFrame)
+        scroll.setWidget(central)
+        self._scroll_content = central
+        self.setCentralWidget(scroll)
 
         outer = QVBoxLayout(central)
         outer.setSpacing(10)
@@ -1515,6 +836,8 @@ class MainWindow(QMainWindow):
             widget.setAccessibleDescription(self.t(description))
         for widget, key in self._text_map:
             widget.setText(self.t(key))
+            # Explicit names otherwise retain the previous interface language.
+            widget.setAccessibleName(self.t(key).replace("&", ""))
         for widget, name_key, desc_key in self._acc_map:
             widget.setAccessibleName(self.t(name_key))
             if desc_key == "acc_editor_d":
@@ -1527,6 +850,15 @@ class MainWindow(QMainWindow):
                 )
             else:
                 widget.setAccessibleDescription(self.t(desc_key))
+            if widget.toolTip() or widget.property("vidtrans_tooltip"):
+                widget.setToolTip(widget.accessibleDescription())
+        for widget, keys in (
+            (self.open_button, "Ctrl+O"), (self.start_button, "F5"),
+            (self.save_button, "Ctrl+S"), (self.copy_button, "Ctrl+Shift+C"),
+            (self.export_button, "Ctrl+E"), (self.timestamps_check, "Ctrl+Shift+T"),
+        ):
+            widget.setToolTip(self.t("shortcut_hint", keys=keys))
+        self.editor.setPlaceholderText(self.t("editor_placeholder"))
         self.interface_label.setText(self.t("lbl_interface_lang"))
         self.interface_label.setAccessibleName(self.t("acc_lang_label_n"))
         for i, (key, _data) in enumerate(IFACE_COMBO_ITEMS):
@@ -1564,8 +896,6 @@ class MainWindow(QMainWindow):
             else Qt.LayoutDirection.LeftToRight
         )
         QApplication.setLayoutDirection(direction)
-        if self.subtitles:
-            self.populate_editor()
         if self.interface_combo.count() > 0:
             self.interface_combo.setCurrentIndex(
                 IFACE_COMBO_ITEMS.index(
@@ -1643,13 +973,17 @@ class MainWindow(QMainWindow):
                 "QListWidget:focus, QTextBrowser:focus {"
                 " border: 5px solid #00FFFF; outline: 5px solid #00FFFF; }"
             )
+        import vt_prefs
+        scale = int(vt_prefs.normalized(vt_prefs.load())["text_size"]) / 100
+        stylesheet = re.sub(r"font-size:\s*([\d.]+)(pt|px)",
+                            lambda match: "font-size: %g%s" % (float(match[1]) * scale, match[2]), stylesheet)
         self.setStyleSheet(stylesheet)
         self._sync_settings_menus()
         QApplication.processEvents()
 
     # ---------------------------------------------------------------- menus
     def _build_menus(self):
-        """File, Edit, Settings, Accessibility, Tools, Models and Help.
+        """File, Edit, Settings, View, Tools, Models and Help.
 
         Every item carries a mnemonic (Alt + letter) and a shortcut that Qt
         prints next to it, and every one of them is reachable with the keyboard
@@ -1677,7 +1011,7 @@ class MainWindow(QMainWindow):
         file_menu = top_menu("menu_file")
         self._make_action(file_menu, "act_open_video", self.select_video, "Ctrl+O")
         self._make_action(file_menu, "act_import_srt", self.import_srt, "Ctrl+I")
-        self._make_action(file_menu, "act_export_srt", self.export_srt, "Ctrl+S")
+        self._make_shortcut("act_export_srt", self.export_srt, "Ctrl+S")
         self._make_action(file_menu, "act_export", self.export_results, "Ctrl+E")
         self._make_action(file_menu, "act_render", self.render_video, "Ctrl+R")
         self._make_action(
@@ -1701,12 +1035,10 @@ class MainWindow(QMainWindow):
         self._make_action(
             settings_menu, "act_preferences", self.open_preferences, "Ctrl+,"
         )
-        settings_menu.addSeparator()
         iface_group = QActionGroup(self)
         iface_group.setExclusive(True)
         for shortcut, lang in (("Ctrl+Shift+1", "en"), ("Ctrl+Shift+2", "ar")):
-            act = self._make_action(
-                settings_menu,
+            act = self._make_shortcut(
                 "act_iface_" + lang,
                 lambda checked, l=lang: self._on_iface_menu(l, checked),
                 shortcut,
@@ -1716,33 +1048,34 @@ class MainWindow(QMainWindow):
             self._iface_actions[lang] = act
         self._iface_group = iface_group
 
-        # ----------------------------------------------------- Accessibility
-        a11y_menu = top_menu("menu_accessibility")
-        self._make_action(
-            a11y_menu, "act_a11y_settings", self.open_accessibility, "Ctrl+Shift+A"
-        )
-        self._timestamps_act = self._make_action(
-            a11y_menu, "act_timestamps", self._on_timestamps_action, "Ctrl+Shift+T"
-        )
-        self._timestamps_act.setCheckable(True)
-        self._timestamps_act.setChecked(self.show_timestamps)
-        a11y_menu.addSeparator()
-        self._view_high_act = self._make_action(
-            a11y_menu, "act_high_contrast", self._on_view_high_contrast, "Ctrl+Shift+H"
-        )
-        self._view_high_act.setCheckable(True)
-        for key, shortcut, slot in (
+        # Preferences is the single home for accessibility settings.
+        self._make_shortcut("act_a11y_settings", self.open_accessibility, "Ctrl+Shift+A")
+        for key, sequence, slot in (
+            ("act_high_contrast", "Ctrl+Shift+H", self._on_view_high_contrast),
             ("act_large_focus", "Ctrl+Shift+L", self._on_large_focus),
             ("act_simplified", "Ctrl+Shift+S", self._on_simplified),
             ("act_announce_progress", "Ctrl+Shift+P", self._on_announce_progress),
             ("act_sounds", "Ctrl+Shift+M", self._on_sounds),
         ):
-            act = self._make_action(a11y_menu, key, slot, shortcut)
+            act = self._make_shortcut(key, slot, sequence)
             act.setCheckable(True)
-            self._a11y_actions[key] = act
+            if key == "act_high_contrast":
+                self._view_high_act = act
+            else:
+                self._a11y_actions[key] = act
+        view_menu = top_menu("menu_view")
+        self._timestamps_act = self._make_action(
+            view_menu, "act_timestamps", self._on_timestamps_action, "Ctrl+Shift+T"
+        )
+        self._timestamps_act.setCheckable(True)
+        self._timestamps_act.setChecked(self.show_timestamps)
 
         # ----------------------------------------------------------- Tools
         tools_menu = top_menu("menu_tools")
+        self._make_action(tools_menu, "act_batch", self.open_batch, "Ctrl+B")
+        self._make_action(tools_menu, "act_transcribe", self.transcribe, "Ctrl+T")
+        self._make_action(tools_menu, "act_translate", self.translate, "Ctrl+Shift+Y")
+        tools_menu.addSeparator()
         self._make_action(tools_menu, "act_extract", self.extract_audio, "Ctrl+Shift+E")
         self._make_action(tools_menu, "act_cancel", self.cancel_work, "Ctrl+Shift+X")
 
@@ -1752,6 +1085,9 @@ class MainWindow(QMainWindow):
             ("act_model_tiny", "tiny", "Ctrl+1"),
             ("act_model_base", "base", "Ctrl+2"),
             ("act_model_small", "small", "Ctrl+3"),
+            ("act_model_medium", "medium", "Ctrl+4"),
+            ("act_model_large-v3", "large-v3", "Ctrl+5"),
+            ("act_model_turbo", "turbo", "Ctrl+6"),
         ):
             act = self._make_action(
                 models_menu,
@@ -1775,6 +1111,109 @@ class MainWindow(QMainWindow):
         self._menu_map.append((help_menu, "menu_help"))
 
         self._sync_settings_menus()
+
+    def open_batch(self):
+        if self._settings_busy_guard():
+            return
+        if getattr(self, "_batch_dialog", None) is not None:
+            self._batch_dialog.raise_()
+            self._batch_dialog.activateWindow()
+            return
+        from vt_batch import BatchDialog
+        dialog = BatchDialog(self)
+        self._batch_dialog = dialog
+        try:
+            dialog.exec()
+        finally:
+            self._batch_dialog = None
+            dialog.deleteLater()
+
+    def update_recovery_preference(self):
+        import vt_prefs
+        self._recover_enabled = vt_prefs.load().get("recover_session", "true") != "false"
+        if not self._recover_enabled:
+            import vt_session
+            self._recovery_timer.stop()
+            vt_session.clear()
+
+    def _on_transcript_edited(self):
+        if self._restoring_session:
+            return
+        self._transcript_dirty = True
+        if self._recover_enabled:
+            self._recovery_timer.start()
+
+    def save_recovery(self):
+        if not self._recover_enabled or not self._transcript_dirty:
+            return
+        import vt_session
+        try:
+            if self.editor.toPlainText().strip():
+                vt_session.save(self.video_path, self.editor.toPlainText(), self.show_timestamps, self.subtitles)
+            else:
+                vt_session.clear()
+        except OSError:
+            self.announce(self.t("msg_recovery_failed"))
+
+    def offer_recovery(self):
+        if not self._recover_enabled:
+            return
+        import vt_session
+        saved = vt_session.load()
+        if not saved:
+            return
+        answer = QMessageBox.question(self, self.t("title_recover"), self.t("body_recover"),
+                                      QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                      QMessageBox.StandardButton.Yes)
+        if answer != QMessageBox.StandardButton.Yes:
+            vt_session.clear()
+            return
+        try:
+            subtitles = [srt.Subtitle(i + 1, timedelta(seconds=float(item["start"])),
+                                     timedelta(seconds=float(item["end"])), item["text"])
+                         for i, item in enumerate(saved["subtitles"])]
+        except (KeyError, TypeError, ValueError, OverflowError):
+            return
+        self._restoring_session = True
+        try:
+            self.subtitles = subtitles
+            self.video_path = saved["source"]
+            self.audio_path = ""
+            self.show_timestamps = bool(saved.get("timestamps", True))
+            previous = self.timestamps_check.blockSignals(True)
+            self.timestamps_check.setChecked(self.show_timestamps)
+            self.timestamps_check.blockSignals(previous)
+            self.path_label.setText(self.video_path or self.t("lbl_no_video"))
+            self.path_label.setAccessibleName(self.t("acc_path_n") + ": " + self.video_path)
+            self.editor.setPlainText(saved["text"])
+            self._sync_settings_menus()
+        finally:
+            self._restoring_session = False
+        self._transcript_dirty = True
+        self.editor.setFocus()
+        self.announce(self.t("msg_session_restored"))
+
+    def _mark_exported(self):
+        import vt_session
+        self._transcript_dirty = False
+        self._recovery_timer.stop()
+        vt_session.clear()
+
+    def _confirm_replace(self):
+        if not self._transcript_dirty or not self.editor.toPlainText().strip():
+            return True
+        return QMessageBox.question(self, self.t("title_replace"), self.t("body_replace"),
+                                    QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                    QMessageBox.StandardButton.No) == QMessageBox.StandardButton.Yes
+
+    def _make_shortcut(self, key, callback, shortcut):
+        """Keep established shortcuts without repeating settings in menus."""
+        act = QAction(self.t(key), self)
+        act.setShortcut(shortcut)
+        act.triggered.connect(callback)
+        self.addAction(act)
+        self._action_map.append((act, key))
+        return act
 
     def _make_action(self, menu, key, callback, shortcut=None):
         act = QAction(self.t(key), self)
@@ -1913,6 +1352,7 @@ class MainWindow(QMainWindow):
         timestamps on or off never throws an edit away, and neither the
         caret nor the focus is moved while the text is redrawn.
         """
+        was_dirty = getattr(self, "_transcript_dirty", False)
         try:
             subs = self.read_subtitles_from_editor(confirm=False)
             if subs is not None:
@@ -1935,6 +1375,9 @@ class MainWindow(QMainWindow):
         except Exception:  # noqa: BLE001 - the toggle still applies this run
             logging.exception("the timestamp preference could not be saved")
         self.populate_editor()
+        self._transcript_dirty = was_dirty
+        if not was_dirty:
+            self._recovery_timer.stop()
         self.announce(
             self.t("msg_timestamps_on") if checked else self.t("msg_timestamps_off")
         )
@@ -2300,18 +1743,20 @@ class MainWindow(QMainWindow):
 
     # ---------------------------------------------------------- accessibility
     def announce(self, text, show_box=False, kind=None):
+        changed = text != getattr(self, "_last_status_text", None)
+        self._last_status_text = text
         self.status_label.setText(self.t("status_prefix") + " " + text)
         self.status_label.setAccessibleName(self.t("acc_status_n") + ": " + text)
         self.statusBar().showMessage(text)
-        if QAccessible is not None:
+        # Use a real polite announcement event without moving keyboard focus.
+        # A result dialog announces itself; do not also queue the same text.
+        if changed and text and not show_box:
             try:
-                QAccessible.updateAccessibility()
+                event = QAccessibleAnnouncementEvent(self.status_label, text)
+                event.setPoliteness(QAccessible.AnnouncementPoliteness.Polite)
+                QAccessible.updateAccessibility(event)
             except Exception:
-                pass
-        try:
-            QApplication.alert(self)
-        except Exception:
-            pass
+                logging.getLogger("vidtrans.a11y").debug("Status announcement unavailable", exc_info=True)
         if show_box:
             self.feedback(kind or "ok")
             QMessageBox.information(self, self.t("title_task_complete"), text)
@@ -2359,6 +1804,7 @@ class MainWindow(QMainWindow):
         thread.stages.connect(self._announce_stage)
         thread.completed.connect(on_completed)
         thread.failed.connect(self.on_failed)
+        thread.finished.connect(lambda worker=thread: self._worker_finished(worker))
         self._last_announced = -1
         thread.start()
         self.set_busy(True)
@@ -2407,10 +1853,18 @@ class MainWindow(QMainWindow):
         logging.error(traceback.format_exc())
 
     def _release_thread(self):
-        self.worker_thread = None
+        if self.worker_thread is None or not self.worker_thread.isRunning():
+            self.worker_thread = None
+
+    def _worker_finished(self, worker):
+        if self.worker_thread is worker:
+            self.worker_thread = None
+        worker.deleteLater()
 
     # ---------------------------------------------------------------- tasks
     def select_video(self):
+        if self._settings_busy_guard():
+            return
         path, _ = QFileDialog.getOpenFileName(
             self,
             self.t("dlg_open_video"),
@@ -2420,6 +1874,11 @@ class MainWindow(QMainWindow):
         if not path:
             self.announce(self.t("msg_video_select_cancel"))
             return
+        if not self._confirm_replace():
+            return
+        self.editor.clear()
+        self.subtitles = []
+        self._mark_exported()
         self.video_path = path
         self.audio_path = ""
         self.detected_language = "auto"
@@ -2453,6 +1912,8 @@ class MainWindow(QMainWindow):
 
     def transcribe(self):
         if not self._require_video():
+            return
+        if not self._confirm_replace():
             return
         choice = self._engine_choice("transcribe")
         if choice is None:
@@ -2685,6 +2146,9 @@ class MainWindow(QMainWindow):
             event.ignore()
 
     def dropEvent(self, event):
+        if self._settings_busy_guard():
+            event.ignore()
+            return
         try:
             path = event.mimeData().urls()[0].toLocalFile()
         except Exception:  # noqa: BLE001 - a malformed drop simply does nothing
@@ -2692,6 +2156,12 @@ class MainWindow(QMainWindow):
         if not path or not os.path.isfile(path):
             self.announce(self.t("body_no_video"))
             return
+        if not self._confirm_replace():
+            event.ignore()
+            return
+        self.editor.clear()
+        self.subtitles = []
+        self._mark_exported()
         self.video_path = path
         self.audio_path = ""
         self.detected_language = "auto"
@@ -2852,7 +2322,8 @@ class MainWindow(QMainWindow):
         import vt_install
 
         lines = [self.t("msg_model_status_header")]
-        for name in ("tiny", "base", "small"):
+        from vt_prefs import WHISPER_MODELS
+        for name in WHISPER_MODELS:
             cached = vt_install.model_is_cached(name)
             state = self.t("model_installed") if cached else self.t("model_missing")
             lines.append("%s: %s" % (name, state))
@@ -3118,6 +2589,8 @@ class MainWindow(QMainWindow):
         self.announce(self.t("msg_rows_deleted", count=removed))
 
     def import_srt(self):
+        if self._settings_busy_guard():
+            return
         path, _ = QFileDialog.getOpenFileName(
             self,
             self.t("dlg_import_srt"),
@@ -3137,8 +2610,11 @@ class MainWindow(QMainWindow):
                 self.t("body_import_failed", err=str(exc)),
             )
             return
+        if not self._confirm_replace():
+            return
         self.subtitles = trim_subtitles(parsed)
         self.populate_editor()
+        self._mark_exported()
         self.announce(
             self.t("msg_import_done", count=len(self.subtitles), path=path),
             show_box=True,
@@ -3200,6 +2676,7 @@ class MainWindow(QMainWindow):
         except Exception as exc:
             QMessageBox.warning(self, self.t("title_export_failed"), str(exc))
             return
+        self._mark_exported()
         self.last_output_folder = os.path.dirname(path)
         self.announce(
             self.t("msg_export_done", count=len(subtitles), path=path),
@@ -3246,6 +2723,7 @@ class MainWindow(QMainWindow):
         except Exception as exc:
             QMessageBox.warning(self, self.t("title_export_failed"), str(exc))
             return
+        self._mark_exported()
         self.last_output_folder = os.path.dirname(path)
         subtitles_done = self.t("msg_export_done", count=len(subtitles), path=path)
         if not self.video_path:
@@ -3295,6 +2773,10 @@ class MainWindow(QMainWindow):
         os.startfile(folder)
         self.announce(self.t("msg_folder_opened", path=folder))
 
+    def _source_is_audio(self):
+        from vt_i18n import SUPPORTED_AUDIO_SUFFIXES
+        return os.path.splitext(self.video_path)[1].lower() in SUPPORTED_AUDIO_SUFFIXES
+
     def _require_video(self):
         if not self.video_path:
             QMessageBox.warning(
@@ -3306,27 +2788,42 @@ class MainWindow(QMainWindow):
         return True
 
     def closeEvent(self, event):
+        self.save_recovery()
+        batch = getattr(self, "_batch_dialog", None)
+        if batch is not None and batch.running:
+            batch.stop_queue()
+            self.announce(self.t("msg_wait_cancel"))
+            event.ignore()
+            return
         if getattr(self, "_exit_started", False):
             event.accept()
             return
-        # Exit confirmation: the user can still cancel before the goodbye
-        # panel, the farewell chime and the final shutdown.
-        box = QMessageBox(self)
-        box.setIcon(QMessageBox.Icon.Question)
-        box.setWindowTitle(self.t("title_exit_confirm"))
-        box.setText(self.t("body_exit_confirm", text=vt_setup.tr(self.current_lang, "farewell_message")))
-        yes = box.addButton(self.t("btn_exit_yes"), QMessageBox.ButtonRole.AcceptRole)
-        no = box.addButton(self.t("btn_exit_no"), QMessageBox.ButtonRole.RejectRole)
-        box.setDefaultButton(no)
-        box.exec()
-        if box.clickedButton() is not yes:
-            self.announce(self.t("msg_exit_cancelled"))
-            event.ignore()
-            return
+        # A routine exit should only show the optional timed farewell. Ask
+        # before abandoning unsaved text or interrupting an active task.
+        needs_confirmation = (
+            (self._transcript_dirty and bool(self.editor.toPlainText().strip()))
+            or (self.worker_thread is not None and self.worker_thread.isRunning())
+        )
+        if needs_confirmation:
+            box = QMessageBox(self)
+            box.setIcon(QMessageBox.Icon.Question)
+            box.setWindowTitle(self.t("title_exit_confirm"))
+            box.setText(self.t("body_exit_confirm", text=vt_setup.tr(self.current_lang, "farewell_message")))
+            yes = box.addButton(self.t("btn_exit_yes"), QMessageBox.ButtonRole.AcceptRole)
+            no = box.addButton(self.t("btn_exit_no"), QMessageBox.ButtonRole.RejectRole)
+            box.setDefaultButton(no)
+            box.exec()
+            if box.clickedButton() is not yes:
+                self.announce(self.t("msg_exit_cancelled"))
+                event.ignore()
+                return
 
         if self.worker_thread is not None and self.worker_thread.isRunning():
             self.worker_thread.requestInterruption()
-            self.worker_thread.wait(4000)
+            if not self.worker_thread.wait(4000):
+                self.announce(self.t("msg_wait_cancel"))
+                event.ignore()
+                return
         self.worker_thread = None
 
         app = QApplication.instance()
@@ -3372,7 +2869,7 @@ def _install_crash_log():
             app = QApplication.instance() or QApplication([])
             QMessageBox.critical(
                 None,
-                "Accessible Video Transcriber error",
+                "Accessible Media Transcriber error",
                 "A problem occurred. Details were saved to:\n{}\n\n{}".format(
                     crash_path, exc_value
                 ),
@@ -3669,7 +3166,7 @@ def main():
 
     logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
     app = QApplication(sys.argv)
-    app.setApplicationName("Accessible Video Transcriber")
+    app.setApplicationName("Accessible Media Transcriber")
     app.setStyle("Fusion")
     app.setFont(QFont("Segoe UI", 11))
     try:
@@ -3710,6 +3207,7 @@ def main():
     from PySide6.QtCore import QTimer
 
     QTimer.singleShot(0, _land_on_first_action)
+    QTimer.singleShot(100, window.offer_recovery)
 
     # The automatic update check waits a few seconds so it never slows the
     # program down or interrupts the screen reader while the window opens.

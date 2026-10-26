@@ -1,4 +1,38 @@
-# Accessible Video Transcriber 1.3.0
+# Accessible Media Transcriber 1.3.1
+
+## English — 1.3.1
+
+- Maintenance release: Settings no longer puts keyboard focus on unnamed scroll groups. Each page has a translated name and clearer keyboard instructions. The startup checkbox explicitly says it checks for updates in both languages.
+
+- Renamed the app to reflect audio and video transcription. Existing profile and executable names remain compatible with previous installations.
+- Audio and video selection share English and Arabic terminology. Audio can be exported as text/subtitles or rendered as a captioned video with a plain background.
+- Accessibility options live in Preferences; Ctrl+Shift+A opens that page directly without a duplicate menu.
+- Express installation uses the default folder, Start menu shortcut and Base model. Custom installation offers a destination, optional Start menu/desktop shortcuts, and Tiny, Base, Small or API-only setup.
+- Preferences offer offline model selection and cloud provider/model selection with API keys.
+- Help → Report a Problem now offers email to iman.rammal@gmail.com, copying the address, and GitHub reporting. Email opens a draft for the user to review and send.
+- Welcome and farewell panels close within three seconds and have saved opt-out checkboxes, both in the panels and in Preferences. Their delayed focus helper respects a user interacting with the checkbox.
+- Clean exits skip the extra confirmation; unsaved transcripts and active tasks still require confirmation.
+- Added batch transcription, transcript recovery, and adjustable interface text size.
+- Automated regression checks and local recording trials cover transcription and captioned-video rendering. Comparison reports also cover Whisper Small and Qwen3-ASR 0.6B. These are exploratory results without human reference transcripts, not an accuracy benchmark; retain Whisper as the offline default.
+- Screen-reader verification status and remaining manual checks are recorded in ACCESSIBILITY_REVIEW.md.
+
+## العربية — 1.3.1
+
+- إصدار إصلاحات: لم يعد التنقل بلوحة المفاتيح يتوقف على مجموعات تمرير غير مسماة في التفضيلات. لكل صفحة اسم مترجم وتعليمات تنقل أوضح، ويذكر خيار بدء التشغيل صراحةً التحقق من وجود تحديثات.
+
+- أصبح اسم التطبيق «مفرّغ الوسائط الميسّر» ليشمل تفريغ الصوت والفيديو، مع الحفاظ على توافق الإعدادات السابقة.
+- وُحّدت المصطلحات في الواجهتين، ويمكن تصدير الصوت كنص أو تسميات توضيحية، أو إنشاء فيديو بالتسميات على خلفية بسيطة.
+- جُمعت خيارات إمكانية الوصول في التفضيلات، ويفتحها الاختصار Ctrl+Shift+A مباشرة دون قائمة مكررة.
+- يختار التثبيت السريع المجلد الافتراضي واختصار قائمة ابدأ ونموذج Base. يتيح التثبيت المخصص اختيار المجلد والاختصارات ونموذج Tiny أو Base أو Small، أو العمل بمفاتيح API فقط.
+- يمكن اختيار النموذج المحلي أو مزوّد الخدمة السحابية ونموذجه من التفضيلات.
+- يتيح خيار «الإبلاغ عن مشكلة» مراسلة iman.rammal@gmail.com أو نسخ العنوان أو الإبلاغ عبر GitHub. يفتح البريد مسودة ليراجعها المستخدم ويرسلها بنفسه.
+- تختفي رسالتا الترحيب والوداع خلال ثلاث ثوانٍ، ويمكن تعطيلهما وحفظ الاختيار.
+- أُضيف التفريغ الدفعي واستعادة النصوص غير المكتملة وتكبير نص الواجهة.
+- نجح ١٥٤ اختبارًا آليًا، ويشمل التحقق المحلي تفريغ تسجيلات صوت وفيديو وإنشاء فيديو بالنصوص المصاحبة منها. تظل Whisper الخيار المحلي الافتراضي؛ فالمقارنة الاستكشافية مع Qwen لا تكفي لإثبات تفوّقه دون نصوص مرجعية بشرية واختبار التوقيت.
+
+---
+
+# Previous release: Accessible Video Transcriber 1.3.0
 
 ## English
 

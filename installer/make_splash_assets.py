@@ -147,7 +147,7 @@ def make_splash() -> str:
     p.drawText(
         QRectF(0, 78, w, 46),
         Qt.AlignmentFlag.AlignCenter,
-        "Accessible Video Transcriber",
+        "Accessible Media Transcriber",
     )
 
     f2 = QFont("Segoe UI")
@@ -183,7 +183,7 @@ def make_splash_png() -> str:
     p.drawText(
         QRectF(0, 78, w, 46),
         Qt.AlignmentFlag.AlignCenter,
-        "Accessible Video Transcriber",
+        "Accessible Media Transcriber",
     )
 
     f2 = QFont("Segoe UI")

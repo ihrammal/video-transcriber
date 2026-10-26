@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Accessible Video Transcriber - Detailed Keyboard Shortcut List</title>
+<title>Accessible Media Transcriber - Detailed Keyboard Shortcut List</title>
 <style>
   body { font-family: "Segoe UI", Arial, sans-serif; line-height: 1.65; max-width: 54rem;
          margin: 0 auto; padding: 1.5rem 1.1rem 5rem; color: #1b1b1b; background: #ffffff; }
@@ -41,8 +41,8 @@
 <body>
 
 <header>
-  <h1 id="top">Accessible Video Transcriber &mdash; Keyboard Shortcuts</h1>
-  <p>Version 1.3.0, by Iman Rammal. Every shortcut the program has, in one
+  <h1 id="top">Accessible Media Transcriber &mdash; Keyboard Shortcuts</h1>
+  <p>Version 1.3.1, by Iman Rammal. Every shortcut the program has, in one
   list, grouped by menu, with a line explaining what each one does. The same
   list also lives in the combined user guide: press <kbd>Ctrl+/</kbd> to
   open the guide straight at the Keyboard Shortcuts section.</p>
@@ -87,7 +87,7 @@
 <table>
   <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
   <tr><td class="keys"><kbd>Ctrl+O</kbd></td><td>Open Video&hellip;</td>
-      <td>Opens the file dialog to choose a video (or an audio file) to work on.
+      <td>Opens the file dialog to choose an audio or video recording (or an audio file) to work on.
       You can also drag a file onto the window instead.</td></tr>
   <tr><td class="keys"><kbd>Ctrl+I</kbd></td><td>Import .srt&hellip;</td>
       <td>Reads an existing subtitle file into the transcript editor, so you
@@ -95,7 +95,7 @@
   <tr><td class="keys"><kbd>Ctrl+S</kbd></td><td>Export .srt&hellip;</td>
       <td>Writes the captions to a subtitle file with full start and end
       times, ready for players and upload sites.</td></tr>
-  <tr><td class="keys"><kbd>Ctrl+E</kbd></td><td>Export subtitles and video</td>
+  <tr><td class="keys"><kbd>Ctrl+E</kbd></td><td>Export transcript or subtitles...</td>
       <td>The complete hand-off: announces the start, writes the captions to
       a subtitle or plain text file, then offers to burn the same captions
       into a copy of the video, and announces the result.</td></tr>
@@ -131,7 +131,7 @@
 <h2>Settings</h2>
 <table>
   <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
-  <tr><td class="keys"><kbd>Ctrl+,</kbd></td><td>Speech &amp; Translation Settings&hellip;</td>
+  <tr><td class="keys"><kbd>Ctrl+,</kbd></td><td>Preferences&hellip;</td>
       <td>Opens the preferences: default speech engine, recognition model,
       translation service and the API keys with Show, Test and Get API key
       buttons.</td></tr>
@@ -177,7 +177,7 @@
 <table>
   <tr><th scope="col">Shortcut</th><th scope="col">Item</th><th scope="col">What it does</th></tr>
   <tr><td class="keys"><kbd>Ctrl+Shift+E</kbd></td><td>Extract Audio</td>
-      <td>Pulls the audio track out of the selected video into a temporary
+      <td>Pulls the audio track out of the selected recording into a temporary
       file, without transcribing yet.</td></tr>
   <tr><td class="keys"><kbd>Ctrl+Shift+X</kbd></td><td>Cancel Task</td>
       <td>Asks the running task to stop at its next safe point and reports
@@ -195,7 +195,7 @@
   <tr><td class="keys"><kbd>Ctrl+2</kbd></td><td>Download Base Model (bundled)</td>
       <td>Downloads the size the program uses by default. Already installed
       models answer immediately.</td></tr>
-  <tr><td class="keys"><kbd>Ctrl+3</kbd></td><td>Download Small Model (most accurate)</td>
+  <tr><td class="keys"><kbd>Ctrl+3</kbd></td><td>Download Small Model</td>
       <td>Downloads the most accurate of the three local models.</td></tr>
   <tr><td class="keys"><kbd>Ctrl+0</kbd></td><td>Model Status</td>
       <td>Lists which models are installed, which are missing and the folder
@@ -223,8 +223,7 @@
   <tr><td class="keys"><kbd>Ctrl+Shift+R</kbd></td><td>Release Notes on GitHub</td>
       <td>Opens the release notes page in your web browser.</td></tr>
   <tr><td class="keys"><kbd>Ctrl+Shift+B</kbd></td><td>Report a Problem</td>
-      <td>Opens the issue page in your web browser, where a problem can be
-      described.</td></tr>
+      <td>Offers email to <a href="mailto:iman.rammal@gmail.com">iman.rammal@gmail.com</a>, copying the address, or GitHub reporting.</td></tr>
   <tr><td class="keys"><kbd>Ctrl+Shift+G</kbd></td><td>License Agreement</td>
       <td>Opens the License Agreement section of the combined guide. The
       program is for noncommercial use only.</td></tr>
@@ -278,8 +277,9 @@ as files in your default browser.</p>
 <footer>
   <p><a href="#top">Back to the top of the list</a> &middot;
   <a href="guide.html">Detailed user guide</a> &middot;
-  Accessible Video Transcriber 1.3.0 &copy; Iman Rammal</p>
+  Accessible Media Transcriber 1.3.1 &copy; Iman Rammal</p>
 </footer>
 
+<section id="current-commands"><h2>Current commands and keyboard shortcuts</h2><p>Accessibility, recovery, text size, and automatic update options are in Preferences. Tools offers batch transcription. Audio recordings can be rendered as captioned MP4 files with a plain background.</p><table><tbody><tr><td>Open Audio or Video...</td><td><kbd>Ctrl+O</kbd></td></tr><tr><td>Import .srt…</td><td><kbd>Ctrl+I</kbd></td></tr><tr><td>Export .srt…</td><td><kbd>Ctrl+S</kbd></td></tr><tr><td>Export transcript or subtitles...</td><td><kbd>Ctrl+E</kbd></td></tr><tr><td>Render Subtitled Video…</td><td><kbd>Ctrl+R</kbd></td></tr><tr><td>Open Output Folder</td><td><kbd>Ctrl+Shift+W</kbd></td></tr><tr><td>Exit</td><td><kbd>Ctrl+Q</kbd></td></tr><tr><td>Add Row</td><td><kbd>Ctrl+Shift+N</kbd></td></tr><tr><td>Delete Selected Row</td><td><kbd>Ctrl+Shift+D</kbd></td></tr><tr><td>Copy Results</td><td><kbd>Ctrl+Shift+C</kbd></td></tr><tr><td>Preferences…</td><td><kbd>Ctrl+,</kbd></td></tr><tr><td>Interface in English</td><td><kbd>Ctrl+Shift+1</kbd></td></tr><tr><td>الواجهة بالعربية</td><td><kbd>Ctrl+Shift+2</kbd></td></tr><tr><td>Accessibility Settings…</td><td><kbd>Ctrl+Shift+A</kbd></td></tr><tr><td>High Contrast Theme</td><td><kbd>Ctrl+Shift+H</kbd></td></tr><tr><td>Larger Focus Indicators</td><td><kbd>Ctrl+Shift+L</kbd></td></tr><tr><td>Simplified Layout</td><td><kbd>Ctrl+Shift+S</kbd></td></tr><tr><td>Announce Progress</td><td><kbd>Ctrl+Shift+P</kbd></td></tr><tr><td>Play Sounds</td><td><kbd>Ctrl+Shift+M</kbd></td></tr><tr><td>Show timestamps</td><td><kbd>Ctrl+Shift+T</kbd></td></tr><tr><td>Batch transcription...</td><td><kbd>Ctrl+B</kbd></td></tr><tr><td>Transcribe</td><td><kbd>Ctrl+T</kbd></td></tr><tr><td>Translate</td><td><kbd>Ctrl+Shift+Y</kbd></td></tr><tr><td>Extract Audio</td><td><kbd>Ctrl+Shift+E</kbd></td></tr><tr><td>Cancel Task</td><td><kbd>Ctrl+Shift+X</kbd></td></tr><tr><td>Download Tiny Model (fastest)</td><td><kbd>Ctrl+1</kbd></td></tr><tr><td>Download Base Model (bundled)</td><td><kbd>Ctrl+2</kbd></td></tr><tr><td>Download Small Model</td><td><kbd>Ctrl+3</kbd></td></tr><tr><td>Download Medium model</td><td><kbd>Ctrl+4</kbd></td></tr><tr><td>Download Large v3 model</td><td><kbd>Ctrl+5</kbd></td></tr><tr><td>Download Turbo model</td><td><kbd>Ctrl+6</kbd></td></tr><tr><td>Model Status</td><td><kbd>Ctrl+0</kbd></td></tr><tr><td>User Guide</td><td><kbd>F1</kbd></td></tr><tr><td>Keyboard Shortcuts</td><td><kbd>Ctrl+/</kbd></td></tr><tr><td>Check for Updates…</td><td><kbd>Ctrl+U</kbd></td></tr><tr><td>Check for updates automatically at startup</td><td><kbd>Ctrl+Shift+U</kbd></td></tr><tr><td>Release Notes on GitHub</td><td><kbd>Ctrl+Shift+R</kbd></td></tr><tr><td>Report a Problem</td><td><kbd>Ctrl+Shift+B</kbd></td></tr><tr><td>License Agreement</td><td><kbd>Ctrl+Shift+G</kbd></td></tr><tr><td>About</td><td><kbd>F12</kbd></td></tr><tr><td>Open Log Folder</td><td><kbd>Ctrl+Shift+V</kbd></td></tr></tbody></table></section>
 </body>
 </html>

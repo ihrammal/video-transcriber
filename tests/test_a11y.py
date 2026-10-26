@@ -66,9 +66,10 @@ def test_apply_to_the_window(qapp, profile):
         assert not window.language_combo.isVisible()
         assert not window.engine_combo.isVisible()
         assert window.task_combo.isVisible()
-        # and the menu check mark follows
-        actions = window._a11y_actions
-        assert actions["act_large_focus"].isChecked() is False
+        # Settings live in Preferences, without duplicate menu toggles.
+        visible = [a for top in window.menuBar().actions() for a in top.menu().actions()]
+        assert all(a not in visible for a in window._a11y_actions.values())
+        assert window.accessibility_settings["large_focus"] is False
     finally:
         window.deleteLater()
     vt_a11y.save(vt_a11y.DEFAULTS)
@@ -81,7 +82,7 @@ def test_settings_survive_a_restart(qapp, profile):
     window = vid_trans_app.MainWindow("en")
     try:
         qapp.processEvents()
-        assert window._a11y_actions["act_large_focus"].isChecked() is True
+        assert window.accessibility_settings["large_focus"] is True
         assert "border: 5px" in window.styleSheet()
     finally:
         window.deleteLater()

@@ -11,3 +11,7 @@ Edit then Add a line (Control plus Shift plus N) appends a new empty segment wit
 
 ## Mistakes
 A line that looks like a timing but is not valid is reported with its line number instead of being silently dropped, and an end time that is not after the start time is refused as well.
+
+
+## Recovery after restarting
+Unfinished transcript edits are saved locally after a short pause and when closing. On the next launch, choose whether to restore the unfinished transcript. Recovery keeps the source path, text and caption timings, and never stores API keys. Exporting clears the recovery copy. General preferences can disable recovery and remove its saved copy. Before replacing an unexported transcript, the program asks for confirmation. Switching the interface language keeps your edits.

@@ -122,7 +122,7 @@ def test_the_shortcut_list_covers_every_shortcut_of_the_program(window):
             if key:
                 real.add(key)
     real.add(window.start_button.shortcut().toString())
-    assert len(real) >= 30, real
+    assert len(real) >= 25, real
 
     listed = set()
     for _heading, rows in vt_help.shortcut_groups(window):

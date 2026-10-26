@@ -21,7 +21,7 @@
 ; and the only [Run] entry launches the installed application.  No network is
 ; used at install time or on first run.
 
-#define MyAppName "Accessible Video Transcriber"
+#define MyAppName "Accessible Media Transcriber"
 #define MyAppVersion "1.1"
 #define MyAppPublisher "Iman Rammal"
 #define MyAppExeName "AccessibleVideoTranscriber.exe"

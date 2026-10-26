@@ -156,13 +156,13 @@ def compile_inno(version: str) -> str | None:
     if not os.path.isfile(script):
         print("installer.iss is missing; skipped", flush=True)
         return None
-    say("2/3 Inno Setup -> installer_output\\AccessibleVideoTranscriber_Setup_%s.exe" % version)
+    say("2/3 Inno Setup -> installer_output\\AccessibleMediaTranscriber_Setup_%s.exe" % version)
     iscc = find_iscc()
     print("> %s" % iscc, flush=True)
     code = subprocess.call([iscc, "/Qp", script], cwd=ROOT)
     if code != 0:
         raise SystemExit("Inno Setup failed (exit %d)" % code)
-    target = os.path.join(OUTPUT_DIR, "AccessibleVideoTranscriber_Setup_%s.exe" % version)
+    target = os.path.join(OUTPUT_DIR, "AccessibleMediaTranscriber_Setup_%s.exe" % version)
     if not os.path.isfile(target):
         raise SystemExit("Inno Setup did not produce " + target)
     print("installer: %.1f MB" % (os.path.getsize(target) / 1048576.0), flush=True)
@@ -173,7 +173,7 @@ def verify_inno(setup_exe: str) -> bool:
     """Silent-install the Inno build, check it, then uninstall again."""
     import winreg
 
-    app_name = "Accessible Video Transcriber"
+    app_name = "Accessible Media Transcriber"
     app_id = "{8F3A6C21-5B7D-4E94-A1C2-3D9E7F0B4A56}"
     uninstall_key = r"Software\Microsoft\Windows\CurrentVersion\Uninstall\%s_is1" % app_id
     target = os.path.join(TEMP, "Accessible Video Transcriber-Inno")
@@ -182,19 +182,15 @@ def verify_inno(setup_exe: str) -> bool:
     # verification folder has to exist before the silent install starts.
     os.makedirs(TEMP, exist_ok=True)
 
-    # An existing installation under the same AppId would silently lose its
-    # registry entry to the throwaway copy.  Remove it first.
-    try:
-        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, uninstall_key) as key:
-            previous, _kind = winreg.QueryValueEx(key, "InstallLocation")
-    except OSError:
-        previous = ""
-    if previous:
-        old_unins = os.path.join(str(previous).rstrip("\\"), "unins000.exe")
-        if os.path.isfile(old_unins):
-            subprocess.run([old_unins, "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART"],
-                           capture_output=True, timeout=600)
-            time.sleep(2.0)
+    # Verification must never uninstall or overwrite an author's installed app.
+    for hive in (winreg.HKEY_CURRENT_USER, winreg.HKEY_LOCAL_MACHINE):
+        for identity in (app_id, "{0ABD1C2E-8F42-4D3A-9CBD-6E3F7A2C1B04}"):
+            key_path = r"Software\Microsoft\Windows\CurrentVersion\Uninstall\%s_is1" % identity
+            try:
+                with winreg.OpenKey(hive, key_path):
+                    raise SystemExit("Installer verification requires a clean Windows test account or VM; an existing installation was found.")
+            except FileNotFoundError:
+                pass
 
     def links():
         import vt_install
@@ -223,7 +219,10 @@ def verify_inno(setup_exe: str) -> bool:
             return {}
 
     say("installing the Inno build silently")
-    subprocess.run(["cmd", "/c", "rmdir", "/s", "/q", target], capture_output=True)
+    if os.path.isdir(target):
+        if os.path.commonpath([os.path.realpath(TEMP), os.path.realpath(target)]) != os.path.realpath(TEMP):
+            raise SystemExit("Unsafe installer verification path")
+        shutil.rmtree(target)
     proc = subprocess.run(
         [setup_exe, "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/CURRENTUSER",
          "/DIR=" + target, "/TASKS=startmenuicon,desktopicon", "/LOG=" + log_file],
@@ -369,6 +368,9 @@ def main(argv=None) -> int:
     freeze("VidTrans.spec", os.path.join(ROOT, "build", "work-app"), DIST_DIR)
     app_exe = first_exe(APP_DIR)
     print("application: %.1f MB" % (os.path.getsize(app_exe) / 1048576.0))
+    if run([sys.executable, os.path.join(ROOT, "tests", "verify_packaged_sources.py"), app_exe]) != 0:
+        print("Build stopped: packaged application code differs from current source.", flush=True)
+        return 1
     ok = True
     if not fast:
         ok = selftest(app_exe, os.path.join(TEMP, "app.txt"))

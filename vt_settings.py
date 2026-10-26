@@ -33,6 +33,7 @@ from PySide6.QtWidgets import (
     QMessageBox,
     QPushButton,
     QRadioButton,
+    QScrollArea,
     QVBoxLayout,
     QWidget,
 )
@@ -89,6 +90,8 @@ class SettingsDialog(QDialog):
         self._translate_radios = {}
         self._key_edits = {}
         self._key_buttons = {}
+        self._cloud_models = {}
+        self._cloud_model_labels = {}
 
         self._build()
         self._load()
@@ -101,14 +104,22 @@ class SettingsDialog(QDialog):
         layout = QVBoxLayout(self)
         self.tabs = QTabWidget(self)
         layout.addWidget(self.tabs)
-        navigation_hint = QLabel(self.t("settings_tabs_hint"))
-        navigation_hint.setWordWrap(True)
-        layout.addWidget(navigation_hint)
+        self.navigation_hint = QLabel(self.t("settings_tabs_hint"))
+        self.navigation_hint.setWordWrap(True)
+        layout.addWidget(self.navigation_hint)
         self._pages = []
         for key in ("general", "speech", "keys", "accessibility"):
             page = QWidget(self.tabs)
             page_layout = QVBoxLayout(page)
-            self.tabs.addTab(page, self.t("settings_tab_" + key))
+            scroll = QScrollArea(self)
+            scroll.setWidgetResizable(True)
+            scroll.setFrameShape(QScrollArea.Shape.NoFrame)
+            scroll.setWidget(page)
+            # Keep Tab on actionable controls, rather than an unnamed scroll
+            # container that NVDA announces only as "grouping".
+            scroll.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+            page.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+            self.tabs.addTab(scroll, self.t("settings_tab_" + key))
             self._pages.append(page_layout)
         general, speech, keys_page, accessibility = self._pages
         self.interface_choice = QComboBox(self)
@@ -127,6 +138,18 @@ class SettingsDialog(QDialog):
         self.auto_update_choice = QCheckBox(self.t("act_auto_update").replace("&", ""))
         self.auto_update_choice.setChecked(bool(update_checker.load_settings().get("auto_check", True)))
         general.addWidget(self.auto_update_choice)
+        self.recovery_choice = QCheckBox(self.t("lbl_recover_session"))
+        self.recovery_choice.setChecked(vt_prefs.load().get("recover_session", "true") != "false")
+        general.addWidget(self.recovery_choice)
+        self.text_size_choice = QComboBox(self)
+        for size in (100, 125, 150, 175, 200):
+            self.text_size_choice.addItem(str(size) + "%", str(size))
+        self.text_size_choice.setCurrentIndex(max(0, self.text_size_choice.findData(vt_prefs.load().get("text_size", "100"))))
+        self.text_size_label = QLabel(self.t("lbl_text_size"))
+        self.text_size_label.setBuddy(self.text_size_choice)
+        general_form.addRow(self.text_size_label, self.text_size_choice)
+        self.text_size_choice.setAccessibleName(self.t("lbl_text_size"))
+        self.text_size_choice.setAccessibleDescription(self.t("desc_text_size"))
         general.addStretch()
         import vt_a11y
         temporary, self.accessibility_checks = vt_a11y.build_dialog(lang=self.lang)
@@ -181,7 +204,9 @@ class SettingsDialog(QDialog):
         self._key_holders = {}
         for engine in ("openai", "groq", "gemini"):
             holder = QWidget(self.keys_box)
-            row = QHBoxLayout(holder)
+            holder_layout = QVBoxLayout(holder)
+            row = QHBoxLayout()
+            holder_layout.addLayout(row)
             row.setContentsMargins(0, 0, 0, 0)
             edit = QLineEdit(holder)
             edit.setEchoMode(QLineEdit.EchoMode.Password)
@@ -197,6 +222,21 @@ class SettingsDialog(QDialog):
             row.addWidget(show)
             row.addWidget(test)
             row.addWidget(get)
+            model_row = QFormLayout()
+            model_label = QLabel(self.t("lbl_cloud_model"), holder)
+            model_combo = QComboBox(holder)
+            model_combo.setEditable(True)
+            choices = {
+                "openai": ("whisper-1",),
+                "groq": ("whisper-large-v3", "whisper-large-v3-turbo"),
+                "gemini": ("gemini-2.5-flash",),
+            }[engine]
+            model_combo.addItems(choices)
+            model_label.setBuddy(model_combo)
+            model_row.addRow(model_label, model_combo)
+            holder_layout.addLayout(model_row)
+            self._cloud_models[engine] = model_combo
+            self._cloud_model_labels[engine] = model_label
             self.keys_form.addRow("", holder)
             self._key_edits[engine] = edit
             self._key_buttons[engine] = (show, test)
@@ -243,6 +283,7 @@ class SettingsDialog(QDialog):
             + [self._key_buttons[key][0] for key in ("openai", "groq", "gemini")]
             + [self._key_buttons[key][1] for key in ("openai", "groq", "gemini")]
             + [self._get_buttons[key] for key in ("openai", "groq", "gemini")]
+            + list(self._cloud_models.values())
             + [self._translate_radios[key] for key in ENGINE_KEYS]
             + [self.save_button, self.cancel_button]
         )
@@ -259,6 +300,7 @@ class SettingsDialog(QDialog):
         self._translate_radios[data["translate_engine"]].setChecked(True)
         for engine in ("openai", "groq", "gemini"):
             self._key_edits[engine].setText(data[engine + "_api_key"])
+            self._cloud_models[engine].setCurrentText(data[engine + "_model"])
         # Start on the provider the user actually works with: the chosen
         # cloud engine, else the first provider that already has a key.
         provider = next(
@@ -293,9 +335,12 @@ class SettingsDialog(QDialog):
             "whisper_model": model,
             "translate_engine": translate,
             "show_timestamps": "true" if self.timestamps_choice.isChecked() else "false",
+            "text_size": self.text_size_choice.currentData(),
+            "recover_session": "true" if self.recovery_choice.isChecked() else "false",
         }
         for name, edit in self._key_edits.items():
             data[name + "_api_key"] = edit.text().strip()
+            data[name + "_model"] = self._cloud_models[name].currentText().strip() or vt_prefs.DEFAULTS[name + "_model"]
         return data
 
     # --------------------------------------------------------------- callbacks
@@ -445,6 +490,8 @@ class SettingsDialog(QDialog):
             parent.interface_combo.setCurrentIndex(self.interface_choice.currentIndex())
             parent.timestamps_check.setChecked(self.timestamps_choice.isChecked())
             vt_a11y.apply(parent)
+            if hasattr(parent, "update_recovery_preference"):
+                parent.update_recovery_preference()
         self.accept()
 
     # ---------------------------------------------------------------- helpers
@@ -473,6 +520,13 @@ class SettingsDialog(QDialog):
             self.tabs.setTabText(index, self.t("settings_tab_" + key))
         self.tabs.setAccessibleName(self.t("dlg_settings_title"))
         self.tabs.setAccessibleDescription(self.t("settings_tabs_hint"))
+        self.navigation_hint.setText(self.t("settings_tabs_hint"))
+        for index in range(self.tabs.count()):
+            title = self.tabs.tabText(index)
+            self.tabs.widget(index).setAccessibleName(title)
+            self.tabs.widget(index).widget().setAccessibleName(title)
+        self.auto_update_choice.setText(self.t("act_auto_update").replace("&", ""))
+        self.auto_update_choice.setAccessibleName(self.auto_update_choice.text())
 
         self.engine_box.setTitle(self.t("grp_engine"))
         self.engine_box.setAccessibleDescription(self.t("grp_engine_d"))
@@ -498,6 +552,9 @@ class SettingsDialog(QDialog):
             engine = self._provider_combo.itemData(index)
             self._provider_combo.setItemText(index, self._label(engine))
         for engine, edit in self._key_edits.items():
+            self._cloud_model_labels[engine].setText(self.t("lbl_cloud_model"))
+            self._cloud_models[engine].setAccessibleName(self.t("lbl_cloud_model") + " - " + self._label(engine))
+            self._cloud_models[engine].setAccessibleDescription(self.t("cloud_model_hint"))
             edit.setAccessibleName(self.t("lbl_key_" + engine))
             edit.setAccessibleDescription(
                 self.t("acc_key_d", engine=self._label(engine))
@@ -520,8 +577,9 @@ class SettingsDialog(QDialog):
         self.translate_box.setTitle(self.t("grp_translate"))
         self.translate_box.setAccessibleDescription(self.t("grp_translate_d"))
         for key, radio in self._translate_radios.items():
-            radio.setText(self.t("lbl_engine_" + key))
-            radio.setAccessibleName(self.t("lbl_engine_" + key))
+            label_key = "lbl_translation_free" if key == "local" else "lbl_engine_" + key
+            radio.setText(self.t(label_key))
+            radio.setAccessibleName(self.t(label_key))
             radio.setAccessibleDescription(self.t("grp_translate_d"))
 
         self.note.setText(self.t("lbl_api_keys_d"))

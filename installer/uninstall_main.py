@@ -21,7 +21,7 @@ import ctypes.wintypes as wintypes
 import os
 import sys
 
-APP_NAME = "Accessible Video Transcriber"
+APP_NAME = "Accessible Media Transcriber"
 PUBLISHER = "Iman Rammal"
 FOLDER_NAME = "Accessible Video Transcriber"
 UNINSTALL_KEY = r"Software\Microsoft\Windows\CurrentVersion\Uninstall\VidTrans"

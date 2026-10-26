@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-# Accessible Video Transcriber application (folder build, windowed).
+# Accessible Media Transcriber application (folder build, windowed).
 #
 #   pyinstaller --noconfirm VidTrans.spec
 #
@@ -38,7 +38,7 @@ from PyInstaller.utils.win32.versioninfo import (
 # The release version of the program, written into the properties of the
 # executable.  It must match update_checker.APP_VERSION, installer.iss and
 # vt_bootstrap.APP_VERSION.
-VERSION = (1, 3, 0, 0)
+VERSION = (1, 3, 1, 0)
 VERSION_INFO = VSVersionInfo(
     ffi=FixedFileInfo(
         filevers=VERSION,
@@ -57,13 +57,13 @@ VERSION_INFO = VSVersionInfo(
                     name="040904B0",
                     kids=[
                         StringStruct("CompanyName", "Iman Rammal"),
-                        StringStruct("FileDescription", "Accessible Video Transcriber and Translator"),
-                        StringStruct("FileVersion", "1.3.0.0"),
+                        StringStruct("FileDescription", "Accessible Media Transcriber and Translator"),
+                        StringStruct("FileVersion", "1.3.1.0"),
                         StringStruct("InternalName", "AccessibleVideoTranscriber"),
                         StringStruct("LegalCopyright", "Copyright (c) Iman Rammal. Noncommercial use only."),
                         StringStruct("OriginalFilename", "AccessibleVideoTranscriber.exe"),
-                        StringStruct("ProductName", "Accessible Video Transcriber"),
-                        StringStruct("ProductVersion", "1.3.0.0"),
+                        StringStruct("ProductName", "Accessible Media Transcriber"),
+                        StringStruct("ProductVersion", "1.3.1.0"),
                     ],
                 )
             ]
@@ -106,6 +106,8 @@ a = Analysis(
         'vt_install',
         'vt_render',
         'vt_workers',
+        'vt_batch',
+        'vt_session',
         # Imported with a plain "import ..." inside functions, so the
         # module graph cannot see them on its own.
         'vt_prefs',
@@ -134,23 +136,8 @@ pyz = PYZ(a.pure)
 # Windows' copy and prevents QtCore from loading.
 a.binaries = [entry for entry in a.binaries if os.path.basename(entry[0]).lower() != 'icuuc.dll']
 
-splash = Splash(
-    'installer/splash/splash.png',
-    binaries=a.binaries,
-    datas=a.datas,
-    text_pos=(70, 200),
-    text_size=13,
-    text_color="#FFC107",
-    text_font="Segoe UI",
-    text_default="Preparing Accessible Video Transcriber...",
-    minify_script=True,
-    always_on_top=True,
-    center='primary',
-)
-
 exe = EXE(
     pyz,
-    splash,
     a.scripts,
     [],
     exclude_binaries=True,
@@ -206,8 +193,8 @@ for model in ("tiny", "base", "small"):
     for required in ("config.json", "model.bin", "tokenizer.json", "vocabulary.txt"):
         if not os.path.isfile(os.path.join(_models_src, model, required)):
             raise RuntimeError("Release requires bundled Whisper " + model + ": " + required)
-if os.path.isdir(_models_src):
-    _models_dst = os.path.join(DIST, "models")
-    if os.path.isdir(_models_dst):
-        shutil.rmtree(_models_dst)
-    shutil.copytree(_models_src, _models_dst)
+_models_dst = os.path.join(DIST, "models")
+if os.path.isdir(_models_dst):
+    shutil.rmtree(_models_dst)
+for model in ("tiny", "base", "small"):
+    shutil.copytree(os.path.join(_models_src, model), os.path.join(_models_dst, model))

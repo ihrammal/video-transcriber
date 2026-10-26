@@ -710,15 +710,29 @@ class RenderThread(QThread):
         size = os.path.getsize(path)
         if size <= 0:
             raise WorkerError(tr(self.lang, "err_render_empty", path=path))
-        try:
-            has_audio, duration, _info = probe_video(path)
-        except Exception as exc:  # noqa: BLE001 - any probe failure means unplayable
-            raise WorkerError(tr(self.lang, "err_render_truncated", path=path)) from exc
-        if duration <= 0:
-            raise WorkerError(tr(self.lang, "err_render_truncated", path=path))
+        # Windows file scanners can briefly hold a newly closed output file.
+        # Retry a short, bounded verification; never report success unverified.
+        last_error = None
+        for attempt in range(3):
+            try:
+                has_audio, duration, _info = probe_video(path)
+                if duration > 0:
+                    break
+            except Exception as exc:
+                last_error = exc
+                log.warning("Output verification attempt %d failed: %s", attempt + 1, exc)
+            if attempt < 2:
+                time.sleep(0.2)
+        else:
+            raise WorkerError(tr(self.lang, "err_render_truncated", path=path)) from last_error
         source_has_audio = True
         try:
-            source_has_audio, _, _ = probe_video(self.video_path)
+            source_has_audio, source_duration, _ = probe_video(self.video_path)
+            if source_duration > 0 and abs(duration - source_duration) > max(1.0, source_duration * 0.01):
+                log.warning("Rendered duration %.3f differs from source %.3f", duration, source_duration)
+                raise WorkerError(tr(self.lang, "err_render_truncated", path=path))
+        except WorkerError:
+            raise
         except Exception:  # noqa: BLE001 - the source was already probed before
             pass
         if source_has_audio and not has_audio:
@@ -755,58 +769,61 @@ class RenderThread(QThread):
 
     def run(self):
         try:
-            from moviepy import CompositeVideoClip, TextClip, VideoFileClip
+            binary = _ffmpeg_exe()
+            if binary:
+                os.environ.setdefault("IMAGEIO_FFMPEG_EXE", binary)
+            from moviepy import AudioFileClip, ColorClip, CompositeVideoClip, TextClip, VideoFileClip
         except Exception as exc:
             self.failed.emit(tr(self.lang, "err_render", msg=str(exc)))
             return
 
+        video = composite = audio_clip = None
+        overlays = []
         try:
             self.stages.emit(tr(self.lang, "stage_loading_video"))
-            video = VideoFileClip(self.video_path)
+            from vt_i18n import SUPPORTED_AUDIO_SUFFIXES
+            if os.path.splitext(self.video_path)[1].lower() in SUPPORTED_AUDIO_SUFFIXES:
+                audio_clip = AudioFileClip(self.video_path)
+                video = ColorClip(size=(1280, 720), color=(18, 24, 34), duration=audio_clip.duration).with_audio(audio_clip)
+            else:
+                video = VideoFileClip(self.video_path)
             width, height = int(video.w), int(video.h)
             # Keep long single-line captions inside the frame.
             font_size = max(20, int(min(width, height) / 26))
-            overlays = []
             sub_count = 0
             for sub in self.subtitles:
+                if self.isInterruptionRequested():
+                    raise InterruptedError("Rendering cancelled")
                 start_td = sub.start
                 end_td = sub.end if sub.end > sub.start else sub.start + timedelta(seconds=1)
                 duration = (end_td - start_td).total_seconds()
                 if duration <= 0.02:
                     continue
-                lines = [line for line in sub.content.splitlines() if line.strip()]
-                if not lines:
+                text = sub.content.strip()
+                if not text:
                     continue
-                line_height = int(font_size * 1.5)
-                for line_index, line in enumerate(lines):
-                    sub_count += 1
-                    text_clip = TextClip(
-                        text=line,
-                        font=self.font_path,
-                        font_size=font_size,
-                        color="white",
-                        bg_color=None,
-                        stroke_color="black",
-                        stroke_width=2,
-                        method="label",
-                    )
-                    y = int(height * 0.92) - ((len(lines) - line_index) * line_height)
-                    overlays.append(
-                        text_clip.with_start(start_td.total_seconds())
-                        .with_duration(duration)
-                        .with_position(("center", max(0, y)))
-                    )
+                from vt_render import caption_clip
+                text_clip = caption_clip(text, font_size, int(width * 0.9), self.font_path)
+                sub_count += 1
+                y = max(0, height - int(text_clip.h) - int(height * 0.05))
+                overlays.append(
+                    text_clip.with_start(start_td.total_seconds())
+                    .with_duration(duration)
+                    .with_position(("center", y))
+                )
             self.stages.emit(tr(self.lang, "stage_burning", count=sub_count))
-            composite = CompositeVideoClip([video] + overlays)
+            composite = CompositeVideoClip([video] + overlays).with_duration(video.duration)
             try:
                 temp_audio = os.path.join(self.temp_dir, "render_temp_audio.m4a")
                 from vt_render import MoviePyProgressLogger
 
-                self._logger = MoviePyProgressLogger(self.progress.emit)
+                self._logger = MoviePyProgressLogger(self.progress.emit, self.isInterruptionRequested)
                 composite.write_videofile(
                     self.output_path,
-                    fps=int(video.fps or 25),
+                    fps=int(getattr(video, "fps", 25) or 25),
                     codec="libx264",
+                    preset="veryfast",
+                    threads=2,
                     audio_codec="aac",
                     temp_audiofile=temp_audio,
                     remove_temp=True,
@@ -831,3 +848,10 @@ class RenderThread(QThread):
         except Exception as exc:
             log.exception("render failed")
             self.failed.emit(tr(self.lang, "err_render", msg=str(exc)))
+        finally:
+            for clip in [composite, *overlays, video, audio_clip]:
+                if clip is not None:
+                    try:
+                        clip.close()
+                    except Exception:
+                        pass

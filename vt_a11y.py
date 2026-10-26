@@ -27,6 +27,8 @@ DEFAULTS = {
     "announce_progress": True,
     "sounds": True,
     "read_hints": True,
+    "show_welcome": True,
+    "show_farewell": True,
 }
 
 FLAGS = tuple(DEFAULTS)
@@ -117,6 +119,13 @@ def apply_descriptions(root, enabled=None):
             widget.setProperty("vidtrans_hint", description)
         hint = widget.property("vidtrans_hint") or ""
         widget.setAccessibleDescription(hint if enabled else "")
+        # Qt can expose a tooltip as the description when the explicit
+        # description is empty. Suppress both routes when hints are disabled.
+        tooltip = widget.toolTip()
+        if tooltip:
+            widget.setProperty("vidtrans_tooltip", tooltip)
+        tooltip = widget.property("vidtrans_tooltip") or ""
+        widget.setToolTip(tooltip if enabled else "")
 
 
 def build_dialog(parent=None, lang="en"):
@@ -169,6 +178,8 @@ def build_dialog(parent=None, lang="en"):
         ("announce_progress", "acc_lbl_progress", "acc_desc_progress"),
         ("sounds", "acc_lbl_sounds", "acc_desc_sounds"),
         ("read_hints", "acc_lbl_hints", "acc_desc_hints"),
+        ("show_welcome", "acc_lbl_welcome", "acc_desc_welcome"),
+        ("show_farewell", "acc_lbl_farewell", "acc_desc_farewell"),
     )
     for key, label_key, desc_key in rows:
         box = QCheckBox(key_text(label_key))

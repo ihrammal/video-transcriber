@@ -1,0 +1,75 @@
+name: Build Windows release candidate
+on:
+  pull_request:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      publish_release:
+        description: Publish after completing the manual screen-reader checks
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  release:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run all regression tests
+        run: python -m pytest -q --basetemp=.test-temp-ci
+      - name: Install Inno Setup
+        run: choco install innosetup --yes --no-progress
+      - name: Bundle the three installable offline speech models
+        run: python -c "from huggingface_hub import snapshot_download; [snapshot_download('Systran/faster-whisper-' + model, local_dir='models/' + model) for model in ('tiny', 'base', 'small')]"
+      - name: Build and self-test the application and installer
+        run: python build.py --no-setup
+      - name: Test an isolated installer identity
+        shell: pwsh
+        run: |
+          $compiler = python -c "import build; print(build.find_iscc())"
+          & $compiler /Qp /DValidationInstall /Otest-results\installer-qa installer.iss
+          if ($LASTEXITCODE -ne 0) { throw 'QA installer compilation failed.' }
+          $setup = Get-ChildItem test-results/installer-qa/*_QA.exe | Select-Object -First 1
+          ./tests/validate_installer.ps1 -SetupPath $setup.FullName
+      - name: Record installer checksums
+        shell: pwsh
+        run: |
+          Get-ChildItem installer_output/AccessibleMediaTranscriber_Setup_*.exe | ForEach-Object {
+            $digest = (Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLower()
+            "$digest  $($_.Name)"
+          } | Set-Content installer_output/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: accessible-media-transcriber-candidate
+          path: |
+            installer_output/AccessibleMediaTranscriber_Setup_*.exe
+            installer_output/SHA256SUMS.txt
+            test-results/installer-report.json
+            RELEASE_NOTES.md
+            RELEASE_CHECKS.md
+      - name: Prepare release after successful checks
+        if: startsWith(github.ref, 'refs/tags/') || (github.event_name == 'workflow_dispatch' && inputs.publish_release)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $version = python -c "from vt_bootstrap import APP_VERSION; print(APP_VERSION)"
+          $tag = "v$version"
+          if ('${{ github.ref_type }}' -eq 'tag' -and '${{ github.ref_name }}' -ne $tag) {
+            throw 'The release tag does not match the application version.'
+          }
+          $arguments = @('release', 'create', $tag,
+            "installer_output/AccessibleMediaTranscriber_Setup_$version.exe",
+            'installer_output/SHA256SUMS.txt', '--title', "Accessible Media Transcriber $version",
+            '--notes-file', 'RELEASE_NOTES.md', '--target', '${{ github.sha }}')
+          if ('${{ inputs.publish_release }}' -ne 'true') { $arguments += '--draft' }
+          & gh @arguments
+          if ($LASTEXITCODE -ne 0) { throw 'Release creation failed.' }

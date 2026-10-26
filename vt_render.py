@@ -20,9 +20,55 @@ def pick_font() -> str:
 
 
 FONT_PATH = pick_font()
+_FONT_FAMILIES = {}
 
 
-def _build_logger(on_progress):
+def caption_clip(text, font_size, width, font_path=None):
+    """Use Qt text shaping so Arabic stays joined and bidirectional text is correct.
+
+    Pillow wheels on Windows may lack RAQM; Qt is already shipped with the app.
+    A document also wraps long captions within the video frame.
+    """
+    import numpy as np
+    from moviepy import ImageClip
+    from PySide6.QtCore import Qt
+    from PySide6.QtGui import QColor, QFont, QFontDatabase, QImage, QPainter, QPen, QTextCharFormat, QTextCursor, QTextDocument
+
+    document = QTextDocument()
+    if not font_path:
+        import vt_install
+        font_path = vt_install.caption_font()
+    family = "Tahoma"
+    if font_path and os.path.isfile(font_path):
+        if font_path not in _FONT_FAMILIES:
+            font_id = QFontDatabase.addApplicationFont(font_path)
+            families = QFontDatabase.applicationFontFamilies(font_id)
+            _FONT_FAMILIES[font_path] = families[0] if families else family
+        family = _FONT_FAMILIES[font_path]
+    font = QFont(family)
+    font.setPixelSize(font_size)
+    document.setDefaultFont(font)
+    document.setPlainText(text)
+    cursor = QTextCursor(document)
+    cursor.select(QTextCursor.SelectionType.Document)
+    style = QTextCharFormat()
+    style.setForeground(QColor("white"))
+    style.setTextOutline(QPen(QColor("black"), 1))
+    cursor.mergeCharFormat(style)
+    block = cursor.blockFormat()
+    block.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+    cursor.mergeBlockFormat(block)
+    document.setTextWidth(width)
+    image = QImage(width, int(document.size().height()) + 2, QImage.Format.Format_RGBA8888)
+    image.fill(QColor(0, 0, 0, 180))
+    painter = QPainter(image)
+    document.drawContents(painter)
+    painter.end()
+    pixels = np.frombuffer(image.bits(), dtype=np.uint8).reshape(image.height(), image.width(), 4).copy()
+    return ImageClip(pixels)
+
+
+def _build_logger(on_progress, cancelled_cb=None):
     """Return an object moviepy's ``proglog.default_bar_logger`` accepts.
 
     moviepy passes the object through unchanged, then calls ``message(...)``,
@@ -40,9 +86,13 @@ def _build_logger(on_progress):
 
         class _ProglogLogger(ProgressBarLogger):
             def messages_callback(self, message, text="", **kw):
+                if cancelled_cb and cancelled_cb():
+                    raise InterruptedError("Rendering cancelled")
                 return None
 
             def bars_callback(self, bar_name, attribute, value, old_value=None):
+                if cancelled_cb and cancelled_cb():
+                    raise InterruptedError("Rendering cancelled")
                 if attribute != "index":
                     return
                 bar = self.bars.get(bar_name) or {}
@@ -68,6 +118,8 @@ def _build_logger(on_progress):
             values = kwargs.get(key) or []
             total = len(list(values)) if not isinstance(values, range) else len(values)
             for count, value in enumerate(values, start=1):
+                if cancelled_cb and cancelled_cb():
+                    raise InterruptedError("Rendering cancelled")
                 if total:
                     try:
                         on_progress(min(99, int(count / total * 100)))
@@ -98,5 +150,5 @@ def _build_logger(on_progress):
 class MoviePyProgressLogger:
     """Thin alias so call sites stay readable."""
 
-    def __new__(cls, on_progress):
-        return _build_logger(on_progress)
+    def __new__(cls, on_progress, cancelled_cb=None):
+        return _build_logger(on_progress, cancelled_cb)

@@ -1,10 +1,10 @@
-Accessible Video Transcriber USER AGREEMENT
-Video transcription, translation and subtitling application
-Application version 1.3.0 - Effective date: 12 October 2026
+Accessible Media Transcriber USER AGREEMENT
+Audio and video transcription, translation and subtitling application
+Application version 1.3.1 - Effective date: 12 October 2026
 Copyright (c) Iman Rammal. All rights reserved.
 
 PLEASE READ THIS AGREEMENT CAREFULLY BEFORE INSTALLING, COPYING OR USING
-Accessible Video Transcriber ("the Application"). BY INSTALLING OR USING THE APPLICATION YOU
+Accessible Media Transcriber ("the Application"). BY INSTALLING OR USING THE APPLICATION YOU
 ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD AND AGREE TO BE BOUND BY THIS
 AGREEMENT. IF YOU DO NOT AGREE, DO NOT INSTALL OR USE THE APPLICATION AND
 REMOVE IT FROM YOUR COMPUTER.
@@ -12,7 +12,7 @@ REMOVE IT FROM YOUR COMPUTER.
 ------------------------------------------------------------------------
 1. WHAT THE APPLICATION DOES
 ------------------------------------------------------------------------
-Accessible Video Transcriber is a desktop application for Windows that:
+Accessible Media Transcriber is a desktop application for Windows that:
   a) converts the speech contained in a video file into timed captions
      (transcription) using an offline speech-recognition model;
   b) optionally translates those captions into another language;
@@ -144,7 +144,7 @@ unenforceable, the remaining provisions continue in full force.
 
 Questions about this Agreement:
     Publisher: Iman Rammal
-    Product:   Accessible Video Transcriber
+    Product:   Accessible Media Transcriber
     Email:     iman.rammal@gmail.com
     LinkedIn: https://www.linkedin.com/in/ImanRammal
     Facebook: https://www.facebook.com/pretty.ammoona

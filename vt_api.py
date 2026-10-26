@@ -304,7 +304,7 @@ def _segments_from_openai(payload: dict, lang: str) -> tuple[list, str]:
     if not out:
         text = str(payload.get("text") or "").strip()
         if text:
-            out.append({"start": 0.0, "end": 3.0, "text": text})
+            raise _fail(lang, "err_api_timestamps")
     if not out:
         raise _fail(lang, "err_api_empty_result", engine="API")
     return out, detected

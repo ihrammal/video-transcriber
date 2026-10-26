@@ -35,14 +35,91 @@ import threading
 import webbrowser
 from pathlib import Path
 
-from PySide6.QtCore import QObject, Signal
-from PySide6.QtWidgets import QMessageBox, QMenu
+from PySide6.QtCore import QObject, Signal, Qt, QUrl, QUrlQuery
+from PySide6.QtGui import QDesktopServices
+from PySide6.QtWidgets import (
+    QApplication, QDialog, QLabel, QLineEdit,
+    QMessageBox, QMenu, QPushButton, QVBoxLayout,
+)
 
 import update_checker as uc
 
 HELP_FILE = "help/user_guide.html"
 HELP_FILES = {"en": "help/user_guide.html", "ar": "help/user_guide_ar.html"}
 CHECK_TITLE = "Check for Updates"
+SUPPORT_EMAIL = "iman.rammal@gmail.com"
+
+
+def problem_email_url(lang="en"):
+    """Prepare a draft only; no files, logs or credentials are attached."""
+    from vt_i18n import tr
+    url = QUrl("mailto:" + SUPPORT_EMAIL)
+    query = QUrlQuery()
+    query.addQueryItem("subject", tr(lang, "report_subject", version=uc.APP_VERSION))
+    url.setQuery(query)
+    return url
+
+
+class ProblemReportDialog(QDialog):
+    def __init__(self, parent=None, lang="en"):
+        super().__init__(parent)
+        from vt_i18n import tr
+        self.lang = lang
+        self.t = lambda key: tr(lang, key)
+        self.setWindowTitle(self.t("report_title"))
+        self.setLayoutDirection(Qt.LayoutDirection.RightToLeft if lang == "ar" else Qt.LayoutDirection.LeftToRight)
+        layout = QVBoxLayout(self)
+        intro = QLabel(self.t("report_intro"), self)
+        intro.setWordWrap(True)
+        layout.addWidget(intro)
+        self.address = QLineEdit(SUPPORT_EMAIL, self)
+        self.address.setReadOnly(True)
+        self.address.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.address.setAccessibleName(self.t("report_address"))
+        layout.addWidget(self.address)
+        self.status = QLabel(self)
+        self.status.setWordWrap(True)
+        layout.addWidget(self.status)
+        row = QVBoxLayout()
+        layout.addLayout(row)
+        for name, key, handler in (
+            ("email_button", "report_email", self._email),
+            ("copy_button", "report_copy", self._copy),
+            ("github_button", "report_github", self._github),
+            ("close_button", "report_close", self.reject),
+        ):
+            button = QPushButton(self.t(key), self)
+            button.setAccessibleName(self.t(key).replace("&", ""))
+            button.clicked.connect(handler)
+            setattr(self, name, button)
+            row.addWidget(button)
+        self.email_button.setDefault(True)
+        self.resize(640, self.sizeHint().height())
+
+    def _status(self, key):
+        message = self.t(key)
+        self.status.setText(message)
+        self.status.setAccessibleName(message)
+        parent = self.parent()
+        if parent is not None and hasattr(parent, "announce"):
+            parent.announce(message)
+
+    def _email(self):
+        opened = QDesktopServices.openUrl(problem_email_url(self.lang))
+        self._status("report_draft_opened" if opened else "report_email_failed")
+
+    def _copy(self):
+        QApplication.clipboard().setText(SUPPORT_EMAIL)
+        self._status("report_copied")
+
+    def _github(self):
+        opened = webbrowser.open(uc.ISSUES_PAGE)
+        self._status("report_github_opened" if opened else "report_github_failed")
+
+
+def report_problem(window):
+    lang = getattr(window, "current_lang", None) or getattr(window, "lang", "en")
+    return ProblemReportDialog(window, lang).exec()
 
 
 def resource_path(relative):
@@ -89,13 +166,12 @@ def build_help_menu(window):
     menu = QMenu(window.t("menu_help"), window)
     make = window._make_action
 
-    make(menu, "act_user_guide", lambda: open_help(window), "F1")
-    make(menu, "act_shortcuts", lambda: open_help(window, "shortcuts"), "Ctrl+/")
+    make(menu, "act_user_guide", window.show_user_guide, "F1")
+    make(menu, "act_shortcuts", window.show_shortcuts, "Ctrl+/")
     menu.addSeparator()
 
     make(menu, "act_check_updates", lambda: run_check(window, False), "Ctrl+U")
-    auto = make(
-        menu,
+    auto = window._make_shortcut(
         "act_auto_update",
         lambda checked=False: uc.set_auto_check(bool(checked)),
         "Ctrl+Shift+U",
@@ -112,7 +188,7 @@ def build_help_menu(window):
     make(
         menu,
         "act_report_problem",
-        lambda: webbrowser.open(uc.ISSUES_PAGE),
+        lambda: report_problem(window),
         "Ctrl+Shift+B",
     )
     menu.addSeparator()
@@ -121,10 +197,6 @@ def build_help_menu(window):
     make(menu, "act_about", window.show_about, "F12")
     menu.addSeparator()
 
-    # Kept from the previous Help menu: not duplicates, they open the long
-    # per-language documents themselves and the log folder.
-    make(menu, "act_guide_file", window.open_guide_file)
-    make(menu, "act_shortcuts_file", window.open_shortcut_file)
     make(menu, "act_open_log", window.open_log_folder, "Ctrl+Shift+V")
     return menu
 

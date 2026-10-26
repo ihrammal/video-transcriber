@@ -1,6 +1,26 @@
 """Keyboard navigation and optional descriptions in unified settings."""
 from PySide6.QtCore import Qt
 from PySide6.QtTest import QTest
+import pytest
+
+
+@pytest.mark.parametrize("lang", ["en", "ar"])
+def test_settings_pages_do_not_trap_keyboard_on_groupings(qapp, profile, lang):
+    from vt_settings import SettingsDialog
+    dialog = SettingsDialog(lang)
+    dialog.show()
+    qapp.processEvents()
+    for index in range(dialog.tabs.count()):
+        scroll = dialog.tabs.widget(index)
+        assert scroll.focusPolicy() == Qt.FocusPolicy.NoFocus
+        assert scroll.accessibleName() == dialog.tabs.tabText(index)
+        assert scroll.widget().accessibleName() == dialog.tabs.tabText(index)
+    dialog.tabs.setCurrentIndex(0)
+    dialog.tabs.tabBar().setFocus()
+    QTest.keyClick(dialog.tabs.tabBar(), Qt.Key.Key_Tab)
+    assert dialog.focusWidget() == dialog.interface_choice
+    assert ("updates" if lang == "en" else "تحديثات") in dialog.auto_update_choice.accessibleName()
+    dialog.close()
 
 
 def test_pages_and_keyboard_navigation(qapp, profile, fake_secrets):
@@ -22,19 +42,25 @@ def test_pages_and_keyboard_navigation(qapp, profile, fake_secrets):
 
 def test_hints_remain_off_after_translation_and_progress(qapp, profile):
     import vt_a11y
+    from PySide6.QtGui import QAccessible
     from vid_trans_app import MainWindow
     vt_a11y.update(read_hints=False)
     window = MainWindow("en")
     assert window.open_button.accessibleName()
     assert window.open_button.accessibleDescription() == ""
+    assert window.open_button.toolTip() == ""
+    assert QAccessible.queryAccessibleInterface(window.open_button).text(QAccessible.Text.Description) == ""
     window.on_progress(25)
     window.interface_combo.setCurrentIndex(1)
     assert window.open_button.accessibleName()
     assert window.open_button.accessibleDescription() == ""
     assert window.progress_bar.accessibleDescription() == ""
+    assert window.open_button.toolTip() == ""
+    assert window.editor.placeholderText() == window.t("editor_placeholder")
     vt_a11y.update(read_hints=True)
     vt_a11y.apply(window)
     assert window.open_button.accessibleDescription()
+    assert window.open_button.toolTip() == window.t("shortcut_hint", keys="Ctrl+O")
     window.deleteLater()
     qapp.processEvents()
 
@@ -71,6 +97,7 @@ def test_switching_to_arabic_updates_group_and_menu_descriptions(qapp, profile):
     assert "إمكانية الوصول" in window.menuBar().accessibleDescription()
     assert "Accessible Video Transcriber" not in window.windowTitle()
     assert window.interface_combo.itemText(0) == "الإنجليزية"
+    assert window.drop_hint.accessibleName() == window.t("lbl_drop_hint")
     buttons = QDialogButtonBox(QDialogButtonBox.StandardButton.Cancel)
     assert not re.search(r"[A-Za-z]", buttons.button(QDialogButtonBox.StandardButton.Cancel).text())
     window.deleteLater()

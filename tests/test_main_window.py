@@ -45,7 +45,7 @@ def _action_by_shortcut(window, key):
 
 def test_the_seven_menus_are_there(window):
     titles = [a.text().replace("&", "") for a in window.menuBar().actions()]
-    for name in ("File", "Edit", "Settings", "Accessibility", "Tools", "Models", "Help"):
+    for name in ("File", "Edit", "Settings", "View", "Tools", "Models", "Help"):
         assert name in titles, titles
 
 

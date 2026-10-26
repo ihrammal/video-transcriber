@@ -1,10 +1,7 @@
-# Opening a video
+# Opening audio or video
 
-## The Open Video button
-Press Control plus O, use File then Open Video, or click the Open Video button in the first group. A file dialog opens, filtered to video files. Dragging a file from a folder onto the window works as well.
+Press Ctrl+O or choose File → Open audio or video. Select a recording such as MP3, WAV, M4A or MP4, or drop it onto the main window.
 
-## What happens next
-The path of the video appears next to the button and the program is ready to run. The video language list should match the language spoken in the video; Automatic detects it for you. The rest of the window stays usable while nothing is running.
+Choose the spoken language, or Automatic, then start transcription. Export text as TXT or timed captions as SRT. Rendering audio creates an MP4 with a plain background, captions and the original sound. Rendering video adds captions to its picture.
 
-## Without a video
-You can still import an existing subtitle file with File then Import .srt, edit it, and export it again. Transcribing and rendering need a video; the program tells you so and moves focus back to the controls.
+You can import, edit and export an existing SRT without a recording. Transcription and rendering require a source recording.

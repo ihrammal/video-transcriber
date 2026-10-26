@@ -20,7 +20,7 @@ import subprocess
 import sys
 import winreg
 
-APP_DISPLAY_NAME = "Accessible Video Transcriber"
+APP_DISPLAY_NAME = "Accessible Media Transcriber"
 PUBLISHER = "Iman Rammal"
 UNINSTALL_KEY = r"Software\Microsoft\Windows\CurrentVersion\Uninstall\VidTrans"
 PAYLOAD_NAME = "AccessibleVideoTranscriber.exe"
@@ -417,7 +417,14 @@ def ffmpeg_exe() -> str:
             return candidate
     try:
         import imageio_ffmpeg
-
+        # Resolving an installed binary should not depend on a subprocess
+        # probe that can fail temporarily under Windows desktop restrictions.
+        if os.name == "nt":
+            import glob
+            binaries = os.path.join(os.path.dirname(imageio_ffmpeg.__file__), "binaries")
+            packaged = sorted(glob.glob(os.path.join(binaries, "ffmpeg-win-x86_64*.exe")))
+            if packaged:
+                return packaged[0]
         return imageio_ffmpeg.get_ffmpeg_exe()
     except Exception:
         return ""

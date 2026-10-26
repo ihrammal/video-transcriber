@@ -251,6 +251,11 @@ def shortcut_groups(window):
         if rows:
             groups.append((menu_action.text().replace("&", ""), rows))
     extras = []
+    menu_actions = {id(action) for top in window.menuBar().actions() if top.menu()
+                    for action in top.menu().actions()}
+    for action, _key in window._action_map:
+        if id(action) not in menu_actions and not action.shortcut().isEmpty():
+            extras.append((action.text().replace("&", ""), key_words(action.shortcut().toString())))
     start = getattr(window, "start_button", None)
     if start is not None and not start.shortcut().isEmpty():
         extras.append(

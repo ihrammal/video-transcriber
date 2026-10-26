@@ -4,6 +4,14 @@ All notable changes to Accessible Video Transcriber are listed here.
 The format follows Keep a Changelog, and the project uses Calendar Versioning
 numbers of the form major.minor.patch.
 
+## 1.3.1 - 2026-10-26
+
+- Named Settings pages and removed scroll containers from keyboard focus.
+- Clarified update checking and Settings navigation in English and Arabic.
+- Updated help for audio/video, centralized terminology and simplified menus.
+- Added audio rendering, model choices, custom setup, recovery and batch transcription.
+- Preserved installation identity, user profiles and automatic update discovery.
+
 ## 1.3.0 - 2026-10-12
 
 - Unified General, Speech and translation, API keys and Accessibility settings.

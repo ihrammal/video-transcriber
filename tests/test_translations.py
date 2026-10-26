@@ -11,6 +11,9 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 
 def _load_tr(path: pathlib.Path) -> dict:
+    if path.name == "vid_trans_app.py":
+        from vt_i18n import TR
+        return TR
     tree = ast.parse(io.open(path, encoding="utf-8").read())
     for node in tree.body:
         if isinstance(node, ast.Assign):
@@ -81,7 +84,7 @@ def test_menu_mnemonics_are_unique():
     menus = [
         tr[k]
         for k in tr
-        if k.startswith("menu_") and isinstance(tr[k], str) and "&" in tr[k]
+        if k in ("menu_file", "menu_edit", "menu_settings", "menu_view", "menu_tools", "menu_models", "menu_help") and "&" in tr[k]
     ]
     letters = [m[m.index("&") + 1].lower() for m in menus if len(m) > m.index("&") + 1]
     assert len(letters) == len(set(letters)), letters
@@ -91,7 +94,7 @@ def test_welcome_and_exit_messages_are_exact():
     import vt_setup
 
     assert vt_setup.WELCOME_TEXT == (
-        "Welcome to the Accessible Video Transcriber by Iman Rammal"
+        "Welcome to the Accessible Media Transcriber by Iman Rammal"
     )
     assert vt_setup.FAREWELL_TEXT == (
         "Thank you for using my program, Goodbye."

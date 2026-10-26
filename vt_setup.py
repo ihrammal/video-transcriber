@@ -1,10 +1,10 @@
 """vt_setup.py -- welcome screen, install screen and goodbye screen.
 
-Opening Accessible Video Transcriber shows the welcome screen once, on the first launch (and
+Opening Accessible Media Transcriber shows the welcome screen once, on the first launch (and
 again whenever the program is started with ``--welcome``):
 
 1. **Welcome** -- a full width animated banner types the line
-   ``Welcome to the Accessible Video Transcriber by Iman Rammal`` letter by
+   ``Welcome to the Accessible Media Transcriber by Iman Rammal`` letter by
    letter while a short musical jingle plays.  The sentence is announced by
    the screen reader as soon as the window opens and focus lands on the
    **Continue** button, which starts the program.  No licence or agreement is
@@ -83,10 +83,10 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-WELCOME_TEXT = "Welcome to the Accessible Video Transcriber by Iman Rammal"
+WELCOME_TEXT = "Welcome to the Accessible Media Transcriber by Iman Rammal"
 FAREWELL_TEXT = "Thank you for using my program, Goodbye."
 
-APP_TITLE = "Accessible Video Transcriber"
+APP_TITLE = "Accessible Media Transcriber"
 GOLD = QColor("#FFC107")
 GOLD_SOFT = QColor("#FFD54F")
 
@@ -98,17 +98,19 @@ SETUP_TR = {
     "en": {
         "welcome_message": WELCOME_TEXT,
         "farewell_message": FAREWELL_TEXT,
-        "setup_title": "Accessible Video Transcriber - Setup",
+        "setup_title": "Accessible Media Transcriber - Setup",
         "iface_en": "English",
         "iface_ar": "Arabic",
-        "setup_access": "Accessible Video Transcriber setup wizard",
+        "setup_access": "Accessible Media Transcriber setup wizard",
         "setup_access_d": "Two step setup: welcome, then installation type and shortcuts.",
         "welcome_hint": "Welcome! Choose the language, then press Next to continue.",
         "welcome_access": "Welcome banner",
         "welcome_access_d": WELCOME_TEXT,
         "welcome_status_n": "Welcome message",
-        "welcome_title": "Welcome to Accessible Video Transcriber",
+        "welcome_title": "Welcome to Accessible Media Transcriber",
         "welcome_auto": "The program opens automatically in 3 seconds. Press Continue to start now.",
+        "show_welcome_next_time": "Show this welcome next time",
+        "show_farewell_next_time": "Show this goodbye next time",
         "btn_continue": "Continue",
         "btn_continue_n": "Continue button",
         "btn_continue_d": "Closes this welcome message and opens the program.",
@@ -122,35 +124,35 @@ SETUP_TR = {
         "acc_lang_n": "Setup language",
         "acc_lang_d": "Chooses the language of the setup screens and of the application.",
         "install_title": "Installation type",
-        "install_hint": "Choose how Accessible Video Transcriber is installed, then press Install and start.",
+        "install_hint": "Choose how Accessible Media Transcriber is installed, then press Install and start.",
         "mode_standard": "Standard (recommended)",
         "mode_standard_d": "Install for the current user in your personal Programs folder, add "
-        "the Start menu and desktop shortcuts and register Accessible Video Transcriber in Windows Apps & features.",
+        "the Start menu and desktop shortcuts and register Accessible Media Transcriber in Windows Apps & features.",
         "mode_portable": "Portable",
-        "mode_portable_d": "Keep Accessible Video Transcriber in one self contained folder: no Start menu, no "
+        "mode_portable_d": "Keep Accessible Media Transcriber in one self contained folder: no Start menu, no "
         "desktop shortcut and no entry in Windows Apps & features.",
         "mode_custom": "Custom folder",
         "mode_custom_d": "Install into a folder of your choice.",
         "lbl_install_dir": "Installation folder:",
         "btn_browse": "Browse...",
         "acc_browse_n": "Browse for a folder button",
-        "acc_browse_d": "Opens a folder picker to choose where Accessible Video Transcriber is installed.",
+        "acc_browse_d": "Opens a folder picker to choose where Accessible Media Transcriber is installed.",
         "acc_folder_n": "Installation folder",
-        "acc_folder_d": "The folder Accessible Video Transcriber is installed into.",
+        "acc_folder_d": "The folder Accessible Media Transcriber is installed into.",
         "shortcuts_title": "Shortcuts and extra components",
-        "chk_start_menu": "Create a Accessible Video Transcriber shortcut in the Start menu",
-        "chk_desktop": "Create a Accessible Video Transcriber shortcut on the desktop",
+        "chk_start_menu": "Create a Accessible Media Transcriber shortcut in the Start menu",
+        "chk_desktop": "Create a Accessible Media Transcriber shortcut on the desktop",
         "chk_model": "Download the speech recognition model now (about 150 MB, needed to transcribe)",
         "acc_start_menu_n": "Start menu shortcut",
-        "acc_start_menu_d": "Adds Accessible Video Transcriber to the Windows Start menu and lists it in Apps and features.",
+        "acc_start_menu_d": "Adds Accessible Media Transcriber to the Windows Start menu and lists it in Apps and features.",
         "acc_desktop_n": "Desktop shortcut",
-        "acc_desktop_d": "Adds a Accessible Video Transcriber shortcut to the desktop.",
+        "acc_desktop_d": "Adds a Accessible Media Transcriber shortcut to the desktop.",
         "acc_model_n": "Download the speech recognition model",
         "acc_model_d": "Downloads the Whisper speech recognition model so transcription also works "
         "without an internet connection.",
-        "chk_launch": "Start Accessible Video Transcriber when the installation finishes",
-        "acc_launch_n": "Start Accessible Video Transcriber now",
-        "acc_launch_d": "Opens Accessible Video Transcriber as soon as the installation has finished.",
+        "chk_launch": "Start Accessible Media Transcriber when the installation finishes",
+        "acc_launch_n": "Start Accessible Media Transcriber now",
+        "acc_launch_d": "Opens Accessible Media Transcriber as soon as the installation has finished.",
         "tools_title": "Tools for transcription and video output",
         "tool_ffmpeg": "Video engine (ffmpeg)",
         "tool_ffprobe": "Stream inspector (ffprobe)",
@@ -178,10 +180,10 @@ SETUP_TR = {
         "step_folder": "Creating the application folder",
         "step_payload": "Copying the application files",
         "step_shortcuts": "Creating the Start menu and desktop shortcuts",
-        "step_register": "Adding Accessible Video Transcriber to Windows Apps & features",
+        "step_register": "Adding Accessible Media Transcriber to Windows Apps & features",
         "step_tools": "Checking the video tools (ffmpeg, captions, speech model)",
         "step_final": "Finishing the installation",
-        "install_done": "Setup finished. Press Start to open Accessible Video Transcriber.",
+        "install_done": "Setup finished. Press Start to open Accessible Media Transcriber.",
         "install_ready": "Everything is already installed and up to date.",
         "install_portable": "Portable mode: nothing was copied and no shortcut was created.",
         "install_failed": "Step failed: {msg}",
@@ -191,17 +193,17 @@ SETUP_TR = {
         "btn_back": "Back",
         "btn_next": "Next",
         "btn_install": "Install and start",
-        "btn_start": "Start Accessible Video Transcriber",
-        "btn_finish": "Start Accessible Video Transcriber",
+        "btn_start": "Start Accessible Media Transcriber",
+        "btn_finish": "Start Accessible Media Transcriber",
         "btn_exit": "Exit",
         "acc_back_n": "Back",
         "acc_back_d": "Returns to the welcome screen.",
         "acc_next_n": "Next",
         "acc_next_d": "Moves to the installation screen.",
         "acc_install_n": "Install and start",
-        "acc_install_d": "Installs Accessible Video Transcriber with the selected options and then starts it.",
-        "acc_finish_n": "Start Accessible Video Transcriber",
-        "acc_finish_d": "Closes the setup and opens Accessible Video Transcriber.",
+        "acc_install_d": "Installs Accessible Media Transcriber with the selected options and then starts it.",
+        "acc_finish_n": "Start Accessible Media Transcriber",
+        "acc_finish_d": "Closes the setup and opens Accessible Media Transcriber.",
         "acc_exit_n": "Exit",
         "acc_exit_d": "Closes the setup without installing.",
         "acc_progress_n": "Installation progress",
@@ -210,19 +212,21 @@ SETUP_TR = {
         "acc_steps_d": "List of the setup steps and their current state.",
     },
     "ar": {
-        "welcome_message": "أهلًا بك في برنامج تفريغ الفيديو الميسّر من إعداد إيمان رمّال",
+        "welcome_message": "أهلًا بك في مفرّغ الوسائط الميسّر من إعداد إيمان رمّال",
         "farewell_message": "شكرًا لاستخدامك البرنامج. إلى اللقاء.",
-        "setup_title": "إعداد برنامج تفريغ الفيديو الميسّر",
+        "setup_title": "إعداد مفرّغ الوسائط الميسّر",
         "iface_en": "الإنجليزية",
         "iface_ar": "العربية",
-        "setup_access": "معالج إعداد برنامج تفريغ الفيديو الميسّر",
+        "setup_access": "معالج إعداد مفرّغ الوسائط الميسّر",
         "setup_access_d": "إعداد من خطوتين: الترحيب، ثم نوع التثبيت والاختصارات.",
         "welcome_hint": "أهلًا بك! اختر اللغة ثم اضغط «التالي» للمتابعة.",
         "welcome_access": "لوحة الترحيب",
-        "welcome_access_d": "أهلًا بك في برنامج تفريغ الفيديو الميسّر من إعداد إيمان رمّال",
+        "welcome_access_d": "أهلًا بك في مفرّغ الوسائط الميسّر من إعداد إيمان رمّال",
         "welcome_status_n": "رسالة الترحيب",
-        "welcome_title": "أهلًا بك في برنامج تفريغ الفيديو الميسّر",
+        "welcome_title": "أهلًا بك في مفرّغ الوسائط الميسّر",
         "welcome_auto": "يفتح البرنامج تلقائيًا خلال 3 ثوانٍ. اضغط «متابعة» للبدء الآن.",
+        "show_welcome_next_time": "إظهار رسالة الترحيب في المرة القادمة",
+        "show_farewell_next_time": "إظهار رسالة الوداع في المرة القادمة",
         "btn_continue": "متابعة",
         "btn_continue_n": "زر متابعة",
         "btn_continue_d": "يغلق رسالة الترحيب هذه ويفتح البرنامج.",
@@ -236,34 +240,34 @@ SETUP_TR = {
         "acc_lang_n": "لغة الإعداد",
         "acc_lang_d": "تختار لغة شاشات الإعداد ولغة التطبيق.",
         "install_title": "نوع التثبيت",
-        "install_hint": "اختر طريقة تثبيت برنامج تفريغ الفيديو الميسّر ثم اضغط «تثبيت وتشغيل».",
+        "install_hint": "اختر طريقة تثبيت مفرّغ الوسائط الميسّر ثم اضغط «تثبيت وتشغيل».",
         "mode_standard": "قياسي (موصى به)",
         "mode_standard_d": "تثبيت للمستخدم الحالي في مجلد البرامج الشخصية، مع إنشاء اختصارات قائمة "
-        "البدء وسطح المكتب وتسجيل برنامج تفريغ الفيديو الميسّر في تطبيقات Windows.",
+        "البدء وسطح المكتب وتسجيل مفرّغ الوسائط الميسّر في تطبيقات Windows.",
         "mode_portable": "محمول",
-        "mode_portable_d": "إبقاء برنامج تفريغ الفيديو الميسّر في مجلد واحد مكتفي: بلا اختصار في قائمة ابدأ وبلا "
+        "mode_portable_d": "إبقاء مفرّغ الوسائط الميسّر في مجلد واحد مكتفي: بلا اختصار في قائمة ابدأ وبلا "
         "اختصار على سطح المكتب وبلا تسجيل في تطبيقات Windows.",
         "mode_custom": "مجلد مخصص",
         "mode_custom_d": "التثبيت في مجلد تختاره أنت.",
         "lbl_install_dir": "مجلد التثبيت:",
         "btn_browse": "استعراض...",
         "acc_browse_n": "زر استعراض المجلد",
-        "acc_browse_d": "يفتح نافذة اختيار المجلد الذي سيُثبَّت فيه برنامج تفريغ الفيديو الميسّر.",
+        "acc_browse_d": "يفتح نافذة اختيار المجلد الذي سيُثبَّت فيه مفرّغ الوسائط الميسّر.",
         "acc_folder_n": "مجلد التثبيت",
-        "acc_folder_d": "المجلد الذي سيُثبَّت فيه برنامج تفريغ الفيديو الميسّر.",
+        "acc_folder_d": "المجلد الذي سيُثبَّت فيه مفرّغ الوسائط الميسّر.",
         "shortcuts_title": "الاختصارات والمكونات الإضافية",
-        "chk_start_menu": "إنشاء اختصار برنامج تفريغ الفيديو الميسّر في قائمة ابدأ",
-        "chk_desktop": "إنشاء اختصار برنامج تفريغ الفيديو الميسّر على سطح المكتب",
+        "chk_start_menu": "إنشاء اختصار مفرّغ الوسائط الميسّر في قائمة ابدأ",
+        "chk_desktop": "إنشاء اختصار مفرّغ الوسائط الميسّر على سطح المكتب",
         "chk_model": "تنزيل نموذج التعرّف على الكلام الآن (نحو 150 ميغابايت، مطلوب للتفريغ)",
         "acc_start_menu_n": "اختصار قائمة ابدأ",
-        "acc_start_menu_d": "يضيف برنامج تفريغ الفيديو الميسّر إلى قائمة ابدأ في Windows ويسجّله في التطبيقات.",
+        "acc_start_menu_d": "يضيف مفرّغ الوسائط الميسّر إلى قائمة ابدأ في Windows ويسجّله في التطبيقات.",
         "acc_desktop_n": "اختصار سطح المكتب",
-        "acc_desktop_d": "يضيف اختصار برنامج تفريغ الفيديو الميسّر إلى سطح المكتب.",
+        "acc_desktop_d": "يضيف اختصار مفرّغ الوسائط الميسّر إلى سطح المكتب.",
         "acc_model_n": "تنزيل نموذج التعرّف على الكلام",
         "acc_model_d": "ينزّل نموذج Whisper ليعمل التفريغ حتى بدون اتصال بالإنترنت.",
-        "chk_launch": "تشغيل برنامج تفريغ الفيديو الميسّر عند انتهاء التثبيت",
-        "acc_launch_n": "تشغيل برنامج تفريغ الفيديو الميسّر الآن",
-        "acc_launch_d": "يفتح برنامج تفريغ الفيديو الميسّر فور انتهاء التثبيت.",
+        "chk_launch": "تشغيل مفرّغ الوسائط الميسّر عند انتهاء التثبيت",
+        "acc_launch_n": "تشغيل مفرّغ الوسائط الميسّر الآن",
+        "acc_launch_d": "يفتح مفرّغ الوسائط الميسّر فور انتهاء التثبيت.",
         "tools_title": "أدوات التفريغ وإخراج الفيديو",
         "tool_ffmpeg": "محرك الفيديو (ffmpeg)",
         "tool_ffprobe": "فاحص المسارات (ffprobe)",
@@ -289,10 +293,10 @@ SETUP_TR = {
         "step_folder": "إنشاء مجلد التطبيق",
         "step_payload": "نسخ ملفات التطبيق",
         "step_shortcuts": "إنشاء اختصارات قائمة البدء وسطح المكتب",
-        "step_register": "إضافة برنامج تفريغ الفيديو الميسّر إلى تطبيقات Windows",
+        "step_register": "إضافة مفرّغ الوسائط الميسّر إلى تطبيقات Windows",
         "step_tools": "فحص أدوات الفيديو (ffmpeg والتسميات ونموذج الكلام)",
         "step_final": "إنهاء التثبيت",
-        "install_done": "اكتمل الإعداد. اضغط «تشغيل برنامج تفريغ الفيديو الميسّر» لفتحه.",
+        "install_done": "اكتمل الإعداد. اضغط «تشغيل مفرّغ الوسائط الميسّر» لفتحه.",
         "install_ready": "كل شيء مثبَّت بالفعل وفي آخر تحديث.",
         "install_portable": "الوضع المحمول: لم يُنسخ أي ملف ولم يُنشأ أي اختصار.",
         "install_failed": "فشلت الخطوة: {msg}",
@@ -302,17 +306,17 @@ SETUP_TR = {
         "btn_back": "السابق",
         "btn_next": "التالي",
         "btn_install": "تثبيت وتشغيل",
-        "btn_start": "تشغيل برنامج تفريغ الفيديو الميسّر",
-        "btn_finish": "تشغيل برنامج تفريغ الفيديو الميسّر",
+        "btn_start": "تشغيل مفرّغ الوسائط الميسّر",
+        "btn_finish": "تشغيل مفرّغ الوسائط الميسّر",
         "btn_exit": "خروج",
         "acc_back_n": "زر السابق",
         "acc_back_d": "يعيدك إلى شاشة الترحيب.",
         "acc_next_n": "زر التالي",
         "acc_next_d": "ينقلك إلى شاشة التثبيت.",
         "acc_install_n": "زر التثبيت والتشغيل",
-        "acc_install_d": "يثبّت برنامج تفريغ الفيديو الميسّر بالخيارات المحددة ثم يشغّله.",
-        "acc_finish_n": "زر تشغيل برنامج تفريغ الفيديو الميسّر",
-        "acc_finish_d": "يغلق الإعداد ويفتح برنامج تفريغ الفيديو الميسّر.",
+        "acc_install_d": "يثبّت مفرّغ الوسائط الميسّر بالخيارات المحددة ثم يشغّله.",
+        "acc_finish_n": "زر تشغيل مفرّغ الوسائط الميسّر",
+        "acc_finish_d": "يغلق الإعداد ويفتح مفرّغ الوسائط الميسّر.",
         "acc_exit_n": "زر الخروج",
         "acc_exit_d": "يغلق الإعداد دون تثبيت.",
         "acc_progress_n": "شريط تقدم التثبيت",
@@ -513,11 +517,17 @@ def stop_music() -> None:
 
 
 def play_welcome_music() -> None:
+    import vt_a11y
+    if not vt_a11y.load()["sounds"]:
+        return
     _play(_melody("welcome", WELCOME_NOTES), loop=True)
 
 
 def play_farewell_music() -> None:
     stop_music()
+    import vt_a11y
+    if not vt_a11y.load()["sounds"]:
+        return
     _play(_melody("farewell", FAREWELL_NOTES), loop=False)
 
 
@@ -1766,7 +1776,7 @@ class _WelcomePanel(QDialog):
     * focus then lands on the **Continue** button (Enter, Space, Escape or a
       click all dismiss the panel), so the user is never trapped and never has
       to guess what to press;
-    * no timer closes the panel behind the user's back.
+    * the panel closes within three seconds and can be disabled in Preferences.
     """
 
     def __init__(self, language: str, seconds: float = WELCOME_SECONDS, parent=None):
@@ -1774,12 +1784,12 @@ class _WelcomePanel(QDialog):
         self.language = language if language in ("en", "ar") else "en"
         from vt_i18n import configure_qt_language
         configure_qt_language(self.language)
-        self._seconds = max(0.0, float(seconds))
+        self._seconds = min(WELCOME_SECONDS, max(0.001, float(seconds)))
 
         self.setWindowFlag(Qt.WindowType.WindowContextHelpButtonHint, False)
         self.setWindowTitle(tr(self.language, "welcome_title"))
-        self.setAccessibleName(tr(self.language, "welcome_message"))
-        self.setAccessibleDescription(tr(self.language, "welcome_access_d"))
+        self.setAccessibleName(tr(self.language, "welcome_title"))
+        self.setAccessibleDescription("")
         self.setLayoutDirection(
             Qt.LayoutDirection.RightToLeft
             if self.language == "ar"
@@ -1801,7 +1811,7 @@ class _WelcomePanel(QDialog):
         self.message.setWordWrap(True)
         self.message.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.message.setAccessibleName(tr(self.language, "welcome_message"))
-        self.message.setAccessibleDescription(tr(self.language, "welcome_status_n"))
+        self.message.setAccessibleDescription("")
         self.message.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         root.addWidget(self.message)
 
@@ -1812,11 +1822,17 @@ class _WelcomePanel(QDialog):
         hint.setAccessibleDescription(tr(self.language, "welcome_auto"))
         root.addWidget(hint)
 
+        self.show_next_time = QCheckBox(tr(self.language, "show_welcome_next_time"))
+        self.show_next_time.setChecked(True)
+        self.show_next_time.setAccessibleName(self.show_next_time.text())
+        self.show_next_time.toggled.connect(self._save_visibility)
+        root.addWidget(self.show_next_time)
+
         self.continue_button = QPushButton(tr(self.language, "btn_continue"))
         self.continue_button.setObjectName("welcomeContinue")
         self.continue_button.setAccessibleName(tr(self.language, "btn_continue_n"))
         self.continue_button.setAccessibleDescription(
-            tr(self.language, "welcome_message") + ". " + tr(self.language, "btn_continue_d")
+            tr(self.language, "btn_continue_d")
         )
         self.continue_button.setAutoDefault(True)
         self.continue_button.setDefault(True)
@@ -1856,6 +1872,10 @@ class _WelcomePanel(QDialog):
         if self.isVisible():
             self.accept()
 
+    def _save_visibility(self, checked):
+        import vt_a11y
+        vt_a11y.update(show_welcome=checked)
+
     def _claim_focus(self):
         if not self.isVisible():
             return
@@ -1866,7 +1886,7 @@ class _WelcomePanel(QDialog):
             pass
 
     def _land_on_continue(self):
-        if not self.isVisible():
+        if not self.isVisible() or self.focusWidget() is not self.message:
             return
         try:
             self.continue_button.setFocus(Qt.FocusReason.OtherFocusReason)
@@ -1917,6 +1937,10 @@ def show_welcome_screen(app=None, seconds: float = WELCOME_SECONDS, force: bool 
     """
     language = saved_language() or "en"
     try:
+        import vt_a11y
+        if not force and not vt_a11y.load()["show_welcome"]:
+            close_boot_splash()
+            return language
         panel = _WelcomePanel(language, seconds)
         if app is not None and getattr(panel, "screen", None) is not None:
             _centre(panel)
@@ -1961,18 +1985,19 @@ def run_setup(app=None, mode="app", payload="", uninstaller="") -> tuple:
 def show_exit_screen(app, on_finished) -> bool:
     """Goodbye message: the exact farewell sentence plus an OK button.
 
-    The dialog is modal and waits for the user, so the sentence is always
-    spoken by the screen reader and the program never closes before the
-    message has been displayed.  Enter, Space, Escape or a click on OK all
-    finish the program; nothing else can.
+    The dialog closes automatically within three seconds, or immediately on
+    OK or Escape. Preferences can disable it entirely.
     """
     try:
+        import vt_a11y
+        if not vt_a11y.load()["show_farewell"]:
+            return False
         language = saved_language() or "en"
         box = QDialog()
         box.setModal(True)
         box.setWindowFlag(Qt.WindowType.WindowContextHelpButtonHint, False)
         box.setWindowTitle(tr(language, "exit_title"))
-        box.setAccessibleName(tr(language, "farewell_message"))
+        box.setAccessibleName(tr(language, "exit_title"))
         box.setAccessibleDescription(tr(language, "exit_hint"))
         box.setLayoutDirection(
             Qt.LayoutDirection.RightToLeft
@@ -1994,7 +2019,7 @@ def show_exit_screen(app, on_finished) -> bool:
         message.setWordWrap(True)
         message.setAlignment(Qt.AlignmentFlag.AlignCenter)
         message.setAccessibleName(tr(language, "farewell_message"))
-        message.setAccessibleDescription(tr(language, "welcome_status_n"))
+        message.setAccessibleDescription("")
         message.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         root.addWidget(message)
 
@@ -2005,9 +2030,15 @@ def show_exit_screen(app, on_finished) -> bool:
         hint.setAccessibleDescription(tr(language, "exit_hint"))
         root.addWidget(hint)
 
+        show_next_time = QCheckBox(tr(language, "show_farewell_next_time"))
+        show_next_time.setChecked(True)
+        show_next_time.setAccessibleName(show_next_time.text())
+        show_next_time.toggled.connect(lambda checked: vt_a11y.update(show_farewell=checked))
+        root.addWidget(show_next_time)
+
         ok_button = QPushButton(tr(language, "btn_ok"))
         ok_button.setAccessibleName(tr(language, "btn_ok_n"))
-        ok_button.setAccessibleDescription(tr(language, "farewell_message") + ". " + tr(language, "exit_hint"))
+        ok_button.setAccessibleDescription(tr(language, "exit_hint"))
         ok_button.setAutoDefault(True)
         ok_button.setDefault(True)
         ok_button.clicked.connect(box.accept)
@@ -2030,7 +2061,8 @@ def show_exit_screen(app, on_finished) -> bool:
         # on the OK button the user is asked to press.
         message.setFocus(Qt.FocusReason.OtherFocusReason)
         QTimer.singleShot(0, lambda: message.setFocus(Qt.FocusReason.OtherFocusReason))
-        QTimer.singleShot(900, lambda: ok_button.setFocus(Qt.FocusReason.OtherFocusReason))
+        QTimer.singleShot(900, lambda: ok_button.setFocus(Qt.FocusReason.OtherFocusReason)
+                          if box.isVisible() and box.focusWidget() is message else None)
         # The goodbye screen closes itself after a few seconds; the OK button
         # (or Enter/Space/Escape) still closes it earlier.
         QTimer.singleShot(int(EXIT_SECONDS * 1000), box.accept)

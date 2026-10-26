@@ -1,22 +1,25 @@
-# Accessible Video Transcriber
+# Accessible Media Transcriber
 
-A Windows desktop program by Iman Rammal that turns a video into captions. It
+A Windows desktop program by Iman Rammal that turns audio and video into transcripts and captions. It
 hears the speech, writes it down with timestamps, translates it, lets you edit
 every line in a plain text area, and burns the result back into the video.
 
-The whole program is built for screen readers and keyboard-only use. NVDA,
-JAWS, Narrator and braille displays receive a name and a description for every
-control, the focus is always visible, progress is announced, and the interface
-switches between English and Arabic, right to left.
+The program is built for screen readers and keyboard-only use, with named
+controls, visible focus, progress announcements and an English/Arabic interface.
+Arabic uses a right-to-left layout. See the accessibility review for verified
+coverage and the remaining reader-specific checks.
 
 ## What it does
 
-Version 1.3 brings preferences into one tabbed window (Ctrl+,).
+Version 1.4 supports audio and video, batch transcription, recovery of unfinished
+transcripts, adjustable text size, and optional welcome and farewell messages
+that close within three seconds. Preferences share one tabbed window (Ctrl+,).
 General, Speech and translation, API keys, and Accessibility pages work with
 the mouse, arrow keys on the tabs, and Ctrl+Tab/Ctrl+Shift+Tab from any page.
 Turn off **Read control hints and details** on the Accessibility page to
 reduce screen-reader speech while keeping names, values and essential messages.
-See [release notes](RELEASE_NOTES.md) and the [accessibility review](ACCESSIBILITY_REVIEW.md).
+See [release notes](RELEASE_NOTES.md), the [accessibility review](ACCESSIBILITY_REVIEW.md),
+and the [screen-reader test record](SCREEN_READER_TESTING.md).
 
 Transcribe. The program extracts the audio with ffmpeg and writes timestamped
 captions. The free offline Whisper engine needs no key and no account. You can
@@ -44,6 +47,8 @@ topics, written in English or Arabic to match the interface
 (`help\user_guide.html` and `help\user_guide_ar.html`). The Help menu also
 offers Check for Updates (Ctrl+U), the detailed topic files under
 `resources\help`, and Open Log Folder (Ctrl+Shift+V).
+Report a Problem (Ctrl+Shift+B) offers email to iman.rammal@gmail.com,
+copying the address, or GitHub reporting. Email opens a draft for review.
 
 ## Who it is for
 
@@ -70,19 +75,22 @@ Windows 10 or newer, 64 bit.
 Python 3.11 to 3.14 if you run it from source. The installer carries its own
 Python, so a released install does not need Python at all.
 
-About 500 MB of disk space for the program, plus space for the 141 MB Whisper
-model and for a copy of each video you render.
+Allow disk space for the program, the selected model and each exported video.
+Model sizes are approximately 75 MB (Tiny), 145 MB (Base), and 484 MB (Small).
 
-The installer includes Tiny, Base and Small models for offline transcription.
+Custom installation offers Tiny, Base and Small models for offline transcription,
+or an API-only installation. Express installation selects Base automatically.
 An internet connection is needed for optional model downloads, for the free
 translation engine, and for any cloud engine. Transcription with the local
-engine works offline after the first run.
+engine works offline as soon as its model is installed.
 
 ## Install
 
 The easiest route is the installer from the GitHub Releases page. Download
-`AccessibleVideoTranscriber_Setup_<version>.exe`, run it, and follow the
-prompts. It puts the program, the model, ffmpeg, the licence texts and both
+`AccessibleMediaTranscriber_Setup_<version>.exe`, run it, and follow the
+prompts. Express uses the default folder and a Start menu shortcut. Custom lets
+you choose the destination, Start menu and desktop shortcuts, and an offline model.
+It puts the program, the selected model, ffmpeg, the licence texts and both
 help files into one folder, and it removes them cleanly on uninstall. Setup
 finds an older 1.1 installation and offers to remove it; your settings,
 sounds and downloaded models are kept.
@@ -128,14 +136,15 @@ into temporary folders, and never touches your real API keys.
 
 ## Add an API key
 
-Open Settings with Ctrl+, then choose Speech and Translation Settings. Each
+Open Preferences with Ctrl+, then choose the API keys tab. Each
 provider, OpenAI, Groq and Google Gemini, has its own row with a Key for box,
 a Show key button, a Test key button and a Get API key button that opens the
 provider's own key page.
 
 Paste the key and save. The key goes into the Windows Credential Manager,
 the same store Windows uses for saved passwords. It is never written into
-`prefs.json`, never printed into the log, and never shown again after saving.
+`prefs.json` or printed into the log. Keys are hidden by default in the interface;
+the Show key button lets you inspect a saved key.
 Old copies left in a plain text preferences file are moved out automatically
 the first time the program loads them.
 
@@ -258,19 +267,19 @@ is in `THIRD-PARTY-LICENSES.md`.
 
 ## Author
 
-Iman Rammal, Braille Training Specialist and NVDA Certified Expert.
+Iman Rammal
+
+- Braille Training Specialist
+- NVDA Certified Expert
+- Microsoft Word with NVDA Certified Expert
+- JAWS Certified
+- Assistive technology trainer
+- Translator / interpreter
 
 Email: iman.rammal@gmail.com
 
-LinkedIn: https://www.linkedin.com/in/ImanRammal
-
-Instagram: https://www.instagram.com/rammal_iman/
-
-
-YouTube: https://www.youtube.com/@Welcome2Sawa
-
-Telegram: https://t.me/ImanSawa
-
-Facebook: https://www.facebook.com/pretty.ammoona
-
-X: https://x.com/imanrammal
+- YouTube: https://www.youtube.com/@ihrammal
+- Telegram: https://t.me/ihrammal
+- Facebook: https://www.facebook.com/ihrammal
+- X: https://x.com/ihrammal
+- TikTok: https://tiktok.com/ihrammal

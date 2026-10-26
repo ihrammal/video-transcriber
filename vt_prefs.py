@@ -38,7 +38,7 @@ log = logging.getLogger("vidtrans.prefs")
 
 ENGINES = ("local", "openai", "groq", "gemini")
 API_ENGINES = ("openai", "groq", "gemini")
-WHISPER_MODELS = ("tiny", "base", "small")
+WHISPER_MODELS = ("tiny", "base", "small", "medium", "large-v3", "turbo")
 
 DEFAULTS = {
     "transcribe_engine": "local",
@@ -54,6 +54,8 @@ DEFAULTS = {
     "groq_translate_model": "llama-3.1-8b-instant",
     "gemini_translate_model": "gemini-2.5-flash",
     "show_timestamps": "true",
+    "text_size": "100",
+    "recover_session": "true",
 }
 
 ENGINE_LABELS = {
@@ -164,6 +166,18 @@ def load() -> dict:
         with open(path, "r", encoding="utf-8") as handle:
             stored = json.load(handle)
     except FileNotFoundError:
+        # The installer may supply a smaller offline model. Respect that
+        # choice on first launch without overwriting an existing profile.
+        try:
+            import configparser
+            import vt_install
+            installed = configparser.ConfigParser()
+            installed.read(os.path.join(vt_install.app_dir(), "installed-model.ini"), encoding="utf-8")
+            model = installed.get("transcription", "model", fallback="base")
+            if model in WHISPER_MODELS:
+                data["whisper_model"] = model
+        except Exception:
+            log.debug("installer model preference unavailable", exc_info=True)
         return data
     except Exception as exc:  # noqa: BLE001 - a broken file must never crash the app
         log.warning("preferences could not be read (%s); using the defaults", exc)
@@ -217,6 +231,9 @@ def normalized(data: dict) -> dict:
     out["translate_engine"] = _clean(out["translate_engine"])
     model = str(out["whisper_model"] or "").strip().lower()
     out["whisper_model"] = model if model in WHISPER_MODELS else "base"
+    if out["text_size"] not in ("100", "125", "150", "175", "200"):
+        out["text_size"] = "100"
+    out["recover_session"] = "false" if out["recover_session"] == "false" else "true"
     for key in ("openai_api_key", "groq_api_key", "gemini_api_key"):
         out[key] = str(out[key] or "").strip()
     for key in DEFAULTS:
